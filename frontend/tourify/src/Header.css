@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3vh 3vw; 
+    background-color: #FFF;
+    color: #000;
+    position: fixed; 
+    width: 100vw;
+  }
+  
+  .logo-and-phrase {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+  }
+  
+  .logo-image {
+    width: auto; 
+    max-height: 5vw;  
+  }
+  
+  .logo-and-phrase a {
+    color: #000;
+    font-size: 2rem;
+    text-decoration: none;
+  }
+  
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 32px;
+    gap: 10px;
+    width: 180px;
+    height: 56px;
+    background: #FFEED9;
+    border-radius: 100px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  #btn-crear-cuenta {
+    background-color: #FFEED9;
+    color: #FE8C00;
+  }
+  
+  #btn-iniciar-sesion {
+    background-color:  #FE8C00;
+    color: #FFEED9;
+  }
+  
+  .btn:hover {
+    transform: scale(1.05); 
+  }
+  
+  .auth-buttons {
+    display: flex;
+    width: 30%;
+    gap: 4%;
+  }
+  
+  body {
+    background-color: chocolate;
+  }
+  
