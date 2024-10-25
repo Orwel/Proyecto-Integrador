@@ -24,12 +24,12 @@
   
   .logo-image {
     width: auto; 
-    max-height: 5vw;  
+    max-height: 100px;  
   }
   
   .logo-and-phrase a {
     color: #000;
-    font-size: 2px;
+    font-size: 18px;
     text-decoration: none;
   }
   
@@ -70,4 +70,52 @@
   body {
     background-color: chocolate;
   }
+
+/* Menú hamburguesa */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.hamburger-menu span {
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: #000;
+  border-radius: 2px;
+}
+
+/* Estilos para móviles */
+@media (max-width: 768px) {
+  .auth-buttons {
+    display: none; /* Ocultar los botones normales en móviles */
+  }
+
+  .hamburger-menu {
+    display: flex; /* Mostrar el ícono de hamburguesa en móviles */
+  }
+
+  /* Cuando el menú está activo */
+  .auth-buttons.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Debajo del header */
+    right: 3vw;
+    background-color: #FFF;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .auth-buttons.active .btn {
+    width: 100%; /* Ancho completo en móviles */
+    margin-bottom: 10px;
+  }
+}
+
   

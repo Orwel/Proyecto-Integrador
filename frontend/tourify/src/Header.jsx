@@ -18,6 +18,12 @@ const Header = () => {
         <button className="btn" id='btn-crear-cuenta'>Crear cuenta</button>
         <button className="btn" id='btn-iniciar-sesion'>Iniciar sesión</button>
       </div>
+      
+  <div class="hamburger-menu" id="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
     </header>
   );
 };
