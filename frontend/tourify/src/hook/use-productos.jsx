@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react';
 import { useSupabase } from '../context/supabase-context';
 
 
-export const useDestinos = () => {
+export const useProductos = () => {
   const { supabase } = useSupabase(); 
-  const [destinos, setDestinos] = useState([]); 
+  const [productos, setProductos] = useState([]); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
 
   useEffect(() => {
-    const fetchDestinos = async () => {
+    const fetchProductos = async () => {
       setLoading(true); 
       const { data, error } = await supabase
-        .from('destinos') 
+        .from('productos') 
         .select('*'); 
 
       if (error) {
@@ -21,12 +21,12 @@ export const useDestinos = () => {
         return;
       }
 
-      setDestinos(data);
+      setProductos(data);
       setLoading(false);
     };
 
-    fetchDestinos(); 
+    fetchProductos(); 
   }, [supabase]); 
 
-  return { destinos, loading, error }; 
+  return { productos, loading, error }; 
 };

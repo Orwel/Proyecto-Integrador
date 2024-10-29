@@ -4,10 +4,10 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Navbar } from './components/navbar'
 import { Card } from './components/card'
-import { useDestinos } from './hook/use-destinos'
+
 
 function App() {
-  const { destinos, loading, error } = useDestinos();
+ 
 
   if (loading) return <p>Cargando destinos...</p>; // Mensaje de carga
   if (error) return <p>Error al cargar destinos: {error.message}</p>; // Manejo de errores
@@ -35,20 +35,7 @@ function App() {
             </a>
           </nav>
 
-          <div className="card-container">
-          {destinos.map((destino) => (
-            <Card
-              key={destino.id}
-              image={destino.image} 
-              title={destino.title} 
-              location={destino.location} 
-              country={destino.country} 
-              reviews={destino.reviews} 
-              rating={destino.rating} 
-              price={destino.price} 
-            />
-          ))}
-        </div>
+         
         </section>
 
         <section>

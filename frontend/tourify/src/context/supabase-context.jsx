@@ -7,9 +7,11 @@ const Context = createContext(undefined);
 export default function SupabaseProvider({ children }) {
   const navigate = useNavigate();  
   const [supabase] = useState(() => createClient(
-    'https://ajcbomdufukavyhkteqy.supabase.co', 
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqY2JvbWR1ZnVrYXZ5aGt0ZXF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk2NTIwMDAsImV4cCI6MjA0NTIyODAwMH0.WQKvGN6_dq5fPieMWVWIxRGnXl5lXiAQkwBcO0B_gkA'
+    'https://fmjhwbfguggvpiosupzi.supabase.co', 
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtamh3YmZndWdndnBpb3N1cHppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk5MDA2NzEsImV4cCI6MjA0NTQ3NjY3MX0.up4XnlL_cwblqMuAb4kfmepp63hLlh99YPeRLDasG9Q'
   ));
+
+
 
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
