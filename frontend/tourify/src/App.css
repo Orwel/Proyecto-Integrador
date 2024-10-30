@@ -100,29 +100,33 @@
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
-.mobile-menu1{
+.mobile-menu1 {
   position: relative;
 }
 
 @media (max-width: 768px) {
   .navbar-buttons {
-    display: none; /* Oculta los botones en tablet y móvil */
+    display: none;
+    /* Oculta los botones en tablet y móvil */
   }
-  
+
   .hamburger-menu {
-    display: block; /* Muestra el menú hamburguesa en tablet y móvil */
+    display: block;
+    /* Muestra el menú hamburguesa en tablet y móvil */
   }
 
   .mobile-menu {
-    display: flex; /* Muestra el menú desplegable si el menú hamburguesa está abierto */
+    display: flex;
+    /* Muestra el menú desplegable si el menú hamburguesa está abierto */
   }
 
   .navbar-header {
-    padding: 16px; /* Ajusta el padding para pantallas más pequeñas */
+    padding: 16px;
+    /* Ajusta el padding para pantallas más pequeñas */
   }
 
   .navbar-header-logo {
@@ -130,29 +134,28 @@
   }
 }
 
-.section01{
-height: 1000px;
+.section01 {
+  height: 1000px;
 }
 
 /* card */
 
 .card {
   display: flex;
-  background-color: white;
+  background-color: RGBA(254, 140, 0, 0.25);
   border-radius: 16px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  max-width: 600px;
-  margin: 20px;
+  max-width: 330px;
+
   position: relative;
 }
 
 .card-image img {
-  width: 200px;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
+  border-radius: 14px;
 }
 
 .card-content {
@@ -213,10 +216,11 @@ height: 1000px;
 }
 
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; 
-  justify-content: center; 
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 10px;
+  justify-content: center;
 }
 
 .container-body{
