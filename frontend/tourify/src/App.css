@@ -226,3 +226,54 @@
 .container-body{
   padding-top: 120px;
 }
+
+/*para el detalle*/
+
+.detail-container {
+  padding: 120px 20px; /* Aumentar el padding superior a 120px para más espacio */
+  max-width: 800px;
+  margin: 0 auto; /* Centra el contenedor */
+}
+
+
+.detail-header {
+  display: flex;
+  justify-content: space-between; /* Espacio entre el título y el botón */
+  align-items: center;
+  margin-bottom: 20px; /* Espacio inferior */
+}
+
+.product-title {
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #FE8C00; /* Color de texto */
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.detail-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos en el cuerpo */
+  text-align: left; /* Alineación a la izquierda para el texto */
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto; /* Mantiene la proporción de la imagen */
+  border-radius: 8px; /* Esquinas redondeadas */
+  margin-bottom: 20px; /* Espacio debajo de la imagen */
+}
+
+.product-description,
+.product-price {
+  font-size: 18px;
+  margin: 10px 0; /* Espacio vertical entre los elementos */
+  text-align: center; /* Centra el texto */
+}
