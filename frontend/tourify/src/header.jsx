@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import { SearchBar } from './components/SearchBar';
 
 
 const Header = () => {
@@ -40,6 +41,7 @@ const Header = () => {
           <button className="btn" id='btn-iniciar-sesion'>Iniciar sesión</button>
         </div>
       )}
+      <SearchBar/>
     </header>
   );
 };
