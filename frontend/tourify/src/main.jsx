@@ -20,6 +20,7 @@ createRoot(document.getElementById('root')).render(
       <StrictMode>
 
         <Header />
+        
         <Routes>
             <Route path={routes.home} element={<Body />} />
             <Route path="/detail/:id" element={<Detail />} />

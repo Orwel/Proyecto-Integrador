@@ -6,7 +6,6 @@ const Body = () => {
     return (
 
         <div className='container-body'>
-          
             <ContainerProductos />
         </div>
 
