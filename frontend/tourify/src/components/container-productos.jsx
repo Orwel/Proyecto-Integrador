@@ -11,7 +11,7 @@ console.log(productos, "ver aqui")
 				<div className="card-container">
 					{productos.map((product) => (
 						<Card
-							key={product.id}
+							id={product.id}
 							image={product.url_img}
 							title={product.name}
 							location={product.destination}
