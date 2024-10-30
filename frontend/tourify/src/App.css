@@ -146,8 +146,8 @@
   border-radius: 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  max-width: 330px;
-
+  max-width: 70vw;
+  z-index: 2;
   position: relative;
 }
 
@@ -217,11 +217,13 @@
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr); 
   gap: 20px;
   padding: 10px;
-  justify-content: center;
+  max-height: calc(5 * 200px); 
+   
 }
+
 
 .container-body{
   padding-top: 120px;

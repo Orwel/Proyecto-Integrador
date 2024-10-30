@@ -17,9 +17,9 @@ const Header = () => {
           <img src="/img/logo.png" className="logo-image" alt="Logo" />
         </Link>
         <Link to="/" className="logo">
-         
+         <a>¡Crea recuerdos duraderos... Descubre nuevos horizontes!</a>
         </Link>
-        <span>¡Crea recuerdos duraderos... Descubre nuevos horizontes!</span>
+        
         <div className="auth-buttons">
         <button className="btn" id='btn-crear-cuenta'>Crear cuenta</button>
         <button className="btn" id='btn-iniciar-sesion'>Iniciar sesión</button>
