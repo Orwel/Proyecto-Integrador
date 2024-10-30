@@ -12,8 +12,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 2vh 3vw; 
+  justify-content: space-around;
+  padding: 16px 16px;
   background-color: #FFF;
   color: #000;
   z-index: 1000; /* Asegura que el header esté siempre en la parte superior */
@@ -30,7 +30,7 @@
 
 .logo-image {
   width: auto; 
-  max-height: 100px;  
+   
 }
 
 .logo-and-phrase a {
