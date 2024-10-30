@@ -45,7 +45,7 @@
 }
 
 .navbar-header {
-  position: static;
+  position: fixed;
   width: 100%;
   left: 0;
   right: 0;
@@ -54,6 +54,8 @@
   background: white;
   padding: 24px 112px;
   box-sizing: border-box;
+  z-index: 100;
+  
 }
 
 .navbar-header-logo {
@@ -219,4 +221,8 @@
   gap: 20px;
   padding: 10px;
   justify-content: center;
+}
+
+.container-body{
+  padding-top: 120px;
 }
