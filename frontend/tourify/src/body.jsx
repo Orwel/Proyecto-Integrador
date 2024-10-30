@@ -5,7 +5,7 @@ const Body = () => {
 
     return (
 
-        <div>
+        <div className='container-body'>
             <h1>Welcome to Tourify</h1>
             <p>This is the body component.</p>
             <ContainerProductos />
