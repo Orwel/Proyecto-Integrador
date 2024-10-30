@@ -14,26 +14,29 @@ const Header = () => {
   return (
     <header className="header">
       <div className='logo-and-phrase'>
+        <div>
         <Link to="/" className="logo">
           <img src="/img/logo.png" className="logo-image" alt="Logo" />
         </Link>
         <Link to="/" className="logo">
-         <a>¡Crea recuerdos duraderos... Descubre nuevos horizontes!</a>
+          <a>¡Crea recuerdos duraderos... Descubre nuevos horizontes!</a>
         </Link>
-        
+
+        </div>
+
         <div className="auth-buttons">
-        <button className="btn" id='btn-crear-cuenta'>Crear cuenta</button>
-        <button className="btn" id='btn-iniciar-sesion'>Iniciar sesión</button>
+          <button className="btn" id='btn-crear-cuenta'>Crear cuenta</button>
+          <button className="btn" id='btn-iniciar-sesion'>Iniciar sesión</button>
+        </div>
+
+        <div className="hamburger-menu" onClick={toggleMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
 
-      <div className="hamburger-menu" onClick={toggleMenu}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      </div>
-      
-      
+
 
       {isMenuOpen && (
         <div className="mobile-menu">
@@ -41,7 +44,7 @@ const Header = () => {
           <button className="btn" id='btn-iniciar-sesion'>Iniciar sesión</button>
         </div>
       )}
-      <SearchBar/>
+      <SearchBar />
     </header>
   );
 };
