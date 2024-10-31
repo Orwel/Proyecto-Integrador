@@ -32,29 +32,33 @@ const TabsCategorias = () => {
 								color: "#FE8C00",
 							},
 						}}>
-						{tabData.map(({ value: tabValue, label, Icon }) => (
-							<Tab
-								className="mt-3"
-								key={tabValue}
-								value={tabValue}
-								label={
-									<div
-										style={{
-											textAlign: "center",
-										}}>
-										<Icon color={value === tabValue ? "#FE8C00" : "black"} />
-										<span
+						{tabData.map(
+							({ value: tabValue, label, inconNoSelected, iconSelected }) => (
+								<Tab
+									className="mt-3"
+									key={tabValue}
+									value={tabValue}
+									label={
+										<div
 											style={{
-												display: "block",
-												marginTop: "4px",
-												fontSize: "18px",
+												textAlign: "center",
 											}}>
-											{label}
-										</span>
-									</div>
-								}
-							/>
-						))}
+											<img
+												src={value == tabValue ? iconSelected : inconNoSelected}
+											/>
+											<span
+												style={{
+													display: "block",
+													marginTop: "4px",
+													fontSize: "18px",
+												}}>
+												{label}
+											</span>
+										</div>
+									}
+								/>
+							)
+						)}
 					</Tabs>
 				</Box>
 				{tabData.map(({ value: tabValue }, index) => (

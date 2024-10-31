@@ -1,14 +1,40 @@
-import BuySvg from "../components/BuySvg";
-import CamaraSvg from "../components/CamaraSvg";
-import CorazonSvg from "../components/CorazonSvg";
-import ImagenSvg from "../components/ImagenSvg";
-import MaletinSvg from "../components/MaletinSvg";
-import MasSvg from "../components/MasSvg";
+import { icons } from "./icons";
+
 export const tabData = [
-	{ value: "1", label: "Aventura y Deportes", Icon: MaletinSvg },
-	{ value: "2", label: "Cultura y Patrimonio", Icon: CamaraSvg },
-	{ value: "3", label: "Tours Urbanos", Icon: BuySvg },
-	{ value: "4", label: "Naturaleza y Ecoturismo", Icon: ImagenSvg },
-	{ value: "5", label: "Bienestar y Relajación", Icon: CorazonSvg },
-	{ value: "6", label: "Más", Icon: MasSvg },
+	{
+		value: "1",
+		label: "Aventura y Deportes",
+		iconSelected: icons.painted.work,
+		inconNoSelected: icons.black.work,
+	},
+	{
+		value: "2",
+		label: "Cultura y Patrimonio",
+		iconSelected: icons.painted.video,
+		inconNoSelected: icons.black.video,
+	},
+	{
+		value: "3",
+		label: "Tours Urbanos",
+		iconSelected: icons.painted.buy,
+		inconNoSelected: icons.black.buy,
+	},
+	{
+		value: "4",
+		label: "Naturaleza y Ecoturismo",
+		iconSelected: icons.painted.image,
+		inconNoSelected: icons.black.image,
+	},
+	{
+		value: "5",
+		label: "Bienestar y Relajación",
+		iconSelected: icons.painted.heart,
+		inconNoSelected: icons.black.heart,
+	},
+	{
+		value: "6",
+		label: "Más",
+		iconSelected: icons.painted.category,
+		inconNoSelected: icons.black.category,
+	},
 ];
