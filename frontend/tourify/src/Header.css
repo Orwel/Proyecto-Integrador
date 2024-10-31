@@ -6,31 +6,31 @@
 }
 
 .header {
-  height: 60px; /* Ajusta esta altura según tus necesidades */
+  /* height: 120px;  */
   width: 100%;
   position: fixed;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 3vh 3vw; 
+  justify-content: space-around;
+  padding: 16px 16px;
   background-color: #FFF;
   color: #000;
-  position: fixed;
-
+  z-index: 1000; /* Asegura que el header esté siempre en la parte superior */
 }
+
 
 .logo-and-phrase {
   display: flex;
   align-items: center; 
   justify-content: space-between;
   gap: 10px; 
-  margin-top: 60px;
-  width: 2000px;
+  width: 100vw;
 }
 
 .logo-image {
   width: auto; 
-  max-height: 100px;  
+   
 }
 
 .logo-and-phrase a {

@@ -15,13 +15,26 @@ const Detail = () => {
     return (
         <div className="detail-container">
             <div className="detail-header">
-                <h2 className="product-title">{product.name}</h2>
-                <button className="back-button" onClick={() => navigate(-1)}>← Volver</button>
+                <div className="detail-title">
+                    <h1 className="product-title">{product.name}</h1>
+                    <button className="back-button" onClick={() => navigate(-1)}>← Volver</button>
+                </div>
+                <div className="product-rating">
+                    <span className="detail-rating-star">⭐ {product.rating}</span>
+                    <span className="detail-reviews">({product.reviews} reviews)</span>
+                    <span className="detail-location">🚩 {product.city}</span>
+                </div>
             </div>
             <div className="detail-body">
                 <img src={product.url_img} alt={product.name} className="product-image" />
-                <p className="product-description">{product.city}</p>
-                <p className="product-price">Precio: {product.unit_price}</p>
+                <p className="detail-time">{product.nights} noches  •  {product.days} días </p>
+                <br />
+                <hr />
+                <br />
+                <p className="product-description">{product.description}</p>
+                <hr />
+                <h3 className="detail-itinerary">Itinerario</h3>
+                <p className="product-itinerary">{product.itinerary}</p>
             </div>
         </div>
     )
