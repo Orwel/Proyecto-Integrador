@@ -1,10 +1,14 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaYoutube, FaPinterest } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <footer style={styles.footer}>
       <div style={styles.left}>
+        <Link to="/" >
+          <img src="/img/logo.png" style={styles.logo} alt="Logo" />
+        </Link>
         <p style={styles.p}><span style={styles.span}>&copy;</span> 2024 Tourify, Digital House. | All rights reserved.</p>
       </div>
       <div style={styles.right}>
@@ -42,7 +46,9 @@ const styles = {
     margin: 0,
   },
   left: {
-    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    // flex: 1,
   },
   right: {
     display: 'flex',
@@ -53,6 +59,10 @@ const styles = {
     fontSize: '1.5rem',
     textDecoration: 'none',
   },
+  logo: {
+    width: '2.2rem',
+    marginRight: '1rem',
+  }
 };
 
 export default Footer;
