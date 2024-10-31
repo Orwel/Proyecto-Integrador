@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.header {
+  /* height: 120px;  */
+  width: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 16px 16px;
+  background-color: #FFF;
+  color: #000;
+  z-index: 1000; /* Asegura que el header esté siempre en la parte superior */
+}
+
+
+.logo-and-phrase {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+  gap: 10px; 
+  width: 100vw;
+}
+
+.logo-image {
+  width: auto; 
+   
+}
+
+.logo-and-phrase a {
+  color: #000;
+  font-size: 18px;
+  text-decoration: none;
+  white-space: nowrap; /* Esto evita que el texto se divida en varias líneas */
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+  gap: 10px;
+  width: 180px;
+  height: 56px;
+  background: #FFEED9;
+  border-radius: 100px;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#btn-crear-cuenta {
+  background-color: #FFEED9;
+  color: #FE8C00;
+}
+
+#btn-iniciar-sesion {
+  background-color:  #FE8C00;
+  color: #FFEED9;
+}
+
+.btn:hover {
+  transform: scale(1.05); 
+}
+
+.auth-buttons {
+  display: flex;
+  width: 30%;
+  gap: 4%;
+}
+
+
+
+.hamburger-menu {
+  display: none; /* Oculto por defecto */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger-menu span {
+  height: 3px;
+  width: 25px;
+  background: #000;
+  margin: 4px 0;
+  transition: 0.3s;
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centramos los elementos */
+  position: absolute; /* Para que se superponga sobre el contenido */
+  top: 60px; /* Ajusta según tu header */
+  right: 0;
+  background-color: #FFF; /* Color de fondo del menú */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Asegura que el menú ocupe el ancho completo */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .auth-buttons {
+      display: none; /* Ocultar botones en móvil */
+  }
+
+  .hamburger-menu {
+      display: flex; /* Mostrar botón hamburguesa */
+  }
+
+  .logo-and-phrase a {
+      font-size: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-and-phrase a {
+    
+    font-size: 2vw;
+   
+}
+}
