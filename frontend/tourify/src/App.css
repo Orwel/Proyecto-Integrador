@@ -300,6 +300,7 @@
   /* Centra los elementos en el cuerpo */
   text-align: left;
   /* Alineación a la izquierda para el texto */
+  border-bottom: 2px solid #E5E7EB;
 }
 
 .product-image {
@@ -348,6 +349,7 @@
   text-align: justify;
   /* Centra el texto */
   line-height: 1.8;
+  border-bottom: 2px solid #E5E7EB;
 }
 
 .detail-itinerary {
