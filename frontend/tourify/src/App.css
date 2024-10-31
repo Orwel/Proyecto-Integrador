@@ -3,6 +3,12 @@
   margin: 0 auto;
   padding: 0;
   text-align: center;
+
+
+}
+
+* {
+  font-family: "Comfortaa", sans-serif;
 }
 
 .logo {
@@ -55,7 +61,7 @@
   padding: 24px 112px;
   box-sizing: border-box;
   z-index: 100;
-  
+
 }
 
 .navbar-header-logo {
@@ -217,27 +223,153 @@
 
 .card-container {
   display: grid;
-  grid-template-columns: 1fr; 
+  grid-template-columns: 1fr;
   gap: 20px;
   padding: 10px;
 
   /* max-height: calc(5 * 200px);  */
-   
+
 }
 
 @media (min-width: 1024px) {
   .card-container {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 
-.container-body{
+.container-body {
+
   padding-top: 320px;
   display: flex;
   justify-content: center;
   background: #ECECEC;
 
+}
+
+
+/*para el detalle*/
+
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 280px 80px 20px 80px;
+  /* Aumentar el padding superior a 120px para más espacio */
+  width: 100%;
+  background: #ECECEC;
+  /* Centra el contenedor */
+}
+
+
+.detail-header {
+  display: flex;
+  flex-direction: column;
+  /* Espacio entre el título y el botón */
+  align-items: center;
+  margin-bottom: 20px;
+  /* Espacio inferior */
+}
+
+.product-title {
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.detail-title {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #FE8C00;
+  /* Color de texto */
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.detail-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centra los elementos en el cuerpo */
+  text-align: left;
+  /* Alineación a la izquierda para el texto */
+}
+
+.product-image {
+  /* width: 100%; */
+  height: 400px;
+  background-size: cover;
+  image-rendering: auto;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  /* Mantiene la proporción de la imagen */
+  border-radius: 30px;
+  /* Esquinas redondeadas */
+  margin-bottom: 20px;
+  /* Espacio debajo de la imagen */
+}
+
+.product-rating {
+  display: flex;
+  width: 100%;
+  align-content: center;
+  justify-content: left;
+  font-size: 10px;
+
+}
+
+.detail-rating-star {
+  margin-right: 10px;
+}
+
+.detail-reviews {
+  margin-right: 10px;
+
+}
+
+.detail-time {
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+}
+
+
+.product-description {
+  font-size: 13px;
+  margin: 15px 0 15px 0;
+  /* Espacio vertical entre los elementos */
+  text-align: justify;
+  /* Centra el texto */
+  line-height: 1.8;
+}
+
+.detail-itinerary {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: left;
+
+}
+
+.product-itinerary {
+  width: 100%;
+  text-align: left;
+  white-space: pre-line;
+  font-size: 12px;
+  line-height: 2;
+}
+
+
+.hr {
+
+  color: gray;
+  font-weight: 100;
 }
 
 .search-bar {
@@ -262,7 +394,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
-  
+
 }
 
 .search-field {

@@ -30,7 +30,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#E5E7EB',
+    // backgroundColor: '#E5E7EB',
     color: '#4B5563',
     padding: '1rem 2rem',
     fontSize: '0.9rem',
@@ -39,7 +39,7 @@ const styles = {
     color: '#FE8C00',
   },
   p: {
-      margin: 0,
+    margin: 0,
   },
   left: {
     flex: 1,
