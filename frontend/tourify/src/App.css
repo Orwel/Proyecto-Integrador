@@ -223,13 +223,8 @@
 
 .card-container {
   display: grid;
-<<<<<<< HEAD
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 10px;
-=======
   grid-template-columns: 1fr;
   gap: 20px;
->>>>>>> diana
   padding: 10px;
 
   /* max-height: calc(5 * 200px);  */
