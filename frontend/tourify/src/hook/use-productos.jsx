@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSupabase } from '../context/supabase-context';
 
-
 export const useProductos = () => {
   const { supabase } = useSupabase(); 
   const [productos, setProductos] = useState([]); 
@@ -13,7 +12,7 @@ export const useProductos = () => {
       setLoading(true); 
       const { data, error } = await supabase
         .from('productos') 
-        .select('*'); 
+        .select('*');
 
       if (error) {
         setError(error); 
@@ -21,7 +20,8 @@ export const useProductos = () => {
         return;
       }
 
-      setProductos(data);
+      const productosRandom = data.sort(() => Math.random() - 0.5);
+      setProductos(productosRandom);
       setLoading(false);
     };
 
