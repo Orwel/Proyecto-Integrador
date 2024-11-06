@@ -1,12 +1,13 @@
-import React from 'react';
-
+import React from "react";
+import { ContainerProductos } from "./components/container-productos";
+import Categorias from "./components/Categorias";
 const Body = () => {
-    return (
-        <div>
-            <h1>Welcome to Tourify</h1>
-            <p>This is the body component.</p>
-        </div>
-    );
+	return (
+		<div className="container-body">
+			<Categorias />
+			<ContainerProductos />
+		</div>
+	);
 };
 
 export default Body;
