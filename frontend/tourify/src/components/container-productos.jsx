@@ -4,7 +4,7 @@ import { Card } from "./card";
 
 export const ContainerProductos = () => {
 	const { productos, loading, error } = useProductos();
-	console.log(productos, "ver aqui");
+	// console.log(productos, "ver aqui");
 	return (
 		<>
 			<div>
