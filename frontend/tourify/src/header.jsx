@@ -15,18 +15,21 @@ const Header = () => {
     <header className="header">
       <div className='logo-and-phrase'>
         <div>
-        <Link to="/" className="logo">
-          <img src="/img/logo.png" className="logo-image" alt="Logo" />
-        </Link>
-        <Link to="/" className="logo">
-          <a>¡Crea recuerdos duraderos... Descubre nuevos horizontes!</a>
-        </Link>
+          <Link to="/" className="logo">
+            <img src="/img/logo.png" className="logo-image" alt="Logo" />
+          </Link>
+          <Link to="/" className="logo">
+            <a>¡Crea recuerdos duraderos... Descubre nuevos horizontes!</a>
+          </Link>
 
         </div>
 
         <div className="auth-buttons">
           <button className="btn" id='btn-crear-cuenta'>Crear cuenta</button>
           <button className="btn" id='btn-iniciar-sesion'>Iniciar sesión</button>
+          <Link to={"/adminProductos"}>
+            <h5>Admin Productos</h5>
+          </Link>
         </div>
 
         <div className="hamburger-menu" onClick={toggleMenu}>

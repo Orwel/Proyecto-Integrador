@@ -11,6 +11,8 @@ import { BrowserRouter } from "react-router-dom";
 import Detail from "./components/detail.jsx";
 import { routes } from "./utils/router.js";
 import { Route, Routes } from "react-router-dom";
+import { AdministrarProducto } from "./components/AdministrarProducto.jsx";
+import { ActualizarProducto } from "./components/ActualizarProducto.jsx";
 
 createRoot(document.getElementById("root")).render(
 	<BrowserRouter>
@@ -21,6 +23,8 @@ createRoot(document.getElementById("root")).render(
 				<Routes>
 					<Route path={routes.home} element={<Body />} />
 					<Route path="/detail/:id" element={<Detail />} />
+					<Route path="/adminProductos" element={<AdministrarProducto />} />
+					<Route path="/ActualizarProducto/:id" element={<ActualizarProducto />} />
 				</Routes>
 				<Footer />
 			</StrictMode>
