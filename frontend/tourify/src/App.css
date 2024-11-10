@@ -302,6 +302,10 @@
 	max-width: 100vw;
 }
 
+.container-panel {
+	padding-top: 300px;
+}
+
 /*para el detalle*/
 
 .detail-container {
@@ -517,3 +521,97 @@
 .container-signup{
 	padding-top: 300px;
 }
+
+/* Estilos panel */
+.dashboard {
+	display: flex;
+	min-height: 100vh;
+  }
+  
+  /* Estilo para el menú lateral */
+  .sidebar {
+	width: 200px;
+	background-color: #CFCFCF;
+	color: #60626E;
+	padding: 20px;
+  }
+  
+  .sidebar h2 {
+	margin-top: 0;
+  }
+  
+  .sidebar ul {
+	list-style: none;
+	padding: 0;
+  }
+  
+  .sidebar li {
+	margin: 10px 0;
+  }
+  
+  .content {
+	flex: 1;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: #ECECEC;
+  }
+  
+  /* Ocultar mensaje de móviles en pantallas grandes */
+  .mobile-message {
+	display: none;
+  }
+  
+  /* Estilos para las tarjetas de números */
+  .card {
+	background-color: #f5f5f5;
+	padding: 20px;
+	margin: 10px;
+	flex: 1;
+	text-align: center;
+	font-size: 2rem;
+	color: #333;
+	border-radius: 8px;
+	flex-direction: column;
+
+	span{
+		font-size: 14px;
+	}
+  }
+  
+  /* Estilos en pantallas grandes */
+  .desktop-only {
+	display: flex;
+	width: 100%;
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	background-color: #FFF;
+	border-radius: 5px;
+  }
+  
+  /* Estilos en pantallas móviles */
+  @media (max-width: 768px) {
+	.sidebar {
+	  display: none;
+	}
+  
+	.desktop-only {
+	  display: none;
+	}
+  
+	.mobile-message {
+	  display: block;
+	  font-size: 1.5rem;
+	  color: #888;
+	  text-align: center;
+	}
+
+	.content {
+		justify-content: center;
+	  }
+  }
+  

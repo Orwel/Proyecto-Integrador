@@ -8,6 +8,7 @@ import Body from "./body";
 import Footer from "./footer";
 import Detail from "./components/detail";
 import { routes } from "./utils/router";
+import Panel from "./Panel";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/panel" element={<Panel />} />
       </Routes>
       <Footer />
     </>
