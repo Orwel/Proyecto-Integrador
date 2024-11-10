@@ -16,20 +16,20 @@
   padding: 16px 16px;
   background-color: #FFF;
   color: #000;
-  z-index: 1000; /* Asegura que el header esté siempre en la parte superior */
+  z-index: 50; /* Asegura que el header esté siempre en la parte superior */
 }
 
 
 .logo-and-phrase {
   display: flex;
   align-items: center; 
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 10px; 
   width: 100vw;
 }
 
 .logo-image {
-  width: auto; 
+  width: auto;
    
 }
 

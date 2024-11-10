@@ -5,9 +5,11 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import SupabaseProvider from "./context/supabase-context";
 import { AuthProvider } from "./context/AuthContext";
+import {NextUIProvider} from "@nextui-org/react";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+       <NextUIProvider>
     <BrowserRouter>
       <SupabaseProvider>
         <AuthProvider>
@@ -15,5 +17,6 @@ createRoot(document.getElementById("root")).render(
         </AuthProvider>
       </SupabaseProvider>
     </BrowserRouter>
+       </NextUIProvider>
   </StrictMode>
 );
