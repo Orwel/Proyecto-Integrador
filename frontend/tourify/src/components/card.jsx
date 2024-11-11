@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Card = ({ id, image, title, location, country, reviews, rating, price }) => {
   return (
-      <div className="card">
+    <div className="card">
       <div className="card-image">
         <img src={image} alt={title} />
       </div>

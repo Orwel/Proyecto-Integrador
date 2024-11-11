@@ -12,8 +12,6 @@ const Detail = () => {
     const navigate = useNavigate();
 
 
-    console.log({ characteristics })
-
     const urlImagen = (key) => {
         switch (key) {
             case "Alojamiento":
