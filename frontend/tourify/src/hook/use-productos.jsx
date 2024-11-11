@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSupabase } from '../context/supabase-context';
+import { useNavigate } from "react-router-dom"
 
 export const useProductos = () => {
   const { supabase } = useSupabase();
@@ -30,6 +31,7 @@ export const useProductos = () => {
       return prevProducts.filter(product => product.id !== id)
     })
   }
+
 
 
   useEffect(() => {

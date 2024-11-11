@@ -43,7 +43,7 @@ export const AdministrarProducto = () => {
                                 <td>
                                     {Object.entries(product.characteristics).map(([key, value]) => (
                                         value === 1 &&
-                                        (<li>
+                                        (<li key={key}>
                                             {key}
                                         </li>)
                                     ))}

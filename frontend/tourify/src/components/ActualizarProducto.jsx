@@ -1,26 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { useProductos } from '../hook/use-productos'
 import { useCharacteristics } from '../hook/use-characteristics'
+import { useProductos } from '../hook/use-productos'
+
 
 export const ActualizarProducto = () => {
     const id = parseInt(useParams().id);
-    console.log(id)
-    const { productos, loading, error } = useProductos();
     const { characteristics, loadingChar, errorChar } = useCharacteristics();
+    const { productos, loading, error } = useProductos();
     const product = productos.find(product => product.id === id);
-    console.log(products)
-
-    const characteristic = (char) => {
-        const asArray = Object.entries(product.characteristics)
-        const filtered = asArray.filter(([key, value]) => typeof key === char)
-        return filtered[value]
-    }
-    const [name, setName] = useState('');
-    const [destiny, setdDestiny] = useState('');
-
-
+    console.log(product)
 
     return (
         <div className='formActualizar'>
@@ -45,9 +35,8 @@ export const ActualizarProducto = () => {
                     >
                     </input>
                 </div>
-
                 <div className='form-details'>
-                    <label htmlFor="name">Días</label>
+                    <label htmlFor="dias">Días</label>
                     <input
                         type='text'
                         id='dias'
@@ -58,7 +47,7 @@ export const ActualizarProducto = () => {
                 </div>
 
                 <div className='form-details'>
-                    <label htmlFor="name">Noches</label>
+                    <label htmlFor="noches">Noches</label>
                     <input
                         type='text'
                         id='noches'
@@ -69,7 +58,7 @@ export const ActualizarProducto = () => {
                 </div>
 
                 <div className='form-details'>
-                    <label htmlFor="unit_price">Precio Unitario</label>
+                    <label htmlFor="unit_z|price">Precio Unitario</label>
                     <input
                         type='text'
                         id='precio'
@@ -122,7 +111,6 @@ export const ActualizarProducto = () => {
                     >
                     </textarea>
                 </div>
-
             </form>
         </div>
     )

@@ -14,12 +14,13 @@ import { Route, Routes } from "react-router-dom";
 import { AdministrarProducto } from "./components/AdministrarProducto.jsx";
 import { ActualizarProducto } from "./components/ActualizarProducto.jsx";
 
+
 createRoot(document.getElementById("root")).render(
+
 	<BrowserRouter>
 		<SupabaseProvider>
 			<StrictMode>
 				<Header />
-
 				<Routes>
 					<Route path={routes.home} element={<Body />} />
 					<Route path="/detail/:id" element={<Detail />} />
