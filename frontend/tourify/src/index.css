@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  background-color: #007bff; /* Ajusta el color */
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.user-name {
+  font-size: 1em;
+  color: #333;
+}
+
+.input-login{
+  border-radius: 12px;
+  border-color: #7C887D;
+  border-width: 1px;
+  border-style: solid;
+  background: #ffffff;
+  height: 56px;
+}
+
+.boton-modal-login{
+  background: #FE8C00;
+  width: 100%;
+  padding: 14px 24px;
+  color: white;
+  font-size: 16px;
+}

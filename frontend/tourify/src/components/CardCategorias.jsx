@@ -1,4 +1,6 @@
 import React from "react";
+import location from "@imagenes/Location.png";
+import arrow from "@imagenes/arrowRight.svg";
 
 const CardCategorias = ({ info, filteredCount }) => {
 	return (
