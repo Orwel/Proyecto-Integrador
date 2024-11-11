@@ -8,16 +8,30 @@ import { tabData } from "../utils/tabValues";
 import CardCategorias from "./CardCategorias";
 import { cardCategoria } from "../utils/cardCategoria";
 
-const TabsCategorias = () => {
+const TabsCategorias = ({ selectedCategories }) => {
 	const [value, setValue] = useState("1");
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
+
+	const filteredCards = cardCategoria.filter((card) =>
+		selectedCategories.length === 0
+			? true
+			: selectedCategories.includes(card.tipoCategoria)
+	);
+
+	const filteredCount = filteredCards.length;
+
 	return (
-		<div style={{ textAlign: "start", padding: "" }}>
+		<div style={{ marginTop: 30 }}>
 			<TabContext value={value}>
-				<Box>
+				<Box
+					sx={{
+						display: "flex",
+						justifyContent: "center",
+						marginBottom: "20px",
+					}}>
 					<Tabs
 						value={value}
 						onChange={handleChange}
@@ -71,8 +85,12 @@ const TabsCategorias = () => {
 								gap: "40px 30px",
 								margin: "0 auto",
 							}}>
-							{cardCategoria.map((card) => (
-								<CardCategorias key={card.id} info={card} />
+							{filteredCards.map((card) => (
+								<CardCategorias
+									key={card.id}
+									info={card}
+									filteredCount={filteredCount}
+								/>
 							))}
 						</div>
 					</TabPanel>

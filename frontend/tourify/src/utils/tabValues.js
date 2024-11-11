@@ -25,16 +25,16 @@ export const tabData = [
 		iconSelected: icons.painted.image,
 		inconNoSelected: icons.black.image,
 	},
-	{
-		value: "5",
-		label: "Bienestar y Relajación",
-		iconSelected: icons.painted.heart,
-		inconNoSelected: icons.black.heart,
-	},
-	{
-		value: "6",
-		label: "Más",
-		iconSelected: icons.painted.category,
-		inconNoSelected: icons.black.category,
-	},
+	// {
+	// 	value: "5",
+	// 	label: "Bienestar y Relajación",
+	// 	iconSelected: icons.painted.heart,
+	// 	inconNoSelected: icons.black.heart,
+	// },
+	// {
+	// 	value: "6",
+	// 	label: "Más",
+	// 	iconSelected: icons.painted.category,
+	// 	inconNoSelected: icons.black.category,
+	// },
 ];
