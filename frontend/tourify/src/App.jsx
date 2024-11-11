@@ -9,6 +9,8 @@ import Footer from "./footer";
 import Detail from "./components/detail";
 import { routes } from "./utils/router";
 import Panel from "./Panel";
+import { AdministrarProducto } from "./components/AdministrarProducto";
+import { ActualizarProducto } from "./components/ActualizarProducto";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/panel" element={<Panel />} />
+        <Route path="/adminProductos" element={<AdministrarProducto />} />
+        <Route path="/updateProductos/:id" element={<ActualizarProducto />} />
       </Routes>
       <Footer />
     </>
