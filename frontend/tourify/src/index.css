@@ -34,3 +34,11 @@
   background: #ffffff;
   height: 56px;
 }
+
+.boton-modal-login{
+  background: #FE8C00;
+  width: 100%;
+  padding: 14px 24px;
+  color: white;
+  font-size: 16px;
+}

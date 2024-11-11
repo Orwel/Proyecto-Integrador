@@ -4,14 +4,14 @@ import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 
 
-export default function CustomInput({ inputValue, onValueChange, type }) {
+export default function CustomInput({ inputValue, onChange, type }) {
 	const [isVisible, setIsVisible] = useState(false);
 
 	const validateInput = (value) => {
 		if (type === "email") {
 			return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
 		} else if (type === "password") {
-			return value.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/);
+			return value.length > 0; 
 		}
 		return true; // Para otros tipos de input, no se aplica validación específica
 	};
@@ -28,20 +28,20 @@ export default function CustomInput({ inputValue, onValueChange, type }) {
 			value={inputValue}
 			type={type === "password" && isVisible ? "text" : type}
 			label=" "
-			placeholder={type === "email" ? "Email" : type === "password" ? "Password" : "Name"}
+			placeholder={type === "email" ? "Ingresa tu correo" : type === "password" ? "Ingresa tu contraseña" : "Name"}
 			variant="bordered"
 			isInvalid={isInvalid}
 			color={isInvalid ? "danger" : "success"}
 			errorMessage={
 				isInvalid
 					? type === "email"
-						? "Por favor ingrese un email válido"
+						? " Correo invalido"
 						: type === "password"
-							? "La contraseña debe contener un dígito del 1 al 9, una letra minúscula, una letra mayúscula, un carácter especial, sin espacios y debe tener entre 8 y 16 caracteres."
+							? "Por favor ingrese su contraseña"
 							: null
 					: null
 			}
-			onValueChange={onValueChange}
+			onChange={onChange}
 			endContent={
 				type === "password" && (
 					<button className="focus:outline-none" type="button" onClick={toggleVisibility}>
