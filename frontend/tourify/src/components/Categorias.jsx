@@ -6,7 +6,7 @@ const Categorias = () => {
 		<div style={{ width: "100%", padding: "0rem 2rem" }}>
 			<h2
 				style={{
-					padding: "2.5rem 2rem",
+					padding: "5rem 2rem",
 					maxWidth: "80%",
 					textAlign: "start",
 				}}>

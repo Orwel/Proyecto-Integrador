@@ -203,7 +203,7 @@
 
 .card {
 	display: flex;
-	background-color: RGBA(254, 140, 0, 0.25);
+	background-color: #ffffff;
 	border-radius: 16px;
 	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
@@ -308,7 +308,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	padding: 280px 80px 20px 80px;
+	padding: 350px 80px 20px 80px;
 	/* Aumentar el padding superior a 120px para más espacio */
 	width: 100%;
 	background: #ececec;
@@ -354,20 +354,6 @@
 	text-align: left;
 	/* Alineación a la izquierda para el texto */
 	border-bottom: 2px solid #e5e7eb;
-}
-
-.product-image {
-	/* width: 100%; */
-	height: 400px;
-	background-size: cover;
-	image-rendering: auto;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	/* Mantiene la proporción de la imagen */
-	border-radius: 30px;
-	/* Esquinas redondeadas */
-	margin-bottom: 20px;
-	/* Espacio debajo de la imagen */
 }
 
 .product-rating {
@@ -420,7 +406,6 @@
 	color: gray;
 	font-weight: 100;
 }
-
 
 .detail-characteristics img {
 	width: 25px;
@@ -514,6 +499,166 @@
 	background-color: #e68900;
 }
 
-.container-signup{
+.container-signup {
 	padding-top: 300px;
+}
+
+/* Estilos de la galería de imagenes del producto*/
+.gallery-container {
+	width: 100%;
+	margin: auto;	
+	padding: 40px 0;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+	position: relative;
+}
+
+.gallery {
+	width: 100%; 
+	max-width: 2000px; 
+	margin: 0 auto;
+}
+
+.main-image {
+	height: 100%;
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 10px;
+	border-radius: 20px;
+}
+
+.additional-images {
+	gap: 30px;
+	width: 100%; /* Ajuste para hacerlo responsivo */
+	max-width: 2000px; /* Límite máximo de ancho */
+	height: 100%;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.product-image {
+	width: 100%;
+	height: 100%;
+	margin-bottom: 10px;
+	padding: 10px;
+	border-radius: 20px;
+}
+
+  /* Estilos para el botón "Ver más" */
+.ver-mas {
+	position: absolute;
+	top: 90%;
+	right: 20px;
+	transform: translateY(-50%);
+	z-index: 10;
+}
+
+.btn-gallery {
+	width: 150px;
+	height: 50px;
+	padding: 10px 20px;
+	border-radius: 100px;
+	text-align: center;
+	background-color: #FE8C00;
+	color: #FFEED9;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.btn-gallery:hover {
+	background-color: #fe8c00c9;
+}
+
+@media (max-width: 1024px) {
+	.gallery-container {
+		gap: 5px;
+	}
+	.gallery {
+	  	grid-template-columns: 1fr; /* Una columna para pantallas pequeñas */
+	  	max-width: 100%; /* Ajuste de ancho para tablets */
+	}
+	.additional-images {
+	  	grid-template-columns: 1fr 1fr; /* Dos columnas en lugar de cuatro */
+		gap: 10px;
+	}
+	.ver-mas {
+	  right: 20px; /* Reduce el espacio desde la derecha */
+	  top: 80%; /* Ajusta la posición vertical */
+	}
+	.btn-gallery {
+		width: 120px;
+		height: 40px;
+	}
+}
+
+@media (max-width: 768px) {
+	.gallery-container {
+		gap: 5px;
+	}
+	.gallery {
+	  	grid-template-columns: 1fr; /* Una columna en móvil */
+	  	gap: 3px; /* Reduce el espacio entre las imágenes */
+	}
+	.additional-images {
+		grid-template-columns: 1fr;
+		gap: 5px;
+	}
+	.product-image {
+		padding: 1px;
+	}
+	.ver-mas {
+	  	right: 50px; /* Reduce el margen a la derecha */
+	  	top: 70%; /* Ajusta la posición vertical */
+	}
+}
+
+/* Estilos para la paginación de los producto*/
+.pagination {
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	gap: 10px;
+	margin: 20px;
+}
+
+.pagination .nav-button  {
+	padding: 8px 16px;
+	font-size: 0.9rem;
+	border: 1px solid #D0D5DD;
+	border-radius: 8px;
+	background-color: #f5f5f5;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.pagination .nav-button:hover {
+	background-color: #FE8C00;
+	color: #FFEED9;
+}
+
+.pagination .nav-button:disabled {
+	background-color: #D0D5DD;
+	cursor: not-allowed;
+}
+
+.page-number {
+	padding: 8px 16px;
+	font-size: 0.9rem;
+	border: none;
+	background: none;
+	cursor: pointer;
+	position: relative;
+	transition: color 0.2s;
+}
+
+.page-number:hover {
+	color: #FE8C00;
+}
+
+.active-page {
+	background-color: #FE8C00;
+	color: white;
+	font-weight: bold;
 }

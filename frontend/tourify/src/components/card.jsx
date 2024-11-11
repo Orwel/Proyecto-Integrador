@@ -12,7 +12,8 @@ export const Card = ({ id, image, title, location, country, reviews, rating, pri
       <Link to={"/detail/" + id}>
       <h3>{title}</h3>
       </Link>
-        <p className="card-location">{country} ({location})</p>
+        <p className="card-location">{country}</p>
+        <p className="card-location">📍({location})</p>
         <div className="card-footer">
           <div className="card-footer-left">
             <span className="rating-star">⭐ {rating}</span>
