@@ -666,6 +666,8 @@
 	font-weight: bold;
 }
 /* Estilos panel */
+.container-panel{
+	
 .dashboard {
 	display: flex;
 	min-height: 100vh;
@@ -757,4 +759,6 @@
 		justify-content: center;
 	  }
   }
+}
+
   
