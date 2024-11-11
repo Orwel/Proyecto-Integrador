@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { useProductos } from '../hook/use-productos'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom';
-import Panel from '../Panel';
 import { ActualizarProducto } from './ActualizarProducto';
+import { useCharacteristics } from '../hook/use-characteristics';
 
 
 export const AdministrarProducto = () => {
     const { productos, loading, error, handleDelete } = useProductos();
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false)
+    const { characteristics, loadingChar, errorChar } = useCharacteristics();
+
+
 
 
 
@@ -69,7 +71,7 @@ export const AdministrarProducto = () => {
                                                 🖍</button>
                                             {showModal &&
                                                 <div className="containerUpdate">
-                                                    <ActualizarProducto closeModal={() => setShowModal(false)} product={product} />
+                                                    <ActualizarProducto closeModal={() => setShowModal(false)} product={product} characteristics={characteristics} />
                                                 </div>}
                                         </div>
 

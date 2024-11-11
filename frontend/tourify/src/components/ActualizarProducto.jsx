@@ -1,14 +1,14 @@
 import React from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { useCharacteristics } from '../hook/use-characteristics'
 
 
 
-export const ActualizarProducto = ({ product, closeModal }) => {
+
+export const ActualizarProducto = ({ product, closeModal, characteristics }) => {
     const id = parseInt(useParams().id);
-    const { characteristics, loadingChar, errorChar } = useCharacteristics();
 
-    console.log(product)
+    console.log(characteristics);
+
 
     return (
         <>
@@ -121,13 +121,34 @@ export const ActualizarProducto = ({ product, closeModal }) => {
                                 >
                                 </textarea>
                             </div>
+                            <div className='form-details'>
+                                <p>Caracteristicas</p>
+                                <div>
+                                    {characteristics.map((item) => (
+                                        < div >
 
+                                            <label key={item.id}>
+                                                <input
+                                                    type="checkbox"
+                                                >
+                                                </input>
+                                                <span>{item.name}</span>
+                                            </label>
+                                        </div>
+                                    )
+
+
+                                    )}
+                                </div>
+
+
+                            </div>
                         </form>
                     </div>
 
                     <button className='btn-submit'>Actualizar Producto</button>
-                </div>
-            </div>
+                </div >
+            </div >
         </>
 
     )
