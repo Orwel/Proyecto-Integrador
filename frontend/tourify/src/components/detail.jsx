@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProductos } from '../hook/use-productos';
 import { useCharacteristics } from "../hook/use-characteristics";
+import ProductGallery from "./ProductGallery";
 
 const Detail = () => {
     const id = parseInt(useParams().id);
@@ -50,20 +51,20 @@ const Detail = () => {
                 <div className="product-rating">
                     <span className="detail-rating-star">⭐ {product.rating}</span>
                     <span className="detail-reviews">({product.reviews} reviews)</span>
-                    <span className="detail-location">🚩 {product.city}</span>
+                    <span className="detail-location">📍 {product.city}</span>
                 </div>
             </div>
             <div className="detail-body">
-                <img src={product.url_img} alt={product.name} className="product-image" />
+                <ProductGallery productId={id}/> 
                 <p className="detail-time">{product.nights} noches  •  {product.days} días </p>
                 <br />
                 <hr />
                 <br />
                 <p className="product-description">{product.description}</p>
                 <hr />
-                <h3 className="detail-itinerary">Itinerario</h3>
+                <h3 className="detail-itinerary" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Itinerario</h3>
                 <p className="product-itinerary">{product.itinerary}</p>
-                <h3 className="detail-itinerary">Características</h3>
+                <h3 className="detail-itinerary" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Características</h3>
 
                 <ul className="detail-characteristics">
 
