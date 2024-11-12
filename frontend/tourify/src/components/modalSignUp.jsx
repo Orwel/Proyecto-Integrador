@@ -19,14 +19,23 @@ const ModalSignUp = ({ isOpen, onOpenChange }) => {
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const navigate = useNavigate();
 
+  const [emailValid, setEmailValid] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(false);
+  const [firstNameValid, setFirstNameValid] = useState(false);
+  const [lastNameValid, setLastNameValid] = useState(false);
+
+  const isFormComplete = emailValid && passwordValid && firstNameValid && lastNameValid;
+  
   const handleSignUp = async () => {
 		setIsLoading(true);
 		setErrorMessage(null);
 		try {
 			const { respData, respError } = await signUp(email, password, first_name, last_name);
 			if (respError) {
-				setErrorMessage("Error al crear la cuenta: " + respError.message);
+				setErrorMessage("Error al crear la cuenta: " + respError);
+        console.error("Error al registrarse:", respError);
 			} else {
+        console.log("Usuario registrado exitosamente:", respData);
 				onOpenChange(false);
 				setIsConfirmationOpen(true); 
 				
@@ -57,6 +66,7 @@ const ModalSignUp = ({ isOpen, onOpenChange }) => {
                   inputValue={first_name}
                   type="first_name"
                   onChange={(e) => setFirstname(e.target.value)}
+                  onValidChange={setFirstNameValid}
 									placeholder={"Ingresa tu nombre"}
 									
                 />
@@ -65,12 +75,14 @@ const ModalSignUp = ({ isOpen, onOpenChange }) => {
                   type="last_name"
                   onChange={(e) => setLasttname(e.target.value)}
 									placeholder={"Ingresa tu apellido"}
+                  onValidChange={setLastNameValid}
                 />
 
                 <CustomInput
                   inputValue={email}
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
+                  onValidChange={setEmailValid}
 									placeholder={"Ingresa tu email"}
                 />
 								<span>Te enviaremos por correo electrónico la confirmación de tu viaje y los recibos</span>
@@ -78,6 +90,7 @@ const ModalSignUp = ({ isOpen, onOpenChange }) => {
                   inputValue={password}
                   type="passwordstrong"
                   onChange={(e) => setPassword(e.target.value)}
+                  onValidChange={setPasswordValid}
 									placeholder={"Ingresa tu contraseña"}
                 />
 								<p>Al crear una cuenta, usted acepta nuestra política de privacidad y los términos de uso.</p>
@@ -85,6 +98,7 @@ const ModalSignUp = ({ isOpen, onOpenChange }) => {
               </ModalBody>
               <ModalFooter>
                 <Button
+                 isDisabled={!isFormComplete || isLoading}
                   className="boton-modal-login"
                   onPress={handleSignUp}
                   isLoading={isLoading}>

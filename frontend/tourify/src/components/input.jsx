@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Input } from "@nextui-org/input";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 
 
-export default function CustomInput({ inputValue, onChange, type, placeholder }) {
+export default function CustomInput({ inputValue, onChange, type, placeholder,  onValidChange  }) {
 	const [isVisible, setIsVisible] = useState(false);
 
 	const validatePasswordStrong = (value) =>
@@ -12,11 +12,14 @@ export default function CustomInput({ inputValue, onChange, type, placeholder })
 
 	const validateInput = (value) => {
 		if (type === "email") {
-			return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
+			return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
 		} else if (type === "password") {
 			return value.length > 0;
 		} else if (type === "passwordstrong") {
 			return validatePasswordStrong(value);
+		} else if (type === "first_name" || type === "last_name") {
+			
+			return /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]{3,}$/.test(value);
 		}
 		return true;
 	};
@@ -25,6 +28,10 @@ export default function CustomInput({ inputValue, onChange, type, placeholder })
 		if (inputValue === "") return false;
 		return !validateInput(inputValue);
 	}, [inputValue, type]);
+
+	useEffect(() => {
+    onValidChange(!isInvalid);
+  }, [isInvalid, onValidChange]);
 
 	const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -46,9 +53,9 @@ export default function CustomInput({ inputValue, onChange, type, placeholder })
 							: type === "passwordstrong"
 								? "La contraseña debe contener un dígito del 1 al 9, una letra minúscula, una letra mayúscula, un carácter especial, sin espacios y debe tener entre 8 y 16 caracteres."
 								: type === "first_name"
-									? "Es obligatorio indicar un nombre"
+									? "Es obligatorio indicar un nombre válido"
 									: type === "last_name"
-										? "Es obligatorio indicar un apellido"
+										? "Es obligatorio indicar un apellido válido"
 										: null
 					: null
 			}
