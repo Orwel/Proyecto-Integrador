@@ -26,8 +26,8 @@ const ModalLogin = ({ isOpen, onOpenChange }) => {
         setErrorMessage('Email o contraseña incorrectos');
       } else {
         onOpenChange(false);
-        setIsConfirmationOpen(true); 
-        
+        setIsConfirmationOpen(true);
+
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
@@ -78,11 +78,11 @@ const ModalLogin = ({ isOpen, onOpenChange }) => {
           )}
         </ModalContent>
       </Modal>
-      <ModalConfirmation 
-      isOpen={isConfirmationOpen} 
-      onOpenChange={setIsConfirmationOpen} 
-      navigate={navigate}
-      type="inicio" />
+      <ModalConfirmation
+        isOpen={isConfirmationOpen}
+        onOpenChange={setIsConfirmationOpen}
+        navigate={navigate}
+        type="inicio" />
     </>
 
   );
