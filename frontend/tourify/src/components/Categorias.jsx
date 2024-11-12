@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TabsCategorias from "./TabsCategorias";
-import MultipleSelectCheckmarks from "./MultipleSelectCheckmarks";
+import MultipleSelectCheckmarks from "./MultipleSelectCheckMarks";
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import searchIcon from "@imagenes/search.svg";
@@ -21,7 +21,7 @@ const Categorias = () => {
 					maxWidth: "80%",
 					textAlign: "start",
 				}}>
-				<h6 style={{ color: "#FE8C00", marginBottom: "10px" }}>Categorias</h6>
+				<span style={{ color: "#FE8C00", marginBottom: "10px" }}>Categorias</span>
 				Encuentra tu <span style={{ color: "#FE8C00" }}>Estilo</span>, explora
 				el <span style={{ color: "#FE8C00" }}>Mundo...</span>
 			</h2>
@@ -50,10 +50,10 @@ const Categorias = () => {
 			</section>
 			<TabsCategorias selectedCategories={selectedCategories} />
 			<div className="recomendaciones-title">
-				<p className="eslogan-recomendaciones">
+				<div className="eslogan-recomendaciones">
 					Recomendaciones
 					<h2>¡Los destinos que podrían interesarte!</h2>
-				</p>
+				</div>
 				<p className="texto-recomendaciones">
 					Con tantos destinos emocionantes, elegir el lugar ideal para
 					vacacionar puede ser un reto. Por eso,
