@@ -76,7 +76,7 @@ const ModalSignUp = ({ isOpen, onOpenChange }) => {
 								<span>Te enviaremos por correo electrónico la confirmación de tu viaje y los recibos</span>
                 <CustomInput
                   inputValue={password}
-                  type="password"
+                  type="passwordstrong"
                   onChange={(e) => setPassword(e.target.value)}
 									placeholder={"Ingresa tu contraseña"}
                 />
