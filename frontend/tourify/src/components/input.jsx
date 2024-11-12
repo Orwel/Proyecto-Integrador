@@ -4,7 +4,7 @@ import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 
 
-export default function CustomInput({ inputValue, onChange, type }) {
+export default function CustomInput({ inputValue, onChange, type, placeholder }) {
 	const [isVisible, setIsVisible] = useState(false);
 
 	const validateInput = (value) => {
@@ -28,7 +28,7 @@ export default function CustomInput({ inputValue, onChange, type }) {
 			value={inputValue}
 			type={type === "password" && isVisible ? "text" : type}
 			label=" "
-			placeholder={type === "email" ? "Ingresa tu correo" : type === "password" ? "Ingresa tu contraseña" : "Name"}
+			placeholder={placeholder}
 			variant="bordered"
 			isInvalid={isInvalid}
 			color={isInvalid ? "danger" : "success"}
@@ -38,6 +38,10 @@ export default function CustomInput({ inputValue, onChange, type }) {
 						? " Correo invalido"
 						: type === "password"
 							? "Por favor ingrese su contraseña"
+							: type === "first_name"
+							? "Es obligatorio indicar un nombre"
+							: type === "last_name"
+							? "Es obligatorio indicar un apellido"
 							: null
 					: null
 			}
