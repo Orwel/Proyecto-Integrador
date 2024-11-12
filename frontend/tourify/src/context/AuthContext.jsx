@@ -10,31 +10,49 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
 
+  
+  const getUserInfo = async (id) => {
+    const { data: profile, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+      if (profile && !error) {
+        setUserInfo(profile);
+        console.log("Valor de userInfo:", profile);
+      } else if (error) {
+        console.log("Error al obtener userInfo:", error);
+      }
+    };
+
+  
   useEffect(() => {
     const getSession = async () => {
       const { data } = await supabase.auth.getSession();
-      setUser(data.session?.user ?? null);
+      const sessionUser = data.session?.user ?? null;
+      setUser(sessionUser);
 
-      if (data.session?.user) {
-        const { data: profile } = await supabase
-          .from('users')
-          .select('name')
-          .eq('id', data.session.user.id)
-          .single();
-        if (profile) setUser((user) => ({ ...user, name: profile.name }));
+      if (sessionUser) {
+        getUserInfo(sessionUser.id);
       }
-
     };
 
     getSession();
 
+   
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
-      if (event === 'SIGNED_OUT') {
-        navigate('/login');
+
+      if (session?.user) {
+        getUserInfo(session.user.id);
+      } else if (event === "SIGNED_OUT") {
+        navigate("/");
+        setUserInfo(null);
       }
     });
 
+    
     return () => {
       authListener.subscription.unsubscribe();
     };
@@ -44,54 +62,47 @@ export function AuthProvider({ children }) {
     let respData = null;
     let respError = null;
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (error !== null) {
         respError = error;
-        console.log('error ', error)
+        console.log("error ", error);
       } else {
         respData = data;
         if (data.user) {
           console.log(data.user.id);
-          const { data: dataUser, error } = await supabase
-            .from('users')
-            .select()
-            .eq('id', data.user.id)
-            .limit(1)
-            .single()
-          if (!error) {
-            console.log('DATA USER SETUSERINFO', dataUser)
-            setUserInfo(dataUser)
-          }
+          getUserInfo(data.user.id); 
         }
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
 
-    return { respData, respError }
-  }
-
+    return { respData, respError };
+  };
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
     setUser(null);
-    setUserInfo(null); 
+    setUserInfo(null);
   };
 
-  const signUp = async (email, password, name) => {
-
-    const { user, error } = await supabase.auth.signUp({
-      email, password, options: {
+  const signUp = async (email, password, first_name, last_name) => {
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
         data: {
-          name,
+          first_name,
+          last_name,
         },
-      }
+      },
     });
+
     if (error) throw error;
-
-
+    return data;
   };
+  
 
   return (
     <AuthContext.Provider value={{ user, signIn, signOut, signUp, userInfo }}>
