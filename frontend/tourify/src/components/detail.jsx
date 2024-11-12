@@ -12,30 +12,12 @@ const Detail = () => {
     const navigate = useNavigate();
 
 
-    const urlImagen = (key) => {
-        switch (key) {
-            case "Alojamiento":
-                return characteristics[3].url_icon
-            case "WiFi":
-                return characteristics[1].url_icon
-            case "Transporte incluido":
-                return characteristics[0].url_icon
-            case "Seguro de Viaje":
-                return characteristics[7].url_icon
-            case "Alimentación incluida":
-                return characteristics[4].url_icon
-            case "Asistencia 24/7":
-                return characteristics[6].url_icon
-            case "Traslado Aeropuerto":
-                return characteristics[5].url_icon
-            case "Guia Local - bilingue":
-                return characteristics[2].url_icon
-            case "Souvenir de Bienvenida":
-                return characteristics[8].url_icon
-            default:
-                break;
-        }
+    const urlIcon = (key) => {
+        const item = characteristics.filter(item => item.name.includes(key));
+        return item.map((item) => item.url_icon);
     }
+
+
 
     if (loading) {
         return <div>Cargando...</div>;
@@ -55,7 +37,7 @@ const Detail = () => {
                 </div>
             </div>
             <div className="detail-body">
-                <ProductGallery productId={id}/> 
+                <ProductGallery productId={id} />
                 <p className="detail-time">{product.nights} noches  •  {product.days} días </p>
                 <br />
                 <hr />
@@ -69,10 +51,11 @@ const Detail = () => {
                 <ul className="detail-characteristics">
 
                     {Object.entries(product.characteristics).map(([key, value]) => (
+
                         value === 1 &&
                         (<li>
                             <img
-                                src={urlImagen(key)}
+                                src={urlIcon(key)}
                                 alt={key}
                             />
                             {key}

@@ -12,8 +12,8 @@
 
 .logo {
 	display: flex;
-	
-	
+
+
 }
 
 .logo:hover {
@@ -437,6 +437,101 @@
 	}
 }
 
+.btns-table {
+	display: flex;
+}
+
+.containerUpdate {
+	display: grid;
+	position: absolute;
+	left: 100px;
+	top: 150px;
+	width: 100%;
+	height: 100vh;
+}
+
+.btn-actualizar {
+	padding-right: 1.5em;
+	font-size: 1.5em;
+	font-weight: 500;
+	font-family: inherit;
+	color: (102, 112, 133);
+	cursor: pointer;
+	transition: border-color 0.25s;
+}
+
+.btn-actualizar :hover {
+	border-color: #646cff;
+}
+
+
+/* Editar Producto popUp */
+
+.modalBack {
+	position: absolute;
+	height: auto;
+	width: 80%;
+	display: grid;
+	margin: 10rem 20px;
+	place-items: center;
+	background-color: rgba(231, 228, 228, 0.7);
+}
+
+.modalContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* height: 30%;
+	max-width: 80%; */
+	margin-top: 10px;
+	border-radius: 5px;
+}
+
+.update-admin-title {
+	display: flex;
+	align-items: center;
+}
+
+.update-admin-title p {
+	align-content: center;
+	justify-items: left;
+	font-weight: bold;
+	font-size: 16px;
+	padding-left: 10px;
+	margin: 1rem 25px 0 25px;
+	background-color: #FFF;
+	border-radius: 5px;
+	height: 80px;
+	width: 100%;
+}
+
+.modalContainer .modal__closeBtn {
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 10px;
+	font-weight: 500;
+	font-family: inherit;
+	cursor: pointer;
+	transition: border-color 0.25s;
+	background-color: hsl(33, 100%, 50%);
+	width: auto;
+}
+
+.btn-submit {
+	font-size: 12px;
+	border-radius: 8px;
+	font-weight: 500;
+	background-color: hsl(33, 100%, 50%);
+	width: 120px;
+	width: 250px;
+	padding: 5px;
+	cursor: pointer;
+	margin-bottom: 20px;
+	align-self: center;
+}
+
+/* search-bar*/
 .search-bar {
 	display: flex;
 	flex-direction: column;
@@ -502,6 +597,63 @@
 	background-color: #e68900;
 }
 
+.products-admin {
+	display: flex;
+	flex-direction: column;
+	background-color: #ECECEC;
+	width: 100%;
+}
+
+.products-admin-title {
+	align-content: center;
+	justify-items: left;
+	font-weight: bold;
+	font-size: 16px;
+	padding-left: 10px;
+	margin: 22rem 25px 0 25px;
+	background-color: #FFF;
+	border-radius: 5px;
+	height: 70px;
+
+}
+
+.tabla-products {
+	font-size: 12px;
+	padding: 1.2rem;
+
+}
+
+.formActualizar {
+	padding-top: 250px;
+	margin: 20px;
+	display: flex;
+}
+
+.form-details {
+	margin: 10px 10px;
+}
+
+.form-details label {
+	margin-right: 15px;
+	width: 100px;
+	height: auto;
+	text-align: left;
+}
+
+.form-details input {
+	padding: 10px;
+	margin-right: 15px;
+	width: 800px;
+	height: auto;
+}
+
+.form-details textarea {
+	padding: 10px;
+	margin-right: 15px;
+	width: 800px;
+
+}
+
 .container-signup {
 	padding-top: 300px;
 }
@@ -509,7 +661,7 @@
 /* Estilos de la galería de imagenes del producto*/
 .gallery-container {
 	width: 100%;
-	margin: auto;	
+	margin: auto;
 	padding: 40px 0;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -518,8 +670,8 @@
 }
 
 .gallery {
-	width: 100%; 
-	max-width: 2000px; 
+	width: 100%;
+	max-width: 2000px;
 	margin: 0 auto;
 }
 
@@ -533,8 +685,10 @@
 
 .additional-images {
 	gap: 30px;
-	width: 100%; /* Ajuste para hacerlo responsivo */
-	max-width: 2000px; /* Límite máximo de ancho */
+	width: 100%;
+	/* Ajuste para hacerlo responsivo */
+	max-width: 2000px;
+	/* Límite máximo de ancho */
 	height: 100%;
 	margin: 0 auto;
 	display: grid;
@@ -549,7 +703,7 @@
 	border-radius: 20px;
 }
 
-  /* Estilos para el botón "Ver más" */
+/* Estilos para el botón "Ver más" */
 .ver-mas {
 	position: absolute;
 	top: 90%;
@@ -578,18 +732,27 @@
 	.gallery-container {
 		gap: 5px;
 	}
+
 	.gallery {
-	  	grid-template-columns: 1fr; /* Una columna para pantallas pequeñas */
-	  	max-width: 100%; /* Ajuste de ancho para tablets */
+		grid-template-columns: 1fr;
+		/* Una columna para pantallas pequeñas */
+		max-width: 100%;
+		/* Ajuste de ancho para tablets */
 	}
+
 	.additional-images {
-	  	grid-template-columns: 1fr 1fr; /* Dos columnas en lugar de cuatro */
+		grid-template-columns: 1fr 1fr;
+		/* Dos columnas en lugar de cuatro */
 		gap: 10px;
 	}
+
 	.ver-mas {
-	  right: 20px; /* Reduce el espacio desde la derecha */
-	  top: 80%; /* Ajusta la posición vertical */
+		right: 20px;
+		/* Reduce el espacio desde la derecha */
+		top: 80%;
+		/* Ajusta la posición vertical */
 	}
+
 	.btn-gallery {
 		width: 120px;
 		height: 40px;
@@ -600,20 +763,28 @@
 	.gallery-container {
 		gap: 5px;
 	}
+
 	.gallery {
-	  	grid-template-columns: 1fr; /* Una columna en móvil */
-	  	gap: 3px; /* Reduce el espacio entre las imágenes */
+		grid-template-columns: 1fr;
+		/* Una columna en móvil */
+		gap: 3px;
+		/* Reduce el espacio entre las imágenes */
 	}
+
 	.additional-images {
 		grid-template-columns: 1fr;
 		gap: 5px;
 	}
+
 	.product-image {
 		padding: 1px;
 	}
+
 	.ver-mas {
-	  	right: 50px; /* Reduce el margen a la derecha */
-	  	top: 70%; /* Ajusta la posición vertical */
+		right: 50px;
+		/* Reduce el margen a la derecha */
+		top: 70%;
+		/* Ajusta la posición vertical */
 	}
 }
 
@@ -626,7 +797,7 @@
 	margin: 20px;
 }
 
-.pagination .nav-button  {
+.pagination .nav-button {
 	padding: 8px 16px;
 	font-size: 0.9rem;
 	border: 1px solid #D0D5DD;
@@ -665,100 +836,100 @@
 	color: white;
 	font-weight: bold;
 }
-/* Estilos panel */
-.container-panel{
-	
-.dashboard {
-	display: flex;
-	min-height: 100vh;
-  }
-  
-  /* Estilo para el menú lateral */
-  .sidebar {
-	width: 200px;
-	background-color: #CFCFCF;
-	color: #60626E;
-	padding: 20px;
-  }
-  
-  .sidebar h2 {
-	margin-top: 0;
-  }
-  
-  .sidebar ul {
-	list-style: none;
-	padding: 0;
-  }
-  
-  .sidebar li {
-	margin: 10px 0;
-  }
-  
-  .content {
-	flex: 1;
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	background-color: #ECECEC;
-  }
-  
-  /* Ocultar mensaje de móviles en pantallas grandes */
-  .mobile-message {
-	display: none;
-  }
-  
-  /* Estilos para las tarjetas de números */
-  .card {
-	background-color: #f5f5f5;
-	padding: 20px;
-	margin: 10px;
-	flex: 1;
-	text-align: center;
-	font-size: 2rem;
-	color: #333;
-	border-radius: 8px;
-	flex-direction: column;
 
-	span{
-		font-size: 14px;
+/* Estilos panel */
+.container-panel {
+
+	.dashboard {
+		display: flex;
+		min-height: 100vh;
 	}
-  }
-  
-  /* Estilos en pantallas grandes */
-  .desktop-only {
-	display: flex;
-	width: 100%;
-	padding-top: 20px;
-	padding-left: 20px;
-	padding-bottom: 20px;
-	margin-bottom: 20px;
-	background-color: #FFF;
-	border-radius: 5px;
-  }
-  
-  /* Estilos en pantallas móviles */
-  @media (max-width: 768px) {
+
+	/* Estilo para el menú lateral */
 	.sidebar {
-	  display: none;
+		width: 200px;
+		background-color: #CFCFCF;
+		color: #60626E;
+		padding: 20px;
 	}
-  
-	.desktop-only {
-	  display: none;
+
+	.sidebar h2 {
+		margin-top: 0;
 	}
-  
-	.mobile-message {
-	  display: block;
-	  font-size: 1.5rem;
-	  color: #888;
-	  text-align: center;
+
+	.sidebar ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	.sidebar li {
+		margin: 10px 0;
 	}
 
 	.content {
-		justify-content: center;
-	  }
-  }
-}
+		flex: 1;
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		background-color: #ECECEC;
+	}
 
-  
+	/* Ocultar mensaje de móviles en pantallas grandes */
+	.mobile-message {
+		display: none;
+	}
+
+	/* Estilos para las tarjetas de números */
+	.card {
+		background-color: #f5f5f5;
+		padding: 20px;
+		margin: 10px;
+		flex: 1;
+		text-align: center;
+		font-size: 2rem;
+		color: #333;
+		border-radius: 8px;
+		flex-direction: column;
+
+		span {
+			font-size: 14px;
+		}
+	}
+
+	/* Estilos en pantallas grandes */
+	.desktop-only {
+		display: flex;
+		width: 100%;
+		padding-top: 20px;
+		padding-left: 20px;
+		padding-bottom: 20px;
+		margin-bottom: 20px;
+		background-color: #FFF;
+		border-radius: 5px;
+	}
+
+	/* Estilos en pantallas móviles */
+	@media (max-width: 768px) {
+		.sidebar {
+			display: none;
+		}
+
+		.desktop-only {
+			display: none;
+		}
+
+		.mobile-message {
+			display: block;
+			font-size: 1.5rem;
+			color: #888;
+			text-align: center;
+		}
+
+		.content {
+			justify-content: center;
+
+		}
+	}
+}
