@@ -4,7 +4,7 @@ import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 
 
-export default function CustomInput({ inputValue, onChange, type, placeholder,  onValidChange  }) {
+export default function CustomInput({ inputValue, onChange, type, placeholder, onValidChange }) {
 	const [isVisible, setIsVisible] = useState(false);
 
 	const validatePasswordStrong = (value) =>
@@ -18,7 +18,7 @@ export default function CustomInput({ inputValue, onChange, type, placeholder,  
 		} else if (type === "passwordstrong") {
 			return validatePasswordStrong(value);
 		} else if (type === "first_name" || type === "last_name") {
-			
+
 			return /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]{3,}$/.test(value);
 		}
 		return true;
@@ -30,8 +30,8 @@ export default function CustomInput({ inputValue, onChange, type, placeholder,  
 	}, [inputValue, type]);
 
 	useEffect(() => {
-    onValidChange(!isInvalid);
-  }, [isInvalid, onValidChange]);
+		if (onValidChange) onValidChange(!isInvalid);
+}, [isInvalid, onValidChange]);
 
 	const toggleVisibility = () => setIsVisible(!isVisible);
 
