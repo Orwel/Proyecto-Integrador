@@ -23,18 +23,18 @@ export function AuthProvider({ children }) {
           .single();
         if (profile) setUser((user) => ({ ...user, name: profile.name }));
       }
-    
+
     };
-  
+
     getSession();
-  
+
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
       if (event === 'SIGNED_OUT') {
         navigate('/login');
       }
     });
-  
+
     return () => {
       authListener.subscription.unsubscribe();
     };
@@ -44,21 +44,21 @@ export function AuthProvider({ children }) {
     let respData = null;
     let respError = null;
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({email, password})
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
       if (error !== null) {
         respError = error;
         console.log('error ', error)
       } else {
         respData = data;
-        if(data.user){
+        if (data.user) {
           console.log(data.user.id);
-          const { data:dataUser, error } = await supabase
-          .from('users')
-          .select()
-          .eq('id', data.user.id)
-          .limit(1)
-          .single()
-          if (!error){
+          const { data: dataUser, error } = await supabase
+            .from('users')
+            .select()
+            .eq('id', data.user.id)
+            .limit(1)
+            .single()
+          if (!error) {
             console.log('DATA USER SETUSERINFO', dataUser)
             setUserInfo(dataUser)
           }
@@ -67,30 +67,34 @@ export function AuthProvider({ children }) {
     } catch (error) {
       console.log(error)
     }
-    
-    return {respData, respError}
+
+    return { respData, respError }
   }
 
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
+    setUser(null);
+    setUserInfo(null); 
   };
 
   const signUp = async (email, password, name) => {
-    
-    const { user, error } = await supabase.auth.signUp({ email, password, options: {
-      data: {
-        name,
-      },
-    } });
+
+    const { user, error } = await supabase.auth.signUp({
+      email, password, options: {
+        data: {
+          name,
+        },
+      }
+    });
     if (error) throw error;
 
-   
+
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut, signUp,userInfo  }}>
+    <AuthContext.Provider value={{ user, signIn, signOut, signUp, userInfo }}>
       {children}
     </AuthContext.Provider>
   );

@@ -7,9 +7,6 @@ import { useParams, useNavigate } from "react-router-dom"
 export const ActualizarProducto = ({ product, closeModal, characteristics }) => {
     const id = parseInt(useParams().id);
 
-    console.log(characteristics);
-
-
     return (
         <>
             <div className="modalBack ">

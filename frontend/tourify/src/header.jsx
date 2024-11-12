@@ -32,7 +32,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className='logo-and-phrase'>
-        <div>
+        <div className='flex items-center gap-3'>
           <Link to="/" className="logo">
             <img src="/img/logo.png" className="logo-image" alt="Logo" />
           </Link>
@@ -77,7 +77,7 @@ const Header = () => {
             <>
               <button className="btn" id='btn-crear-cuenta' onClick={() => navigate('/signup')}>Crear cuenta</button>
               <button className="btn" id='btn-iniciar-sesion'
-                onClick={() => onOpen()}
+                onClick={() => navigate('/login')}
               >Iniciar sesión</button>
             </>
           )}
