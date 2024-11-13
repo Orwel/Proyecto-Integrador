@@ -7,7 +7,6 @@ export const useUsers = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Función para crear un nuevo usuario
   const handleCreateUser = async (newUser) => {
     setLoading(true);
     const { data, error } = await supabase
@@ -26,13 +25,13 @@ export const useUsers = () => {
     setLoading(false);
   };
 
-  // Función para actualizar un usuario
   const handleUpdateUser = async (id, updatedUser) => {
     setLoading(true);
     const { data, error } = await supabase
       .from('users')
       .update(updatedUser)
-      .eq('id', id);
+      .eq('id', id)
+      .select();
 
     if (error) {
       setError(error);
@@ -50,7 +49,6 @@ export const useUsers = () => {
     setLoading(false);
   };
 
-  // Función para eliminar un usuario
   const handleDeleteUser = async (id) => {
     const { data, error } = await supabase
       .from('users')
@@ -68,27 +66,34 @@ export const useUsers = () => {
     );
   };
 
+  const fetchUsers = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .order('id', { ascending: true });
+
+    if (error) {
+      setError(error);
+      setLoading(false);
+      return;
+    }
+
+    setUsers(data || []);
+    setLoading(false);
+  };
+
   // Obtener usuarios al montar el componente
   useEffect(() => {
-    const fetchUsers = async () => {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from('users')
-        .select('*')
-        .order('id', { ascending: true });
-
-      if (error) {
-        setError(error);
-        setLoading(false);
-        return;
-      }
-
-      setUsers(data || []);  // Asegurarse de que data sea un array antes de usarlo
-      setLoading(false);
-    };
-
     fetchUsers();
   }, [supabase]);
+
+  // Verificar y recargar usuarios si el array está vacío
+  useEffect(() => {
+    if (!loading && users.length === 0) {
+      fetchUsers();
+    }
+  }, [users, loading]);
 
   return { users, loading, error, handleCreateUser, handleUpdateUser, handleDeleteUser };
 };

@@ -22,10 +22,10 @@ export const AdministrarUsuario = () => {
   };
 
   const handleRoleToggle = async (user) => {
-    const newRoleId = user.role_id === 1 ? 2 : 1;  // Cambiar rol entre 1 y 2
-    await handleUpdateUser(user.id, { role_id: newRoleId });
-  };
-
+		const newRoleId = user.role_id === 1 ? 2 : 1;
+		await handleUpdateUser(user.id, { role_id: newRoleId });
+	};
+	
   const renderCell = useCallback((user, columnKey) => {
     const cellValue = user[columnKey];
 
