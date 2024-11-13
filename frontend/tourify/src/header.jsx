@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import { SearchBar } from './components/SearchBar';
 import { useAuth } from './context/AuthContext';
@@ -18,6 +18,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -46,7 +47,6 @@ const Header = () => {
           <Link to="/" className="logo">
             Crea recuerdos duraderos... Descubre nuevos horizontes!
           </Link>
-
         </div>
 
         <div className="auth-buttons">
@@ -54,16 +54,26 @@ const Header = () => {
             <div className="user-avatar">
               <div className="flex items-center gap-4">
                 <Dropdown
-                className='bg-[#757575] text-white' 
-                placement="bottom-end">
+                  className='bg-[#757575] text-white'
+                  placement="bottom-end">
                   <DropdownTrigger>
                     <div className='flex items-center gap-4 cursor-pointer'>
-                    <span className="avatar">{getInitials(userInfo.first_name)}</span>
-                    <span className="user-name">{userInfo.first_name} {userInfo.last_name}</span>
+                      <span className="avatar">{getInitials(userInfo.first_name)}</span>
+                      <span className="user-name">{userInfo.first_name} {userInfo.last_name}</span>
                     </div>
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
                     
+                    <DropdownItem key="profile" className="h-14 gap-2">
+                    <Link className='cursor-pointer flex gap-4' to="/panel" >
+                    <span className="avatar">{getInitials(userInfo.first_name)}</span>
+                    <div className='flex flex-col'>
+                    <span className="font-semibold">{userInfo.first_name} {userInfo.last_name}</span>
+                      <p className="font-semibold">Ver perfil</p>
+                    </div>
+                    </Link>
+                      
+                    </DropdownItem>
                     <DropdownItem key="profile" className="h-14 gap-2">
                       <h2>Configuracion</h2>
                       <p className="font-semibold">{userInfo.email}</p>
@@ -78,7 +88,7 @@ const Header = () => {
                     </DropdownItem>
                     <DropdownItem key="system">Lista de favoritos</DropdownItem>
                     <DropdownItem key="configurations">Notificaciones</DropdownItem>
-                    
+
                     <DropdownItem key="help_and_feedback">
                       Terminos de servicio
                     </DropdownItem>
@@ -126,7 +136,9 @@ const Header = () => {
           )}
         </div>
       )}
-      <SearchBar />
+      {location.pathname !== '/panel' && <SearchBar />}
+
+
       <ModalLogin
         isOpen={isOpen}
         onOpenChange={onOpenChange} />

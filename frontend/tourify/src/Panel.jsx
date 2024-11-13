@@ -8,7 +8,7 @@ const Panel = () => {
         <h2>Admin</h2>
         <ul>
           <li>
-            <Link to="/panel/">
+            <Link to="/panel">
               Dashboard
             </Link>
           </li>
