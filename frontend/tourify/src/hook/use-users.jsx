@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useSupabase } from '../context/supabase-context';
-import { useNavigate } from "react-router-dom";
 
-export const useProductos = () => {
+export const useUsers = () => {
   const { supabase } = useSupabase();
-  const [productos, setProductos] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Función para crear un nuevo producto
-  const handleCreate = async (newProducto) => {
+  // Función para crear un nuevo usuario
+  const handleCreateUser = async (newUser) => {
     setLoading(true);
     const { data, error } = await supabase
-      .from('productos')
-      .insert([newProducto]);
+      .from('users')
+      .insert([newUser]);
 
     if (error) {
       setError(error);
@@ -21,16 +20,18 @@ export const useProductos = () => {
       return;
     }
 
-    setProductos(prevProducts => [...prevProducts, data[0]]);
+    if (data && data.length > 0) {
+      setUsers(prevUsers => [...prevUsers, data[0]]);
+    }
     setLoading(false);
   };
 
-  // Función para actualizar un producto
-  const handleUpdate = async (id, updatedProducto) => {
+  // Función para actualizar un usuario
+  const handleUpdateUser = async (id, updatedUser) => {
     setLoading(true);
     const { data, error } = await supabase
-      .from('productos')
-      .update(updatedProducto)
+      .from('users')
+      .update(updatedUser)
       .eq('id', id);
 
     if (error) {
@@ -39,18 +40,20 @@ export const useProductos = () => {
       return;
     }
 
-    setProductos(prevProducts =>
-      prevProducts.map(product => 
-        product.id === id ? { ...product, ...data[0] } : product
-      )
-    );
+    if (data && data.length > 0) {
+      setUsers(prevUsers =>
+        prevUsers.map(user => 
+          user.id === id ? { ...user, ...data[0] } : user
+        )
+      );
+    }
     setLoading(false);
   };
 
-  // Función para eliminar un producto
-  const handleDelete = async (id) => {
+  // Función para eliminar un usuario
+  const handleDeleteUser = async (id) => {
     const { data, error } = await supabase
-      .from('productos')
+      .from('users')
       .delete()
       .eq('id', id);
 
@@ -60,17 +63,17 @@ export const useProductos = () => {
       return;
     }
 
-    setProductos(prevProducts => 
-      prevProducts.filter(product => product.id !== id)
+    setUsers(prevUsers => 
+      prevUsers.filter(user => user.id !== id)
     );
   };
 
-  // Obtener productos al montar el componente
+  // Obtener usuarios al montar el componente
   useEffect(() => {
-    const fetchProductos = async () => {
+    const fetchUsers = async () => {
       setLoading(true);
       const { data, error } = await supabase
-        .from('productos')
+        .from('users')
         .select('*')
         .order('id', { ascending: true });
 
@@ -80,12 +83,12 @@ export const useProductos = () => {
         return;
       }
 
-      setProductos(data);
+      setUsers(data || []);  // Asegurarse de que data sea un array antes de usarlo
       setLoading(false);
     };
 
-    fetchProductos();
+    fetchUsers();
   }, [supabase]);
 
-  return { productos, loading, error, handleCreate, handleUpdate, handleDelete };
+  return { users, loading, error, handleCreateUser, handleUpdateUser, handleDeleteUser };
 };

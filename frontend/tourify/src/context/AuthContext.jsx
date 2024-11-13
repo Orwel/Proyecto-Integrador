@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
 
     if (profile && !error) {
       setUserInfo(profile);
-      console.log("Valor de userInfo:", profile);
+      // console.log("Valor de userInfo:", profile);
     } else if (error) {
       console.log("Error al obtener userInfo:", error);
     }
