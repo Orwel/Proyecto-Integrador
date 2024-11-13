@@ -58,6 +58,9 @@ const Header = () => {
                   placement="bottom-end">
                   <DropdownTrigger>
                     <div className='flex items-center gap-4 cursor-pointer'>
+                      <span>
+                      {userInfo ? (userInfo.role_id === 2 ? "Soy Administrador" : "Soy Usuario Normal" ) : ""}
+                      </span>
                       <span className="avatar">{getInitials(userInfo.first_name)}</span>
                       <span className="user-name">{userInfo.first_name} {userInfo.last_name}</span>
                     </div>
@@ -136,7 +139,7 @@ const Header = () => {
           )}
         </div>
       )}
-      {location.pathname !== '/panel' && <SearchBar />}
+      {location.pathname == '/' && <SearchBar />}
 
 
       <ModalLogin

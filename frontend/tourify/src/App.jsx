@@ -10,6 +10,7 @@ import Panel from "./Panel";
 import { AdministrarProducto } from "./components/AdministrarProducto";
 import { ActualizarProducto } from "./components/ActualizarProducto";
 import { ProtectedRoute } from "./utils/ProtectedRoute";
+import { AdministrarUsuario } from "./components/AdministrarUsuario";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
             <Panel />
           </ProtectedRoute>
         } />
-
+        <Route path="/adminUsuarios" element={<AdministrarUsuario />} />
         <Route path="/adminProductos" element={<AdministrarProducto />} />
         <Route path="/updateProductos/:id" element={<ActualizarProducto />} />
       </Routes>

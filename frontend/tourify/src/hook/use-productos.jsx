@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSupabase } from '../context/supabase-context';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export const useProductos = () => {
   const { supabase } = useSupabase();
@@ -8,14 +8,12 @@ export const useProductos = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const handleDelete = async (id) => {
-    console.log(id)
+  // Función para crear un nuevo producto
+  const handleCreate = async (newProducto) => {
+    setLoading(true);
     const { data, error } = await supabase
       .from('productos')
-      .delete()
-      .eq('id', id)
-      .select('*');
-
+      .insert([newProducto]);
 
     if (error) {
       setError(error);
@@ -23,17 +21,51 @@ export const useProductos = () => {
       return;
     }
 
-    if (data) {
-      console.log(data);
+    setProductos(prevProducts => [...prevProducts, data[0]]);
+    setLoading(false);
+  };
+
+  // Función para actualizar un producto
+  const handleUpdate = async (id, updatedProducto) => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('productos')
+      .update(updatedProducto)
+      .eq('id', id);
+
+    if (error) {
+      setError(error);
+      setLoading(false);
+      return;
     }
 
-    setProductos(prevProducts => {
-      return prevProducts.filter(product => product.id !== id)
-    })
-  }
+    setProductos(prevProducts =>
+      prevProducts.map(product => 
+        product.id === id ? { ...product, ...data[0] } : product
+      )
+    );
+    setLoading(false);
+  };
 
+  // Función para eliminar un producto
+  const handleDelete = async (id) => {
+    const { data, error } = await supabase
+      .from('productos')
+      .delete()
+      .eq('id', id);
 
+    if (error) {
+      setError(error);
+      setLoading(false);
+      return;
+    }
 
+    setProductos(prevProducts => 
+      prevProducts.filter(product => product.id !== id)
+    );
+  };
+
+  // Obtener productos al montar el componente
   useEffect(() => {
     const fetchProductos = async () => {
       setLoading(true);
@@ -48,13 +80,12 @@ export const useProductos = () => {
         return;
       }
 
-      const productosRandom = data.sort(() => Math.random() - 0.5);
-      setProductos(productosRandom);
+      setProductos(data);
       setLoading(false);
     };
 
     fetchProductos();
   }, [supabase]);
 
-  return { productos, loading, error, handleDelete };
+  return { productos, loading, error, handleCreate, handleUpdate, handleDelete };
 };
