@@ -39,7 +39,7 @@ export default function MultipleSelectCheckmarks({
 				<InputLabel id="demo-multiple-checkbox-label">
 					<Box display="flex" alignItems="center">
 						<img src={filterLines} alt="Filtro" />
-						<Typography variant="body1">Filtros</Typography> {/* Texto */}
+						<Typography variant="body1">Filtros</Typography>
 					</Box>
 				</InputLabel>
 

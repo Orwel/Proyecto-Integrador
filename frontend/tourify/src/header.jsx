@@ -68,7 +68,7 @@ const Header = () => {
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
                     
                     <DropdownItem key="profile" className="h-14 gap-2">
-                    <Link className='cursor-pointer flex gap-4' to="/panel" >
+                    <Link className='cursor-pointer flex gap-4' to={userInfo.role_id === 2 ? "/panel" : "/panel-usuario"} >
                     <span className="avatar">{getInitials(userInfo.first_name)}</span>
                     <div className='flex flex-col'>
                     <span className="font-semibold">{userInfo.first_name} {userInfo.last_name}</span>
@@ -80,6 +80,7 @@ const Header = () => {
                     <DropdownItem key="profile" className="h-14 gap-2">
                       <h2>Configuracion</h2>
                       <p className="font-semibold">{userInfo.email}</p>
+            
                     </DropdownItem>
 
                     <DropdownItem key="settings">

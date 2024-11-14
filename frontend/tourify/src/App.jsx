@@ -11,6 +11,8 @@ import { AdministrarProducto } from "./components/AdministrarProducto";
 import { ActualizarProducto } from "./components/ActualizarProducto";
 import { ProtectedRoute } from "./utils/ProtectedRoute";
 import { AdministrarUsuario } from "./components/AdministrarUsuario";
+import InformacionPersonal from "./components/InformacionPersonal"; // Importa el componente InformacionPersonal
+import PanelUsuario from "./PanelUsuario"; // Importa el componente PanelUsuario
 
 function App() {
   return (
@@ -24,9 +26,12 @@ function App() {
             <Panel />
           </ProtectedRoute>
         } />
+        
+        <Route path="/panel-usuario" element={<PanelUsuario />} />
         <Route path="/adminUsuarios" element={<AdministrarUsuario />} />
         <Route path="/adminProductos" element={<AdministrarProducto />} />
         <Route path="/updateProductos/:id" element={<ActualizarProducto />} />
+        <Route path="/informacion-personal" element={<InformacionPersonal />} />
       </Routes>
       <Footer />
     </>
