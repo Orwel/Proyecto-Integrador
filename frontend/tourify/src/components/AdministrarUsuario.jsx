@@ -40,7 +40,7 @@ export const AdministrarUsuario = () => {
       case "role":
         return (
           <Chip color={statusColorMap[user.role_id]} size="sm" variant="flat">
-            {user.role_id === 1 ? "Admin" : "User"}
+            {user.role_id === 1 ? "User" : "Admin"}
           </Chip>
         );
       case "actions":
