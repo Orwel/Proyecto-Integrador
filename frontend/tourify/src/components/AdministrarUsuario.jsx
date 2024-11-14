@@ -1,6 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Chip, Switch, Tooltip } from "@nextui-org/react";
 import { useUsers } from "../hook/use-users";
+import { ModalConfirmation } from "./modalConfirmation";
+import { useDisclosure } from "@nextui-org/modal";
 
 
 const columns = [
@@ -10,21 +12,32 @@ const columns = [
 ];
 
 const statusColorMap = {
-  1: "success",  
-  2: "warning",  
+  1: "danger",
+  2: "success",
 };
 
 export const AdministrarUsuario = () => {
   const { users, loading, error, handleUpdateUser } = useUsers();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const getInitials = (name) => {
     return name ? name.split(" ").map(n => n[0]).join("").toUpperCase() : "";
   };
 
-  const handleRoleToggle = async (user) => {
-		const newRoleId = user.role_id === 1 ? 2 : 1;
-		await handleUpdateUser(user.id, { role_id: newRoleId });
-	};
+  const openConfirmationModal = (user) => {
+    setSelectedUser(user);
+    onOpen();
+  };
+
+  const confirmRoleToggle = async () => {
+    if (selectedUser) {
+      const newRoleId = selectedUser.role_id === 1 ? 2 : 1;
+      await handleUpdateUser(selectedUser.id, { role_id: newRoleId });
+      setSelectedUser(null);
+      onOpenChange(false);
+    }
+  };
 
   const renderCell = useCallback((user, columnKey) => {
     const cellValue = user[columnKey];
@@ -40,7 +53,7 @@ export const AdministrarUsuario = () => {
       case "role":
         return (
           <Chip color={statusColorMap[user.role_id]} size="sm" variant="flat">
-            {user.role_id === 1 ? "User" : "Admin"}
+            {user.role_id === 1 ? "Usuario" : "Administrador"}
           </Chip>
         );
       case "actions":
@@ -48,8 +61,9 @@ export const AdministrarUsuario = () => {
           <div className="relative flex items-center gap-2">
             <Tooltip content="Toggle role">
               <Switch
+                defaultSelected={(user.role_id === 2 ? true : false)}
                 checked={user.role_id === 2}
-                onChange={() => handleRoleToggle(user)}
+                onChange={() => openConfirmationModal(user)}
               />
             </Tooltip>
           </div>
@@ -57,27 +71,36 @@ export const AdministrarUsuario = () => {
       default:
         return cellValue;
     }
-  }, [handleRoleToggle]);
+  }, [openConfirmationModal]);
 
   if (loading) return <p>Cargando usuarios...</p>;
   if (error) return <p>Error Cargando usuarios: {error.message}</p>;
 
   return (
-    <Table aria-label="User management table">
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
-            {column.name}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={users}>
-        {(user) => (
-          <TableRow key={user.id}>
-            {(columnKey) => <TableCell>{renderCell(user, columnKey)}</TableCell>}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <>
+      <Table aria-label="User management table">
+        <TableHeader columns={columns}>
+          {(column) => (
+            <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
+              {column.name}
+            </TableColumn>
+          )}
+        </TableHeader>
+        <TableBody items={users}>
+          {(user) => (
+            <TableRow key={user.id}>
+              {(columnKey) => <TableCell>{renderCell(user, columnKey)}</TableCell>}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+      <ModalConfirmation
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        type="permiso"
+        onConfirm={confirmRoleToggle}
+        role_id={selectedUser?.role_id} />
+    </>
+
   );
 };

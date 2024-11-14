@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link } from "@nextui-org/react";
 
-export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type }) => {
+export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConfirm, role_id }) => {
 
 	const handleContinue = () => {
 		onOpenChange(false);
@@ -31,18 +31,16 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type }) => {
 								<ModalFooter>
 									<Button
 										className="boton-modal-login"
-										
+										onPress={onClose()}
 									>
 										Continuar
 									</Button>
 								</ModalFooter>
 							</>
 						)}
-
 						{type === "cierre" && (
 							<>
 								<ModalHeader className="flex flex-col text-center text-[24px]">¡Cierre de sesión exitoso!</ModalHeader>
-
 								<ModalBody className="p-9 text-center">
 									<p className="text-[14px]">Has salido de tu cuenta en <span className="text-[#FE8C00]">Tourify.</span>  Tu sesión ha finalizado de manera segura, y ya no podrás acceder a las funciones exclusivas para usuarios registrados.</p>
 								</ModalBody>
@@ -56,11 +54,9 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type }) => {
 								</ModalFooter>
 							</>
 						)}
-
 						{type === "exito" && (
 							<>
 								<ModalHeader className="flex flex-col text-center text-[24px]">¡Cuenta creada exitosamente!</ModalHeader>
-
 								<ModalBody className="p-9 text-center">
 									<p className="text-[14px]">Te hemos enviado un correo de confirmación de registro a tu dirección de email. Si no recibes el correo en unos minutos, verifica tu carpeta de spam o selecciona la opción "Reenviar correo"</p>
 								</ModalBody>
@@ -70,6 +66,28 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type }) => {
 										onPress={handleContinue}
 									>
 										Reenviar correo
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "permiso" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">Asignación de permisos</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									{role_id === 1 ? (
+										<p className="text-[14px]">¿Estás seguro de que deseas otorgar los permisos de administrador?</p>
+									) : (
+										<p className="text-[14px]">¿Estás seguro de que deseas quitar los permisos de administrador?</p>
+									)}
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login"
+										onPress={() => {
+											onConfirm();
+										}}
+									>
+										Continuar
 									</Button>
 								</ModalFooter>
 							</>
