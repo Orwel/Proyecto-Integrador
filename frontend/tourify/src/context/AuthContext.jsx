@@ -47,7 +47,7 @@ export function AuthProvider({ children }) {
       if (session?.user) {
         getUserInfo(session.user.id);
       } else if (event === "SIGNED_OUT") {
-        navigate("/");
+        // navigate("/");
         setUserInfo(null);
       }
     });
@@ -63,13 +63,14 @@ export function AuthProvider({ children }) {
     let respError = null;
     try {
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      
       if (error !== null) {
         respError = error;
         console.log("error ", error);
       } else {
         respData = data;
         if (data.user) {
-          console.log(data.user.id);
+          // console.log(data.user.id);
           getUserInfo(data.user.id);
         }
       }

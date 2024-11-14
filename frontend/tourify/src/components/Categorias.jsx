@@ -6,22 +6,24 @@ import InputBase from "@mui/material/InputBase";
 import searchIcon from "@imagenes/search.svg";
 import { listaTiposCategoria } from "../utils/listaTiposCategoria";
 
-const Categorias = () => {
+const Categorias = ({ onCategoryChange }) => {
 	const [selectedCategories, setSelectedCategories] = useState([]);
 
 	const handleCategoryChange = (categories) => {
 		setSelectedCategories(categories);
+		onCategoryChange(categories);
 	};
 
 	return (
 		<div style={{ width: "100%", padding: "0rem 2rem" }}>
 			<h2
+				className="mt-24 pb-4 sm:mt-0"
 				style={{
 					padding: "5rem 2rem",
 					maxWidth: "80%",
 					textAlign: "start",
 				}}>
-				<span style={{ color: "#FE8C00", marginBottom: "10px" }}>Categorias</span>
+				<p style={{ color: "#FE8C00", marginBottom: "10px" }}>Categorias</p>
 				Encuentra tu <span style={{ color: "#FE8C00" }}>Estilo</span>, explora
 				el <span style={{ color: "#FE8C00" }}>Mundo...</span>
 			</h2>
@@ -49,17 +51,6 @@ const Categorias = () => {
 				</Search>
 			</section>
 			<TabsCategorias selectedCategories={selectedCategories} />
-			<div className="recomendaciones-title">
-				<div className="eslogan-recomendaciones">
-					Recomendaciones
-					<h2>¡Los destinos que podrían interesarte!</h2>
-				</div>
-				<p className="texto-recomendaciones">
-					Con tantos destinos emocionantes, elegir el lugar ideal para
-					vacacionar puede ser un reto. Por eso,
-					<span> Tourify</span> ha reunido los mejores lugares.
-				</p>
-			</div>
 		</div>
 	);
 };
