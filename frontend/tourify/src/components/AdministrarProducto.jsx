@@ -25,16 +25,13 @@ export const AdministrarProducto = () => {
 					<table className="table table-bordered ">
 						<thead>
 							<tr>
-								<th scope="col">id</th>
+								<th scope="col">Id</th>
 								<th scope="col">Nombre</th>
-								<th scope="col">Destino</th>
-								<th scope="col">Días</th>
-								<th scope="col">Noches</th>
-								<th scope="col">Precio Unitario</th>
-								<th scope="col">Descripción</th>
+								<th scope="col">País</th>
 								<th scope="col">Ciudad</th>
-								<th scope="col">Itinerario</th>
-								<th scope="col">Caracteristicas</th>
+								<th scope="col">Tiempo</th>
+								<th scope="col">Precio Unitario</th>
+								<th scope="col">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -43,20 +40,9 @@ export const AdministrarProducto = () => {
 									<th scope="row">{product.id}</th>
 									<th scope="row">{product.name}</th>
 									<td>{product.destination}</td>
-									<td>{product.days}</td>
-									<td>{product.nights}</td>
-									<td>{product.unit_price}</td>
-									<td>{product.description}</td>
 									<td>{product.city}</td>
-									<td>{product.itinerary}</td>
-									<td>
-										{Object.entries(product.characteristics).map(([key, value]) => (
-											value === 1 &&
-											(<li key={key}>
-												{key}
-											</li>)
-										))}
-									</td>
+									<td>{product.nights} noches <br /> {product.days} días</td>
+									<td className='price'>$ {product.unit_price}</td>
 									<td>
 										<div className='btns-table'>
 											<button
