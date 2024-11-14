@@ -12,8 +12,6 @@
 
 .logo {
 	display: flex;
-
-
 }
 
 .logo:hover {
@@ -209,6 +207,12 @@
 	max-width: 70vw;
 	z-index: 2;
 	position: relative;
+	
+}
+
+.card-image {
+	width: 596px;
+	height: 398px;
 }
 
 .card-image img {
@@ -302,7 +306,7 @@
 }
 
 .container-panel {
-	padding-top: 300px;
+	padding-top: 100px;
 }
 
 /*para el detalle*/
@@ -661,6 +665,7 @@
 /* Estilos de la galería de imagenes del producto*/
 .gallery-container {
 	width: 100%;
+	height: 100%;
 	margin: auto;
 	padding: 40px 0;
 	display: grid;
@@ -686,9 +691,7 @@
 .additional-images {
 	gap: 30px;
 	width: 100%;
-	/* Ajuste para hacerlo responsivo */
 	max-width: 2000px;
-	/* Límite máximo de ancho */
 	height: 100%;
 	margin: 0 auto;
 	display: grid;
@@ -732,30 +735,17 @@
 	.gallery-container {
 		gap: 5px;
 	}
-
 	.gallery {
 		grid-template-columns: 1fr;
-		/* Una columna para pantallas pequeñas */
 		max-width: 100%;
-		/* Ajuste de ancho para tablets */
 	}
-
 	.additional-images {
 		grid-template-columns: 1fr 1fr;
-		/* Dos columnas en lugar de cuatro */
 		gap: 10px;
 	}
-
 	.ver-mas {
 		right: 20px;
-		/* Reduce el espacio desde la derecha */
 		top: 80%;
-		/* Ajusta la posición vertical */
-	}
-
-	.btn-gallery {
-		width: 120px;
-		height: 40px;
 	}
 }
 
@@ -763,28 +753,16 @@
 	.gallery-container {
 		gap: 5px;
 	}
-
 	.gallery {
 		grid-template-columns: 1fr;
-		/* Una columna en móvil */
 		gap: 3px;
-		/* Reduce el espacio entre las imágenes */
 	}
-
 	.additional-images {
 		grid-template-columns: 1fr;
 		gap: 5px;
 	}
-
 	.product-image {
 		padding: 1px;
-	}
-
-	.ver-mas {
-		right: 50px;
-		/* Reduce el margen a la derecha */
-		top: 70%;
-		/* Ajusta la posición vertical */
 	}
 }
 

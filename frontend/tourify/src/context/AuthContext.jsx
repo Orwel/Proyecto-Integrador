@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
 
-  
+
   const getUserInfo = async (id) => {
     const { data: profile, error } = await supabase
       .from("users")
@@ -18,15 +18,15 @@ export function AuthProvider({ children }) {
       .eq("id", id)
       .single();
 
-      if (profile && !error) {
-        setUserInfo(profile);
-        console.log("Valor de userInfo:", profile);
-      } else if (error) {
-        console.log("Error al obtener userInfo:", error);
-      }
-    };
+    if (profile && !error) {
+      setUserInfo(profile);
+      // console.log("Valor de userInfo:", profile);
+    } else if (error) {
+      console.log("Error al obtener userInfo:", error);
+    }
+  };
 
-  
+
   useEffect(() => {
     const getSession = async () => {
       const { data } = await supabase.auth.getSession();
@@ -40,7 +40,7 @@ export function AuthProvider({ children }) {
 
     getSession();
 
-   
+
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
 
@@ -52,7 +52,7 @@ export function AuthProvider({ children }) {
       }
     });
 
-    
+
     return () => {
       authListener.subscription.unsubscribe();
     };
@@ -70,7 +70,7 @@ export function AuthProvider({ children }) {
         respData = data;
         if (data.user) {
           console.log(data.user.id);
-          getUserInfo(data.user.id); 
+          getUserInfo(data.user.id);
         }
       }
     } catch (error) {
@@ -88,21 +88,59 @@ export function AuthProvider({ children }) {
   };
 
   const signUp = async (email, password, first_name, last_name) => {
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-      options: {
-        data: {
-          first_name,
-          last_name,
-        },
-      },
-    });
-
-    if (error) throw error;
-    return data;
-  };
+    let respData = null;
+    let respError = null;
   
+    try {
+      // Verificar si el correo ya existe en la tabla de usuarios
+      const { data: existingUser, error: checkError } = await supabase
+        .from("users")
+        .select("id")
+        .eq("email", email)
+        .single();
+  
+      if (checkError && checkError.code !== "PGRST116") {
+        // Otro error inesperado al verificar el usuario
+        console.error("Error al verificar usuario existente:", checkError);
+        respError = "Error inesperado al verificar el correo electrónico.";
+        return { respData, respError };
+      }
+  
+      if (existingUser) {
+        // El correo ya está registrado
+        respError = "El correo ya está registrado. Por favor, inicia sesión.";
+        console.error(respError);
+        return { respData, respError };
+      }
+  
+      // Si no existe, proceder con el registro
+      const response = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            first_name,
+            last_name,
+          },
+        },
+      });
+  
+      console.log("Respuesta de signUp:", response);
+  
+      if (response.error) {
+        respError = response.error.message;
+        console.error("Error en signUp:", response.error.message);
+      } else {
+        respData = response.data;
+        console.log("Nuevo ID de usuario en signUp:", response.data.user?.id);
+      }
+    } catch (error) {
+      console.error("Error inesperado durante el registro:", error);
+      respError = "Ocurrió un error inesperado al intentar registrarse.";
+    }
+  
+    return { respData, respError };
+  };
 
   return (
     <AuthContext.Provider value={{ user, signIn, signOut, signUp, userInfo }}>
@@ -118,3 +156,5 @@ export const useAuth = () => {
   }
   return context;
 };
+
+export { AuthContext };
