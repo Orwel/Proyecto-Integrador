@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AdministrarUsuario } from "./components/AdministrarUsuario";
 import { InformacionPersonal } from "./components/InformacionPersonal";
+import { AdministrarProducto } from "./components/AdministrarProducto";
+import { FaUsers, FaUserTag, FaShoppingBag, FaTags, FaShieldAlt } from 'react-icons/fa';
 
 const Panel = () => {
   const [showAdministrarUsuario, setShowAdministrarUsuario] = useState(false);
   const [showInformacionPersonal, setShowInformacionPersonal] = useState(false);
+  const [showAdministrarProductos, setShowAdministrarProductos] = useState(false);
   const [loading, setLoading] = useState(false); // Estado para "loading"
 
   const toggleAdministrarUsuario = () => {
@@ -22,6 +25,16 @@ const Panel = () => {
     setShowInformacionPersonal((prev) => !prev);
   };
 
+  const toggleAdministrarProductos = () => {
+    setLoading(true);
+    setShowAdministrarUsuario(false);
+    setShowInformacionPersonal(false);
+    setTimeout(() => {
+      setShowAdministrarProductos(true);
+      setLoading(false);
+    }, 1000);
+  };
+
   return (
     <div className="container-panel">
       <div className="dashboard">
@@ -29,21 +42,31 @@ const Panel = () => {
           <ul>
             <li>
               <button onClick={toggleInformacionPersonal} className="link-button">
-                Información personal
+               <FaUserTag /> Información personal
               </button>
             </li>
             <li>
               <button onClick={toggleAdministrarUsuario} className="link-button">
-                Usuarios
+              <FaUsers /> Usuarios
               </button>
             </li>
             <li>
-              <Link to="/adminProductos">Productos</Link>
+              <button onClick={toggleAdministrarProductos} className="link-button">
+               <FaShoppingBag /> Productos
+              </button>
             </li>
-            <li>Características</li>
-            <li>Categorías</li>
+            <li>
+            <button className="link-button">
+              <FaTags /> Características
+              </button>
+            </li>
+            <li>
+              <button className="link-button">
+              <FaShieldAlt /> Categorías
+              </button>
+            </li>
           </ul>
-          <span>Cerrar Sesión</span>
+          <span className="underline">Cerrar Sesión</span>
         </aside>
 
         <main className="content">
@@ -53,9 +76,11 @@ const Panel = () => {
             <InformacionPersonal />
           ) : showAdministrarUsuario ? (
             <AdministrarUsuario />
+          ) : showAdministrarProductos ? (
+            <AdministrarProducto />
           ) : (
             <>
-              <div className="desktop-only">Dashboard</div>
+              <div className="desktop-only">Dashboard </div>
               <div className="desktop-only">
                 <div className="card">10 <span>Usuarios</span></div>
                 <div className="card">20 <span>Reservas</span></div>

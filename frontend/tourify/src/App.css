@@ -614,7 +614,7 @@
 	font-weight: bold;
 	font-size: 16px;
 	padding-left: 10px;
-	margin: 22rem 25px 0 25px;
+	margin: 1rem 25px 0 25px;
 	background-color: #FFF;
 	border-radius: 5px;
 	height: 70px;
@@ -625,6 +625,10 @@
 	font-size: 12px;
 	padding: 1.2rem;
 
+	.price{
+		color: #FE8C00;
+		font-size: 12px;
+	}
 }
 
 .formActualizar {
@@ -829,6 +833,20 @@
 		background-color: #CFCFCF;
 		color: #60626E;
 		padding: 20px;
+
+		.underline {
+			text-decoration: underline;
+			font-size: 14px;
+			color: #000;
+			cursor: pointer;
+		}
+
+		.link-button {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			justify-content: space-evenly;
+		}
 	}
 
 	.sidebar h2 {
