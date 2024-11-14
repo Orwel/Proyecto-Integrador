@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link } from "@nextui-org/react";
 import { Divider } from "@nextui-org/react";
 import { useAuth } from "../context/AuthContext";
@@ -9,12 +9,13 @@ import { ModalConfirmation } from "./modalConfirmation";
 
 
 const ModalLogin = ({ isOpen, onOpenChange }) => {
-  const { signIn } = useAuth();
+  const { signIn, userInfo } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -25,9 +26,9 @@ const ModalLogin = ({ isOpen, onOpenChange }) => {
       if (respError) {
         setErrorMessage('Email o contraseña incorrectos');
       } else {
+        setIsAuthenticated(true);
         onOpenChange(false);
         setIsConfirmationOpen(true);
-
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
@@ -36,6 +37,14 @@ const ModalLogin = ({ isOpen, onOpenChange }) => {
     }
   };
 
+  useEffect(() => {
+    // Verificar si el usuario está autenticado y tiene el rol adecuado antes de redirigir
+    if (isAuthenticated && userInfo?.role_id === 2) {
+      navigate('/panel');
+    }
+  }, [isAuthenticated, userInfo, navigate]);
+
+  
 
   return (
     <>

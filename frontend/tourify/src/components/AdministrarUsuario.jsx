@@ -10,8 +10,8 @@ const columns = [
 ];
 
 const statusColorMap = {
-  1: "success",  // rol 1
-  2: "warning",  // rol 2
+  1: "success",  
+  2: "warning",  
 };
 
 export const AdministrarUsuario = () => {
@@ -25,7 +25,7 @@ export const AdministrarUsuario = () => {
 		const newRoleId = user.role_id === 1 ? 2 : 1;
 		await handleUpdateUser(user.id, { role_id: newRoleId });
 	};
-	
+
   const renderCell = useCallback((user, columnKey) => {
     const cellValue = user[columnKey];
 
@@ -40,7 +40,7 @@ export const AdministrarUsuario = () => {
       case "role":
         return (
           <Chip color={statusColorMap[user.role_id]} size="sm" variant="flat">
-            {user.role_id === 1 ? "Admin" : "User"}
+            {user.role_id === 1 ? "User" : "Admin"}
           </Chip>
         );
       case "actions":
@@ -59,8 +59,8 @@ export const AdministrarUsuario = () => {
     }
   }, [handleRoleToggle]);
 
-  if (loading) return <p>Loading users...</p>;
-  if (error) return <p>Error loading users: {error.message}</p>;
+  if (loading) return <p>Cargando usuarios...</p>;
+  if (error) return <p>Error Cargando usuarios: {error.message}</p>;
 
   return (
     <Table aria-label="User management table">

@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link } from "@nextui-org/react";
 
 export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type }) => {
+
 	const handleContinue = () => {
 		onOpenChange(false);
 		navigate('/');
 	};
+
+
 
 	return (
 		<Modal
@@ -28,7 +31,7 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type }) => {
 								<ModalFooter>
 									<Button
 										className="boton-modal-login"
-										onPress={handleContinue}
+										
 									>
 										Continuar
 									</Button>
