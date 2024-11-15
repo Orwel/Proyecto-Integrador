@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const ProtectedRoute = ({children}) => {
 	const { userInfo  } = useAuth();
+	const navigate = useNavigate();
 
-if (!userInfo || userInfo.role_id !== 2) {
-return <Navigate to="/" replace />;
+	useEffect(() => {
+    
+    if (!userInfo || userInfo.role_id !== 2) {
+      navigate('/', { replace: true });
+    }
+  }, [userInfo, navigate]); 
 
-}
-	return children;
-}
+  return userInfo && userInfo.role_id === 2 ? children : null;
+};
