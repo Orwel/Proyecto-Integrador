@@ -1,64 +1,43 @@
-import React from "react";
-import location from "@imagenes/location.png";
-import arrow from "@imagenes/arrowRight.svg";
+import React, { useState } from "react";
 
-const CardCategorias = ({ info }) => {
+const CardCategorias = ({ info, filteredCount }) => {
+	const [imageLoaded, setImageLoaded] = useState(false);
+
+	const handleImageLoad = () => {
+		setImageLoaded(true);
+	};
+
 	return (
 		<div
 			style={{
 				overflow: "hidden",
-				borderRadius: "20px",
-				boxShadow: "0 4px 6px 0px #6B7280",
+				position: "relative",
+				display: "flex",
+				flexDirection: "column",
+				height: "100%",
 			}}>
-			<img src={info.img1} alt="imagen" style={{ width: "100%" }} />
-			<div
+			<img
+				src={info.url_img}
+				alt="imagen"
 				style={{
-					padding: "20px 10px",
-					display: "flex",
-					flexDirection: "column",
-					rowGap: "20px",
-					fontSize: "12px",
-					backgroundColor: "#ffffff",
-					margin: "-10px 0",
-					position: "relative",
-				}}>
-				<p style={{ fontWeight: "bold" }}>{info.eslogan}</p>
-				<p
+					width: "100%",
+					objectFit: "cover",
+					height: "100%",
+					borderRadius: "20px",
+				}}
+				onLoad={handleImageLoad}
+			/>
+			{imageLoaded && (
+				<span
+					className="text-center lg:text-start"
 					style={{
-						margin: "0",
-						display: "flex",
-						justifyContent: "space-between",
+						textDecoration: "underline",
+						bottom: "-10",
+						paddingTop: "20px",
 					}}>
-					<span style={{ color: "#6B7280" }}>{info.tiempo}</span>{" "}
-					<span style={{ color: "#FE8C00" }}>{info.precio}</span>
-				</p>
-				<div
-					style={{
-						display: "flex",
-						alignContent: "center",
-						alignItems: "center",
-						gap: "10px",
-					}}>
-					<img src={location} />
-					<span style={{ color: "#6B7280" }}>{info.ubicacion}</span>
-					<button
-						style={{
-							backgroundColor: "#FE8C00",
-							position: "absolute",
-							right: "0",
-							borderRadius: "20px",
-							display: "flex",
-							alignItems: "center",
-							padding: "10px",
-							gap: "10px",
-							color: "#FFEED9",
-							border: "none",
-							cursor: "pointer",
-						}}>
-						<img src={arrow} /> Explorar mas
-					</button>
-				</div>
-			</div>
+					{filteredCount} Destinos encontrados
+				</span>
+			)}
 		</div>
 	);
 };

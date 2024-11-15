@@ -16,20 +16,20 @@
   padding: 16px 16px;
   background-color: #FFF;
   color: #000;
-  z-index: 1000; /* Asegura que el header esté siempre en la parte superior */
+  z-index: 50; /* Asegura que el header esté siempre en la parte superior */
 }
 
 
 .logo-and-phrase {
   display: flex;
   align-items: center; 
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 10px; 
   width: 100vw;
 }
 
 .logo-image {
-  width: auto; 
+  width: auto;
    
 }
 
@@ -37,7 +37,7 @@
   color: #000;
   font-size: 18px;
   text-decoration: none;
-  white-space: nowrap; /* Esto evita que el texto se divida en varias líneas */
+  white-space: nowrap;
 }
 
 .btn {
@@ -77,7 +77,7 @@
 
 
 .hamburger-menu {
-  display: none; /* Oculto por defecto */
+  display: none; 
   flex-direction: column;
   cursor: pointer;
 }
@@ -93,13 +93,13 @@
 .mobile-menu {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centramos los elementos */
-  position: absolute; /* Para que se superponga sobre el contenido */
-  top: 60px; /* Ajusta según tu header */
+  align-items: center;
+  position: absolute; 
+  top: 60px; 
   right: 0;
-  background-color: #FFF; /* Color de fondo del menú */
+  background-color: #FFF;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Asegura que el menú ocupe el ancho completo */
+  width: 100%; 
 }
 
 /* Media Queries */
