@@ -16,6 +16,7 @@ const ModalLogin = ({ isOpen, onOpenChange }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [hasRedirectedToPanel, setHasRedirectedToPanel] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -38,11 +39,11 @@ const ModalLogin = ({ isOpen, onOpenChange }) => {
   };
 
   useEffect(() => {
-    // Verificar si el usuario está autenticado y tiene el rol adecuado antes de redirigir
-    if (isAuthenticated && userInfo?.role_id === 2) {
+    if (isAuthenticated && userInfo?.role_id === 2 && !hasRedirectedToPanel) {
       navigate('/panel');
+      setHasRedirectedToPanel(true);  
     }
-  }, [isAuthenticated, userInfo, navigate]);
+  }, [isAuthenticated, userInfo, navigate, hasRedirectedToPanel]);
 
   
 
