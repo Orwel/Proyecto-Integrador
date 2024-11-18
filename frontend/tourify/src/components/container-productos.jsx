@@ -44,13 +44,13 @@ export const ContainerProductos = () => {
 				</div>
 				{/* Numeración de Páginas */}
 				<div className="pagination">
-					<button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}className="nav-button"> Anterior </button>
+					<button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}className="nav-button">❮❮ Anterior</button>
 					{[...Array(totalPages)].map((_, index) => (
 						<button key={index + 1} onClick={() => 
 							handlePageClick(index + 1)} 
 							className={`page-number ${currentPage === index + 1 ? "active-page" : ""}`}>{index + 1}</button>
 					))}
-					<button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} className="nav-button">Siguiente</button>
+					<button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} className="nav-button">Siguiente ❯❯</button>
 				</div>
 			</div>
 		</>
