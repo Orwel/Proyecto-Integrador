@@ -39,11 +39,10 @@ const Detail = () => {
             <div className="detail-body">
                 <ProductGallery productId={id} />
                 <p className="detail-time">{product.nights} noches  •  {product.days} días </p>
-                <br />
                 <hr />
                 <br />
+                <hr />
                 <p className="product-description">{product.description}</p>
-                <hr />
                 <h3 className="detail-itinerary" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Itinerario</h3>
                 <p className="product-itinerary">{product.itinerary}</p>
                 <h3 className="detail-itinerary" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Características</h3>
