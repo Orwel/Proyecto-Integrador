@@ -78,7 +78,7 @@ export const AdministrarUsuario = () => {
 
   return (
     <>
-      <Table aria-label="User management table">
+      <Table className="desktop-only" aria-label="User management table">
         <TableHeader columns={columns}>
           {(column) => (
             <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
