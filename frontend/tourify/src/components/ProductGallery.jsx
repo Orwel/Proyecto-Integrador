@@ -6,6 +6,7 @@ function ProductGallery({ productId }) {
   const [product, setProduct] = useState(null);
   const [additionalImages, setAdditionalImages] = useState([]);
   const [showAllImages, setShowAllImages] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -24,12 +25,8 @@ function ProductGallery({ productId }) {
           return;
         }
 
-        setProduct({
-          name,
-          main_image,
-        });
-
-        setAdditionalImages(additional_images);
+        setProduct({ name, main_image });
+        setAdditionalImages([main_image, ...additional_images]);
 
       } catch (error) {
         console.error('Error fetching data:', error.message);
@@ -39,29 +36,54 @@ function ProductGallery({ productId }) {
     fetchProductData();
   }, [productId]);
 
+  const handleNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % additionalImages.length);
+  };
+
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? additionalImages.length - 1 : prevIndex - 1
+    );
+  };
+
   if (!product) {
     return <p>Cargando...</p>;
   }
 
-  const imagesToShow = showAllImages ? additionalImages : additionalImages.slice(0, 4);
+  const imagesToShow = additionalImages.slice(0, 4);
 
   return (
     <div className="gallery-container">
       <div className="gallery">
-        <img src={product.main_image} alt={product.name} className="main-image" />
+        <img src={product.main_image} alt={product.name} className="main-image"/>
       </div>
       <div className="additional-images">
-        {imagesToShow.map((image, index) => (
+          {imagesToShow.map((image, index) => (
           <div key={index} className="image-item">
-            <img src={image} alt={`${product.name} additional ${index + 1}`} className="product-image" />
+            <img src={image} alt={`${product.name} additional ${index + 1}`} className="product-image"/>
           </div>
         ))}
       </div>
       <div className="ver-mas">
-        <button onClick={() => setShowAllImages(!showAllImages)} className="btn-gallery">
-          {showAllImages ? 'Ver menos' : 'Ver más'}
-        </button>
+        <button onClick={() => {
+          setShowAllImages(true);
+          setCurrentImageIndex(0);
+        }}
+          className="btn-gallery">Ver más </button>
       </div>
+      {/* Modal carrusel con todas las imágenes */}
+      {showAllImages && (
+      <div className="image-modal" onClick={() => setShowAllImages(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-btn" onClick={() => setShowAllImages(false)}>𐢫 Cerrar</button>
+            <div className="modal-carousel">
+              <button className="nav-btn prev" onClick={handlePrevImage}>❮</button>
+              <img src={additionalImages[currentImageIndex]} alt={`${product.name} gallery ${currentImageIndex + 1}`} className="modal-image"/>
+              <button className="nav-btn next" onClick={handleNextImage}>❯</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
