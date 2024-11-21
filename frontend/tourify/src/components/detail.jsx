@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useProductos } from '../hook/use-productos';
 import { useCharacteristics } from "../hook/use-characteristics";
 import ProductGallery from "./ProductGallery";
+import ProductFavs from "./ProductFavs";
+
 
 const Detail = () => {
     const id = parseInt(useParams().id);
@@ -34,6 +36,10 @@ const Detail = () => {
                     <span className="detail-rating-star">⭐ {product.rating}</span>
                     <span className="detail-reviews">({product.reviews} reviews)</span>
                     <span className="detail-location">📍 {product.city}</span>
+                </div>
+                <div className="detail-favs">
+                    <ProductFavs productId={id} />
+                    <span className="favorite-text">Añadir a favoritos</span>
                 </div>
             </div>
             <div className="detail-body">

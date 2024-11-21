@@ -1,8 +1,8 @@
-import React from 'react';
 import { Link } from "react-router-dom";
-
+import ProductFavs from "./ProductFavs";
 
 export const Card = ({ id, image, title, location, country, reviews, rating, price }) => {
+
   return (
     <div className="card">
       <div className="card-image">
@@ -22,7 +22,9 @@ export const Card = ({ id, image, title, location, country, reviews, rating, pri
           <span className="price">${price}</span>
         </div>
       </div>
-      <button className="card-favorite">❤️</button>
+      <div className="card-favorite">
+        <ProductFavs productId={id} />
+      </div>
     </div>
   );
 }
