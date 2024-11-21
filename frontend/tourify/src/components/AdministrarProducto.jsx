@@ -17,7 +17,7 @@ export const AdministrarProducto = () => {
 
 	return (
 		<>
-			<div className="products-admin" >
+			<div className="products-admin desktop-only" >
 				<div className='products-admin-title'>
 					<p>Listado de Productos</p>
 				</div>
