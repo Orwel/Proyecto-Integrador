@@ -266,8 +266,8 @@
 
 .card-favorite {
 	position: absolute;
-	top: 60px;
-	right: 60px;
+	top: 30px;
+	right: 30px;
 	display: flex;
 	cursor: pointer;
 }
@@ -378,15 +378,16 @@
 }
 
 .detail-favs {
+	position: relative;
 	display: flex;
 	width: 100%;
 	justify-content: end;
 	align-items: center;
 }
 
-.detail-favs img {
-	width: 16px;
-	height: 16px;
+.detail-favs svg {
+	width: 18px;
+	height: 18px;
 }
 
 .favorite-text {

@@ -1,7 +1,8 @@
 import { useFavorites } from "../hook/use-favorites";
 import { useAuth } from "../context/AuthContext";
-import HeartIcon from '../assets/Icons/Heart.svg';
-import EmptyHeartIcon from '../assets/Icons/Union.svg';
+import Heart from "../assets/Icons/Heart";
+import HeartFull from "../assets/Icons/HeartFull";
+
 
 const ProductFavs = ({ productId }) => {
   const { user } = useAuth();
@@ -27,7 +28,7 @@ const ProductFavs = ({ productId }) => {
 
   return (
     <button onClick={handleFavoriteClick} className="card-favorite">
-      {isFavorited ? <img src={EmptyHeartIcon} /> : <img src={HeartIcon} />}
+      {isFavorited ? (<HeartFull />) : (<Heart />)}
     </button>
   );
 };
