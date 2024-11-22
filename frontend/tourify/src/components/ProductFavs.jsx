@@ -26,8 +26,8 @@ const ProductFavs = ({ productId }) => {
   }
 
   return (
-    <button onClick={handleFavoriteClick}>
-      {isFavorited ? <img src={EmptyHeartIcon} alt="Corazón vacío" /> : <img src={HeartIcon} alt="Corazón lleno"/>}
+    <button onClick={handleFavoriteClick} className="card-favorite">
+      {isFavorited ? <img src={EmptyHeartIcon} /> : <img src={HeartIcon} />}
     </button>
   );
 };
