@@ -24,6 +24,7 @@ export const Card = ({ id, image, title, location, country, reviews, rating, pri
       </div>
       <div className="card-favorite">
         <ProductFavs productId={id} />
+        
       </div>
     </div>
   );
