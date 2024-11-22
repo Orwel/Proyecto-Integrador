@@ -7,7 +7,7 @@ import { addDays, isWithinInterval, differenceInDays } from 'date-fns';
 
 registerLocale('es', es);
 
-const Calendario = ({ productoId, onDateSelect, duracionMinima }) => {
+const Calendario = ({ productoId, onDateSelect, duracionMinima, onClearDates }) => {
   console.log('duracionMinima recibida:', duracionMinima);
   
   const [dateRange, setDateRange] = useState([null, null]);
@@ -129,6 +129,9 @@ const Calendario = ({ productoId, onDateSelect, duracionMinima }) => {
 
   const handleClearDates = () => {
     setDateRange([null, null]);
+    if (onClearDates) {
+      onClearDates();
+    }
   };
 
   return (

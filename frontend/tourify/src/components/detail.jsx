@@ -27,6 +27,10 @@ const Detail = () => {
         setDateRange([newStartDate, newEndDate]);
     };
 
+    const handleClearDates = () => {
+        setDateRange([null, null]);
+    };
+
     if (loading) {
         return <div>Cargando...</div>;
     }
@@ -108,6 +112,7 @@ const Detail = () => {
                             duracionMinima={parseInt(product?.duration_days) || 1}
                             selectedRange={dateRange}
                             onRangeChange={setDateRange}
+                            onClearDates={handleClearDates}
                         />
                     </div>
                 </div>
