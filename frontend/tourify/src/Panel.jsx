@@ -1,38 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { FaUsers, FaUserTag, FaShoppingBag, FaTags, FaShieldAlt } from "react-icons/fa";
 import { AdministrarUsuario } from "./components/AdministrarUsuario";
 import { InformacionPersonal } from "./components/InformacionPersonal";
 import { AdministrarProducto } from "./components/AdministrarProducto";
-import { FaUsers, FaUserTag, FaShoppingBag, FaTags, FaShieldAlt } from 'react-icons/fa';
+import { AdministrarCategorias } from "./components/AdministrarCategorias";
 
 const Panel = () => {
-  const [showAdministrarUsuario, setShowAdministrarUsuario] = useState(false);
-  const [showInformacionPersonal, setShowInformacionPersonal] = useState(false);
-  const [showAdministrarProductos, setShowAdministrarProductos] = useState(false);
-  const [loading, setLoading] = useState(false); // Estado para "loading"
+  const [activeComponent, setActiveComponent] = useState(null); // Controla qué componente mostrar
+  const [loading, setLoading] = useState(false);
 
-  const toggleAdministrarUsuario = () => {
+  const handleComponentChange = (component) => {
     setLoading(true);
-    setShowInformacionPersonal(false); // Asegurarse de ocultar Información Personal
     setTimeout(() => {
-      setShowAdministrarUsuario(true);
+      setActiveComponent(component); // Cambia el componente activo después de "cargar"
       setLoading(false);
-    }, 1000); // Simula un tiempo de carga de 1 segundo
-  };
-
-  const toggleInformacionPersonal = () => {
-    setShowAdministrarUsuario(false); // Asegurarse de ocultar Administrar Usuario
-    setShowInformacionPersonal((prev) => !prev);
-  };
-
-  const toggleAdministrarProductos = () => {
-    setLoading(true);
-    setShowAdministrarUsuario(false);
-    setShowInformacionPersonal(false);
-    setTimeout(() => {
-      setShowAdministrarProductos(true);
-      setLoading(false);
-    }, 1000);
+    }, 500); // Simula un pequeño tiempo de carga
   };
 
   return (
@@ -41,28 +23,35 @@ const Panel = () => {
         <aside className="sidebar">
           <ul>
             <li>
-              <button onClick={toggleInformacionPersonal} className="link-button">
-               <FaUserTag /> Información personal
+              <button
+                onClick={() => handleComponentChange("InformacionPersonal")}
+                className="link-button"
+              >
+                <FaUserTag /> Información personal
               </button>
             </li>
             <li>
-              <button onClick={toggleAdministrarUsuario} className="link-button">
-              <FaUsers /> Usuarios
+              <button
+                onClick={() => handleComponentChange("AdministrarUsuario")}
+                className="link-button"
+              >
+                <FaUsers /> Usuarios
               </button>
             </li>
             <li>
-              <button onClick={toggleAdministrarProductos} className="link-button">
-               <FaShoppingBag /> Productos
+              <button
+                onClick={() => handleComponentChange("AdministrarProducto")}
+                className="link-button"
+              >
+                <FaShoppingBag /> Productos
               </button>
             </li>
             <li>
-            <button className="link-button">
-              <FaTags /> Características
-              </button>
-            </li>
-            <li>
-              <button className="link-button">
-              <FaShieldAlt /> Categorías
+              <button
+                onClick={() => handleComponentChange("AdministrarCategorias")}
+                className="link-button"
+              >
+                <FaTags /> Categorías
               </button>
             </li>
           </ul>
@@ -71,27 +60,24 @@ const Panel = () => {
 
         <main className="content">
           {loading ? (
-            <div>Loading...</div> // Muestra "loading" mientras se carga
-          ) : showInformacionPersonal ? (
+            <div>Loading...</div> // Muestra un indicador de carga mientras cambia
+          ) : activeComponent === "InformacionPersonal" ? (
             <InformacionPersonal />
-          ) : showAdministrarUsuario ? (
+          ) : activeComponent === "AdministrarUsuario" ? (
             <AdministrarUsuario />
-          ) : showAdministrarProductos ? (
+          ) : activeComponent === "AdministrarProducto" ? (
             <AdministrarProducto />
+          ) : activeComponent === "AdministrarCategorias" ? (
+            <AdministrarCategorias />
           ) : (
-            <>
-              <div className="desktop-only">Dashboard </div>
-              <div className="desktop-only">
-                <div className="card">10 <span>Usuarios</span></div>
-                <div className="card">20 <span>Reservas</span></div>
-                <div className="card">50 <span>Visitantes</span></div>
-                <div className="card">5 <span>Reservas</span></div>
-              </div>
-            </>
+            <div className="dashboard-summary">
+              <h2>Bienvenido al Panel</h2>
+              <div className="card">10 <span>Usuarios</span></div>
+              <div className="card">20 <span>Reservas</span></div>
+              <div className="card">50 <span>Visitantes</span></div>
+              <div className="card">5 <span>Reservas</span></div>
+            </div>
           )}
-          <div className="mobile-message">
-            El panel de administración no está disponible en dispositivos móviles. Accede desde un dispositivo compatible para gestionar las funciones de administración.
-          </div>
         </main>
       </div>
     </div>
