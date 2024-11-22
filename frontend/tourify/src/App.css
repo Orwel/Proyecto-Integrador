@@ -198,7 +198,7 @@
 	height: 1000px;
 }
 
-/* card */
+/* Estilos cards productos sección recomendados */
 
 .card {
 	display: flex;
@@ -208,13 +208,7 @@
 	overflow: hidden;
 	max-width: 70vw;
 	z-index: 2;
-	position: relative;
-	
-}
-
-.card-image {
-	width: 596px;
-	height: 398px;
+	position: relative;	
 }
 
 .card-image img {
@@ -272,13 +266,10 @@
 
 .card-favorite {
 	position: absolute;
-	top: 16px;
-	right: 16px;
-	background: none;
-	border: none;
-	font-size: 24px;
+	top: 30px;
+	right: 30px;
+	display: flex;
 	cursor: pointer;
-	color: #fe8c00;
 }
 
 .card-container {
@@ -293,6 +284,11 @@
 @media (min-width: 1024px) {
 	.card-container {
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.card-image {
+		width: 596px;
+		height: 398px;
 	}
 }
 
@@ -381,6 +377,24 @@
 	margin-right: 10px;
 }
 
+.detail-favs {
+	position: relative;
+	display: flex;
+	width: 100%;
+	justify-content: end;
+	align-items: center;
+}
+
+.detail-favs svg {
+	width: 18px;
+	height: 18px;
+}
+
+.favorite-text {
+	margin-left: 8px;
+	font-size: 10px;
+}
+
 .detail-time {
 	width: 100%;
 	text-align: left;
@@ -444,6 +458,9 @@
 	.detail-characteristics {
 		display: flex;
 		flex-direction: column;
+	}
+	.detail-favs {
+		justify-content: start;
 	}
 }
 
@@ -738,6 +755,7 @@
 
 .btn-gallery:hover {
 	color: #FFEED9;
+	background-color: #FE8C00;
 }
 
 .image-modal {
