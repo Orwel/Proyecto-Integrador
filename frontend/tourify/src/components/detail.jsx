@@ -56,7 +56,9 @@ const Detail = () => {
             <ProductGallery productId={id} />
             
             <div className="detail-body">
-                <p className="detail-time">{product.nights} noches  •  {product.duration_days} días </p>
+                <p className="detail-time">
+                    {product.duration_nights} noches • {product.duration_days} días
+                </p>
                 <hr />
                 <br />
                 <hr />
@@ -67,13 +69,24 @@ const Detail = () => {
                     <p className="product-itinerary">{product.itinerary}</p>
                     <h3 className="detail-itinerary text-2xl font-bold mt-8 mb-4">Características</h3>
                     <ul className="detail-characteristics">
-                        {Object.entries(product.characteristics).map(([key, value]) => (
-                            value === 1 &&
-                            (<li key={key}>
-                                <img src={urlIcon(key)} alt={key} />
-                                {key}
-                            </li>)
-                        ))}
+                        {Object.entries(product?.characteristics || {}).map(([charId, value]) => {
+                            if (value === 1) {
+                                const charInfo = characteristics.find(char => char.id === parseInt(charId));
+                                if (charInfo) {
+                                    return (
+                                        <li key={charId} className="flex items-center gap-2">
+                                            <img 
+                                                src={charInfo.url_icon} 
+                                                alt={charInfo.name}
+                                                className="w-6 h-6"
+                                            />
+                                            <span>{charInfo.name}</span>
+                                        </li>
+                                    );
+                                }
+                            }
+                            return null;
+                        }).filter(Boolean)}
                     </ul>
 
                     <div className="mt-8">

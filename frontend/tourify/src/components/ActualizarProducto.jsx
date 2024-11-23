@@ -31,12 +31,12 @@ export const ActualizarProducto = ({ closeModal, product, characteristics, onUpd
 		}
 	};
 
-	const handleCharacteristicChange = (charId, value) => {
+	const handleCharacteristicChange = (charId) => {
 		setFormData(prev => ({
 			...prev,
 			characteristics: {
 				...prev.characteristics,
-				[charId]: value === '' ? 0 : parseInt(value)
+				[charId]: prev.characteristics[charId] === 1 ? 0 : 1
 			}
 		}));
 	};
@@ -148,16 +148,26 @@ export const ActualizarProducto = ({ closeModal, product, characteristics, onUpd
 						<div className="space-y-2">
 							<p className="text-sm font-medium text-gray-700">Características</p>
 							{characteristics.map((char) => (
-								<Input
-									key={char.id}
-									type="number"
-									min="0"
-									max="1"
-									label={char.name}
-									value={formData.characteristics[char.id] || 0}
-									onChange={(e) => handleCharacteristicChange(char.id, e.target.value)}
-									variant="bordered"
-								/>
+								<div key={char.id} className="flex items-center gap-2">
+									<input
+										type="checkbox"
+										id={`char-${char.id}`}
+										checked={formData.characteristics[char.id] === 1}
+										onChange={() => handleCharacteristicChange(char.id)}
+										className="w-4 h-4 text-[#FF8127] border-gray-300 rounded focus:ring-[#FF8127]"
+									/>
+									<label 
+										htmlFor={`char-${char.id}`}
+										className="flex items-center gap-2"
+									>
+										<img 
+											src={char.url_icon} 
+											alt={char.name}
+											className="w-6 h-6"
+										/>
+										<span>{char.name}</span>
+									</label>
+								</div>
 							))}
 						</div>
 					</form>
