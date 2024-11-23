@@ -10,9 +10,14 @@ export const useFavorites = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalType, setModalType] = useState("");
+
     //Agregar favorites
     const handleCreate = async (productId) => {
-        if (!user) return;
+        if (!user)
+            return;
+
         setLoading(true);
 
         const prevFavorites = [...favorites];
@@ -26,14 +31,18 @@ export const useFavorites = () => {
             setFavorites(prevFavorites);
             setError(error);
             setLoading(false);
-            alert("Hubo un error al añadir el producto a favoritos.");
+            // alert("Hubo un error al añadir el producto a favoritos.");
+            setModalType("error");
+            setModalOpen(true);
             return;
         }
 
         if (data && data.length > 0) {
             setLoading(false);
         }
-        alert("Producto añadido a favoritos.");
+        // alert("Producto añadido a favoritos.");
+        setModalType("favsAñadidos");
+        setModalOpen(true);
     };
 
     //Eliminar favoritos
@@ -50,7 +59,9 @@ export const useFavorites = () => {
         if (error) {
             setError(error);
             setLoading(false);
-            alert("Hubo un error al eliminar el producto de favoritos.");
+            // alert("Hubo un error al eliminar el producto de favoritos.");
+            setModalType("error");
+            setModalOpen(true);
             return;
         }
     
@@ -59,7 +70,9 @@ export const useFavorites = () => {
         );
 
         setLoading(false);
-        alert("Producto eliminado de favoritos.");
+        // alert("Producto eliminado de favoritos.");
+        setModalType("favsEliminados");
+        setModalOpen(true);
 
     };
 
@@ -87,5 +100,5 @@ export const useFavorites = () => {
         fetchFavorites();
     }, [supabase, user]);
     
-    return { favorites, loading, error, handleCreate, handleDelete };
+    return { favorites, loading, error, handleCreate, handleDelete, modalOpen, modalType, setModalOpen, setModalType};
 };

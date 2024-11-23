@@ -266,10 +266,19 @@
 
 .card-favorite {
 	position: absolute;
-	top: 30px;
-	right: 30px;
+	top: 50px;
+	right: 50px;
 	display: flex;
 	cursor: pointer;
+	transition: transform 0.2s ease-in-out;
+}
+
+.card-favorite:hover {
+	transform: scale(1.2);
+}
+
+.card-favorite:focus {
+	outline: none;
 }
 
 .card-container {
@@ -378,21 +387,30 @@
 }
 
 .detail-favs {
-	position: relative;
 	display: flex;
 	width: 100%;
 	justify-content: end;
 	align-items: center;
+	cursor: pointer;
 }
 
 .detail-favs svg {
-	width: 18px;
-	height: 18px;
+	width: 20px;
+	height: 20px;
+}
+
+.detail-favs:focus {
+	outline: none;
+}
+
+.detail-favs svg:hover {
+	transform: scale(1.2);
 }
 
 .favorite-text {
 	margin-left: 8px;
 	font-size: 10px;
+	font-weight: 500;
 }
 
 .detail-time {

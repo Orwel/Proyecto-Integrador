@@ -8,8 +8,6 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 		navigate('/');
 	};
 
-
-
 	return (
 		<Modal
 			isOpen={isOpen}
@@ -24,7 +22,6 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 						{type === "inicio" && (
 							<>
 								<ModalHeader className="flex flex-col text-center text-[24px]">¡Inicio de sesión exitoso!</ModalHeader>
-
 								<ModalBody className="p-9 text-center">
 									<p className="text-[14px]">Has ingresado a tu cuenta en <span className="text-[#FE8C00]">Tourify.</span>  Ahora puedes explorar y gestionar tus reservas.</p>
 								</ModalBody>
@@ -89,6 +86,70 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 									>
 										Continuar
 									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "favsAñadidos" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡Guardado en favoritos!</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Producto añadido a tu lista de favoritos</p>
+								</ModalBody>
+								<ModalFooter>
+								<Button
+										className="boton-modal-login"
+										onPress={() => {
+											onConfirm();
+										}}
+									>
+										Continuar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "favsEliminados" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡Eliminado de favoritos!</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Producto eliminado de tu lista de favoritos</p>
+								</ModalBody>
+								<ModalFooter>
+								<Button
+									className="boton-modal-login" onPress={() => {
+											onConfirm();
+										}}>
+										Continuar
+								</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "error" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡ERROR!</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Ocurrió un error. Intenta nuevamente.</p>
+								</ModalBody>
+								<ModalFooter>
+								<Button
+									className="boton-modal-login" onPress={() => {
+											onConfirm();
+										}}>
+										Reintentar
+								</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "iniciarSesion" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡Usuario Autenticado!</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Necesitas iniciar sesión para añadir productos a tu lista de favoritos.</p>
+								</ModalBody>
+								<ModalFooter>
+								<Button
+									className="boton-modal-login" onPress={handleContinue}>
+										Continuar
+								</Button>
 								</ModalFooter>
 							</>
 						)}
