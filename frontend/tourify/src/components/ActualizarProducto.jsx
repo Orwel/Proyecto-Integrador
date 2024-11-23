@@ -15,9 +15,10 @@ export const ActualizarProducto = ({ closeModal, product, characteristics, onUpd
 		try {
 			const updatedProduct = {
 				...formData,
-				nights: parseInt(formData.nights),
 				duration_days: parseInt(formData.duration_days),
+				duration_nights: parseInt(formData.duration_nights),
 				unit_price: parseFloat(formData.unit_price),
+				reviews: parseInt(formData.reviews),
 				characteristics: Object.entries(formData.characteristics).reduce((acc, [key, value]) => ({
 					...acc,
 					[key]: parseInt(value)

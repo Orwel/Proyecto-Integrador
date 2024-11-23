@@ -31,9 +31,17 @@ const Detail = () => {
         setDateRange([null, null]);
     };
 
-    if (loading) {
-        return <div>Cargando...</div>;
-    }
+    const getCharacteristicInfo = (charId) => {
+        const characteristic = characteristics.find(char => char.id === parseInt(charId));
+        return characteristic ? {
+            name: characteristic.name,
+            url_icon: characteristic.url_icon
+        } : null;
+    };
+
+    if (loading || loadingChar) return <div>Cargando...</div>;
+    if (error || errorChar) return <div>Error al cargar la información</div>;
+    if (!product) return <div>Producto no encontrado</div>;
 
     return (
         <div className="detail-container">
@@ -71,7 +79,7 @@ const Detail = () => {
                     <ul className="detail-characteristics">
                         {Object.entries(product?.characteristics || {}).map(([charId, value]) => {
                             if (value === 1) {
-                                const charInfo = characteristics.find(char => char.id === parseInt(charId));
+                                const charInfo = getCharacteristicInfo(charId);
                                 if (charInfo) {
                                     return (
                                         <li key={charId} className="flex items-center gap-2">
