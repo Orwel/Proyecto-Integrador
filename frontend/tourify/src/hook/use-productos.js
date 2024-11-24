@@ -8,15 +8,60 @@ export const useProductos = () => {
 
   const fetchProductos = async () => {
     try {
-      const { data, error } = await supabase
+      console.log('Iniciando fetchProductos');
+      
+      // Obtener productos con sus características
+      const { data: productos, error: productosError } = await supabase
         .from('productos')
-        .select('*')
+        .select(`
+          *,
+          productos_caracteristicas!left (
+            caracteristica_id,
+            valor
+          )
+        `)
         .order('id');
 
-      if (error) throw error;
-      setProductos(data);
+      if (productosError) {
+        console.error('Error al obtener productos:', productosError);
+        throw productosError;
+      }
+
+      console.log('Productos raw:', productos);
+
+      // Formatear los productos
+      const productosFormateados = await Promise.all(productos.map(async (producto) => {
+        // Obtener características para este producto
+        const { data: caracteristicas, error: charError } = await supabase
+          .from('productos_caracteristicas')
+          .select('caracteristica_id, valor')
+          .eq('producto_id', producto.id);
+
+        if (charError) {
+          console.error(`Error obteniendo características para producto ${producto.id}:`, charError);
+          return { ...producto, characteristics: {} };
+        }
+
+        console.log(`Características raw para producto ${producto.id}:`, caracteristicas);
+
+        // Convertir características a objeto con valores numéricos
+        const characteristics = (caracteristicas || []).reduce((acc, pc) => ({
+          ...acc,
+          [pc.caracteristica_id]: parseInt(pc.valor)
+        }), {});
+
+        console.log(`Características formateadas para producto ${producto.id}:`, characteristics);
+
+        return {
+          ...producto,
+          characteristics
+        };
+      }));
+
+      console.log('Productos formateados final:', productosFormateados);
+      setProductos(productosFormateados);
     } catch (error) {
-      console.error('Error fetching productos:', error);
+      console.error('Error en fetchProductos:', error);
       setError(error.message);
     } finally {
       setLoading(false);
@@ -50,46 +95,74 @@ export const useProductos = () => {
 
   const handleUpdate = async (updatedProduct) => {
     try {
-      // Preparar los datos para la actualización
-      const updateData = {
-        name: updatedProduct.name,
-        destination: updatedProduct.destination,
-        city: updatedProduct.city,
-        duration_days: parseInt(updatedProduct.duration_days),
-        duration_nights: parseInt(updatedProduct.duration_nights),
-        unit_price: parseFloat(updatedProduct.unit_price),
-        url_img: updatedProduct.url_img || null,
-        description: updatedProduct.description || '',
-        itinerary: updatedProduct.itinerary || '',
-        reviews: parseInt(updatedProduct.reviews) || 0,
-        characteristics: updatedProduct.characteristics || {}
-      };
+      console.log('Producto a actualizar:', updatedProduct);
+      console.log('Características a actualizar:', updatedProduct.characteristics);
 
-      console.log('Datos a actualizar:', updateData);
-
-      const { data, error } = await supabase
+      // 1. Actualizar datos básicos del producto
+      const { error: productError } = await supabase
         .from('productos')
-        .update(updateData)
-        .eq('id', updatedProduct.id)
-        .select();
+        .update({
+          name: updatedProduct.name,
+          destination: updatedProduct.destination,
+          city: updatedProduct.city,
+          duration_days: parseInt(updatedProduct.duration_days),
+          duration_nights: parseInt(updatedProduct.duration_nights),
+          unit_price: parseFloat(updatedProduct.unit_price),
+          url_img: updatedProduct.url_img || null,
+          description: updatedProduct.description || '',
+          itinerary: updatedProduct.itinerary || '',
+          reviews: parseInt(updatedProduct.reviews) || 0
+        })
+        .eq('id', updatedProduct.id);
 
-      if (error) {
-        console.error('Error de Supabase:', error);
-        throw error;
+      if (productError) {
+        console.error('Error actualizando producto:', productError);
+        throw productError;
       }
 
-      // Actualizar el estado local
-      setProductos(prevProductos => 
-        prevProductos.map(producto => 
-          producto.id === updatedProduct.id ? { ...producto, ...updateData } : producto
-        )
-      );
+      // 2. Eliminar características existentes
+      const { error: deleteError } = await supabase
+        .from('productos_caracteristicas')
+        .delete()
+        .eq('producto_id', updatedProduct.id);
 
-      await fetchProductos(); // Recargar los datos
-      return { success: true, data };
+      if (deleteError) {
+        console.error('Error eliminando características:', deleteError);
+        throw deleteError;
+      }
+
+      // 3. Preparar características para insertar
+      const caracteristicasToInsert = Object.entries(updatedProduct.characteristics)
+        .filter(([_, value]) => value === 1)
+        .map(([charId, _]) => ({
+          producto_id: updatedProduct.id,
+          caracteristica_id: parseInt(charId),
+          valor: 1
+        }));
+
+      console.log('Características a insertar:', caracteristicasToInsert);
+
+      // 4. Insertar nuevas características
+      if (caracteristicasToInsert.length > 0) {
+        const { data: insertedData, error: insertError } = await supabase
+          .from('productos_caracteristicas')
+          .insert(caracteristicasToInsert)
+          .select();
+
+        if (insertError) {
+          console.error('Error insertando características:', insertError);
+          throw insertError;
+        }
+
+        console.log('Características insertadas:', insertedData);
+      }
+
+      // 5. Recargar datos
+      await fetchProductos();
+      return { success: true };
     } catch (error) {
-      console.error('Error detallado al actualizar:', error);
-      throw new Error(`Error al actualizar el producto: ${error.message}`);
+      console.error('Error completo al actualizar:', error);
+      throw error;
     }
   };
 
