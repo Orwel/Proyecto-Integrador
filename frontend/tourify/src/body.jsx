@@ -3,10 +3,10 @@ import { ContainerProductos } from "./components/container-productos";
 import Categorias from "./components/Categorias";
 const Body = () => {
 	const [categoriesSelected, setCategoriesSelected] = useState(false);
-
 	const handleCategoryChange = (categories) => {
 		setCategoriesSelected(categories.length > 0);
 	};
+
 	return (
 		<div className="container-body">
 			<Categorias onCategoryChange={handleCategoryChange} />
@@ -23,7 +23,7 @@ const Body = () => {
 					</p>
 				</div>
 			)}
-			{!categoriesSelected && <ContainerProductos />}
+			{!categoriesSelected && <ContainerProductos isFavorites={false} />}
 		</div>
 	);
 };

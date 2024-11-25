@@ -13,6 +13,7 @@ export const useFavorites = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalType, setModalType] = useState("");
 
+
     //Agregar favorites
     const handleCreate = async (productId) => {
         if (!user)
@@ -55,7 +56,7 @@ export const useFavorites = () => {
             .delete()
             .eq("user_id", user.id)
             .eq("product_id", productId);
-    
+
         if (error) {
             setError(error);
             setLoading(false);
@@ -64,8 +65,8 @@ export const useFavorites = () => {
             setModalOpen(true);
             return;
         }
-    
-        setFavorites((prevFavorites) => 
+
+        setFavorites((prevFavorites) =>
             prevFavorites.filter((favorite) => favorite.product_id !== productId)
         );
 
@@ -86,19 +87,19 @@ export const useFavorites = () => {
                 .from("favorites")
                 .select("*")
                 .eq("user_id", user.id)
-                
+
             if (error) {
                 setError(error);
                 setLoading(false);
                 return;
             }
-            
+
             setFavorites(data);
             setLoading(false);
         };
 
         fetchFavorites();
     }, [supabase, user]);
-    
-    return { favorites, loading, error, handleCreate, handleDelete, modalOpen, modalType, setModalOpen, setModalType};
+
+    return { favorites, loading, error, handleCreate, handleDelete, modalOpen, modalType, setModalOpen, setModalType };
 };
