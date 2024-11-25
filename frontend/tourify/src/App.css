@@ -1004,7 +1004,7 @@
 		margin: 10px 0;
 	}
 
-	.content {
+	.content, .content-panel {
 		flex: 1;
 		padding: 20px;
 		display: flex;
@@ -1050,7 +1050,7 @@
 
 	/* Estilos en pantallas móviles */
 	@media (max-width: 768px) {
-		.sidebar {
+		.sidebar, .dashboard-summary {
 			display: none;
 		}
 
@@ -1067,7 +1067,10 @@
 
 		.content {
 			justify-content: center;
+		}
 
+		.content-panel{
+			display: none;
 		}
 	}
 }
