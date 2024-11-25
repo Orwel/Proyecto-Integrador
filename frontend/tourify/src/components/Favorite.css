@@ -1,0 +1,10 @@
+h1 {
+    padding: 10px 0 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.favorite {
+    padding: 10px 0 0 10px;
+}

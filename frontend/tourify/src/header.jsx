@@ -59,28 +59,28 @@ const Header = () => {
                   <DropdownTrigger>
                     <div className='flex items-center gap-4 cursor-pointer'>
                       <span>
-                      {userInfo ? (userInfo.role_id === 2 ? "Soy Administrador" : "Soy Usuario Normal" ) : ""}
+                        {userInfo ? (userInfo.role_id === 2 ? "Soy Administrador" : "Soy Usuario Normal") : ""}
                       </span>
                       <span className="avatar">{getInitials(userInfo.first_name)}</span>
                       <span className="user-name">{userInfo.first_name} {userInfo.last_name}</span>
                     </div>
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
-                    
+
                     <DropdownItem key="profile" className="h-14 gap-2">
-                    <Link className='cursor-pointer flex gap-4' to={userInfo.role_id === 2 ? "/panel" : "/panel-usuario"} >
-                    <span className="avatar">{getInitials(userInfo.first_name)}</span>
-                    <div className='flex flex-col'>
-                    <span className="font-semibold">{userInfo.first_name} {userInfo.last_name}</span>
-                      <p className="font-semibold">Ver perfil</p>
-                    </div>
-                    </Link>
-                      
+                      <Link className='cursor-pointer flex gap-4' to={userInfo.role_id === 2 ? "/panel" : "/panel-usuario"} >
+                        <span className="avatar">{getInitials(userInfo.first_name)}</span>
+                        <div className='flex flex-col'>
+                          <span className="font-semibold">{userInfo.first_name} {userInfo.last_name}</span>
+                          <p className="font-semibold">Ver perfil</p>
+                        </div>
+                      </Link>
+
                     </DropdownItem>
                     <DropdownItem key="profile" className="h-14 gap-2">
                       <h2>Configuracion</h2>
                       <p className="font-semibold">{userInfo.email}</p>
-            
+
                     </DropdownItem>
 
                     <DropdownItem key="settings">
@@ -90,7 +90,11 @@ const Header = () => {
                     <DropdownItem key="analytics">
                       Reservas
                     </DropdownItem>
-                    <DropdownItem key="system">Lista de favoritos</DropdownItem>
+                    <DropdownItem key="system">
+                      <Link className='cursor-pointer flex gap-4' to={"/favoritos"} >
+                        Lista de favoritos
+                      </Link>
+                    </DropdownItem>
                     <DropdownItem key="configurations">Notificaciones</DropdownItem>
 
                     <DropdownItem key="help_and_feedback">

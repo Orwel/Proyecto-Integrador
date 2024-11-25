@@ -1,28 +1,39 @@
 import React, { useState } from "react";
 import { useProductos } from "../hook/use-productos";
 import { Card } from "./card";
+import { useFavorites } from "../hook/use-favorites";
+import { User } from "@nextui-org/react";
 
-export const ContainerProductos = () => {
+export const ContainerProductos = ({ isFavorites }) => {
 	const { productos, loading, error } = useProductos();
+	const { favorites, loadingFav, errorFav } = useFavorites();
 	const [currentPage, setCurrentPage] = useState(1);
 	const productsPerPage = 6;
-	// console.log(productos, "ver aqui");
 
-	if (loading) return <div>Cargando...</div>; 
+	const listIdFavorites = favorites.map((item) => item.product_id);
+
+
+	// Filtra el objeto de productos con solo los favoritos
+	const productsFavorites = productos.filter(({ id }) => listIdFavorites.includes(id));
+
+	const productsList = isFavorites ? productsFavorites : productos
+
+
+	if (loading) return <div>Cargando...</div>;
 	if (error) return <div>Error al cargar los productos</div>;
 
 	// Calcula los índices para los productos para la página actual
 	const indexOfLastProduct = currentPage * productsPerPage;
 	const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-	const currentProducts = productos.slice(indexOfFirstProduct, indexOfLastProduct);
+	const currentProducts = productsList.slice(indexOfFirstProduct, indexOfLastProduct);
 
 	// Calcular el número total de páginas
-	const totalPages = Math.ceil(productos.length / productsPerPage);
+	const totalPages = Math.ceil(productsList.length / productsPerPage);
 
 	// Función para cambiar la página mediante un número de página
 	const handlePageClick = (pageNumber) => {
 		setCurrentPage(pageNumber);
-	  };
+	};
 
 	return (
 		<>
@@ -44,10 +55,10 @@ export const ContainerProductos = () => {
 				</div>
 				{/* Numeración de Páginas */}
 				<div className="pagination">
-					<button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}className="nav-button">❮❮ Anterior</button>
+					<button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className="nav-button">❮❮ Anterior</button>
 					{[...Array(totalPages)].map((_, index) => (
-						<button key={index + 1} onClick={() => 
-							handlePageClick(index + 1)} 
+						<button key={index + 1} onClick={() =>
+							handlePageClick(index + 1)}
 							className={`page-number ${currentPage === index + 1 ? "active-page" : ""}`}>{index + 1}</button>
 					))}
 					<button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} className="nav-button">Siguiente ❯❯</button>
