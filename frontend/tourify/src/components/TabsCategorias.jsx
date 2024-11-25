@@ -7,20 +7,18 @@ import { CircularProgress, Tabs } from "@mui/material";
 import { tabData } from "../utils/tabValues";
 import CardCategorias from "./CardCategorias";
 import { useProductos } from "../hook/use-productos";
-import { listaTiposCategoria } from "../utils/listaTiposCategoria";
 import { Link } from "react-router-dom";
 
-const TabsCategorias = ({ selectedCategories }) => {
+const TabsCategorias = ({ selectedCategories, categorias }) => {
 	const [value, setValue] = useState("1");
-	const { productos, loading, error } = useProductos();
+	const { productos, loading } = useProductos();
+	console.log("producto", productos);
 
 	const asignarCategoria = (producto) => {
-		if (producto.id < 4) return listaTiposCategoria[0];
-		else if (producto.id >= 4 && producto.id <= 7)
-			return listaTiposCategoria[1];
-		else if (producto.id >= 8 && producto.id <= 10)
-			return listaTiposCategoria[2];
-		else return listaTiposCategoria[3];
+		const categoria = categorias.find(
+			(cat) => cat.id === producto.categoria_id
+		);
+		return categoria ? categoria.name : "Sin Categoría";
 	};
 
 	const productosConCategoria = productos?.map((producto) => ({
@@ -35,19 +33,12 @@ const TabsCategorias = ({ selectedCategories }) => {
 	};
 
 	const selectedTabCategory = tabData.find((tab) => tab.value === value)?.label;
-	console.log(
-		"🚀 ~ TabsCategorias ~ selectedTabCategory:",
-		selectedTabCategory
-	);
 
-	const filteredCards = productosConCategoria?.filter((card) => {
+	const filteredCards = productosConCategoria?.filter((producto) => {
 		if (selectedCategories.length > 0) {
-			return selectedCategories.some(
-				(selectedCategory) =>
-					selectedCategory.toLowerCase() === card.categoria.toLowerCase()
-			);
+			return selectedCategories.includes(producto.categoria_id);
 		} else {
-			return card.categoria.toLowerCase() === selectedTabCategory.toLowerCase();
+			return producto.categoria === selectedTabCategory;
 		}
 	});
 
