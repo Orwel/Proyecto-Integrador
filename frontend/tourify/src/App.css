@@ -579,13 +579,19 @@
 	align-self: center;
 }
 
+.search-form {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	height: 80px;
+}
+
 /* search-bar*/
 .search-bar {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	font-family: Arial, sans-serif;
-	margin: 20px;
 }
 
 .search-bar h2 {
