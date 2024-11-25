@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { FaUsers, FaUserTag, FaShoppingBag, FaTags, FaShieldAlt } from "react-icons/fa";
+import { FaUsers, FaUserTag, FaShoppingBag, FaTags, FaShieldAlt, FaClipboardList } from "react-icons/fa";
 import { AdministrarUsuario } from "./components/AdministrarUsuario";
 import { InformacionPersonal } from "./components/InformacionPersonal";
 import { AdministrarProducto } from "./components/AdministrarProducto";
 import { AdministrarCategorias } from "./components/AdministrarCategorias";
+import { AdministrarCaracteristicas } from "./components/AdministrarCaracteristica";
 
 const Panel = () => {
   const [activeComponent, setActiveComponent] = useState(null); // Controla qué componente mostrar
@@ -54,6 +55,14 @@ const Panel = () => {
                 <FaTags /> Categorías
               </button>
             </li>
+            <li>
+              <button
+                onClick={() => handleComponentChange("AdministrarCaracteristicas")}
+                className="link-button"
+              >
+                <FaClipboardList /> Caracteristicas
+              </button>
+            </li>
           </ul>
           <span className="underline">Cerrar Sesión</span>
         </aside>
@@ -69,6 +78,8 @@ const Panel = () => {
             <AdministrarProducto />
           ) : activeComponent === "AdministrarCategorias" ? (
             <AdministrarCategorias />
+          ) : activeComponent === "AdministrarCaracteristicas" ? (
+            <AdministrarCaracteristicas />
           ) : (
             <div className="dashboard-summary">
               <h2>Bienvenido al Panel</h2>
