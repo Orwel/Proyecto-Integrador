@@ -3,6 +3,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Chip, 
 import { useUsers } from "../hook/use-users";
 import { ModalConfirmation } from "./modalConfirmation";
 import { useDisclosure } from "@nextui-org/modal";
+import { useAuth } from './context/AuthContext';
 
 
 const columns = [
@@ -20,6 +21,7 @@ export const AdministrarUsuario = () => {
   const { users, loading, error, handleUpdateUser } = useUsers();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedUser, setSelectedUser] = useState(null);
+  const { userInfo } = useAuth();
 
   const getInitials = (name) => {
     return name ? name.split(" ").map(n => n[0]).join("").toUpperCase() : "";
