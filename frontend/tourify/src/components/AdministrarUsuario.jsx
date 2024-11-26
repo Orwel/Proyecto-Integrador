@@ -3,7 +3,8 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Chip, 
 import { useUsers } from "../hook/use-users";
 import { ModalConfirmation } from "./modalConfirmation";
 import { useDisclosure } from "@nextui-org/modal";
-import { useAuth } from './context/AuthContext';
+import { useAuth } from "../context/AuthContext";
+
 
 
 const columns = [
@@ -59,13 +60,15 @@ export const AdministrarUsuario = () => {
           </Chip>
         );
       case "actions":
+        const isCurrentUser = userInfo?.id === user.id;
         return (
           <div className="relative flex items-center gap-2">
-            <Tooltip content="Toggle role">
+            <Tooltip content="Cambiar Role">
               <Switch
                 defaultSelected={(user.role_id === 2 ? true : false)}
                 checked={user.role_id === 2}
                 onChange={() => openConfirmationModal(user)}
+                isDisabled={isCurrentUser}
               />
             </Tooltip>
           </div>
