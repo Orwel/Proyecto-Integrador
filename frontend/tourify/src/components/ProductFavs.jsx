@@ -2,7 +2,7 @@ import { useFavorites } from "../hook/use-favorites";
 import { useAuth } from "../context/AuthContext";
 import Heart from "../assets/Icons/Heart";
 import HeartFull from "../assets/Icons/HeartFull";
-import { ModalConfirmation } from "./ModalConfirmation";
+import { ModalConfirmation } from "./modalConfirmation";
 
 const ProductFavs = ({ productId }) => {
   const { user } = useAuth();

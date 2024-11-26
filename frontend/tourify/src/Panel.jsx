@@ -60,7 +60,7 @@ const Panel = () => {
                 onClick={() => handleComponentChange("AdministrarCaracteristicas")}
                 className="link-button"
               >
-                <FaClipboardList /> Caracteristicas
+                <FaClipboardList /> Características
               </button>
             </li>
           </ul>
