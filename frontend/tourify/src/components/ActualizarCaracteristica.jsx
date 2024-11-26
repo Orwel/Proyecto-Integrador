@@ -34,7 +34,7 @@ return (
     >
         <ModalContent>
             <ModalHeader className="flex flex-col gap-1 border-b border-gray-200 p-6">
-                <h2 className="text-xl font-bold">Actualizar Producto</h2>
+                <h2 className="text-xl font-bold">Actualizar Característica</h2>
             </ModalHeader>
             
             <ModalBody className="px-6">
@@ -56,7 +56,7 @@ return (
                     />
 
                     <Input
-                        label="URL de Imagen"
+                        label="URL de Icono"
                         value={formData.url_icon}
                         onChange={(e) => setFormData({ ...formData, url_icon: e.target.value })}
                         variant="bordered"

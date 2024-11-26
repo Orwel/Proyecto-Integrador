@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
-import { SearchBar } from './components/SearchBar';
 import { useAuth } from './context/AuthContext';
 import ModalLogin from './components/modalLogin';
 import { useDisclosure } from "@nextui-org/modal";
@@ -149,8 +148,6 @@ const Header = () => {
           )}
         </div>
       )}
-      {location.pathname == '/' && <SearchBar />}
-
 
       <ModalLogin
         isOpen={isOpen}

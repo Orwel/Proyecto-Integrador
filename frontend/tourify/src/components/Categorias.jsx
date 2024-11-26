@@ -36,7 +36,7 @@ const Categorias = ({ onCategoryChange }) => {
 			<h2
 				className="mt-24 pb-4 sm:mt-0"
 				style={{
-					padding: "5rem 2rem",
+					padding: "2rem 2rem",
 					maxWidth: "80%",
 					textAlign: "start",
 				}}>

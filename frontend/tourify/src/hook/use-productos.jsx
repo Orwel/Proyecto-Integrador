@@ -9,24 +9,24 @@ export const useProductos = () => {
 	const [error, setError] = useState(null);
 
 	// Función para crear un nuevo producto
-	const handleCreate = async (newProducto) => {
-		setLoading(true);
-		const { data, error } = await supabase
-			.from("productos")
-			.insert([newProducto]);
+	// const handleCreate = async (newProducto) => {
+	// 	setLoading(true);
+	// 	const { data, error } = await supabase
+	// 		.from("productos")
+	// 		.insert([newProducto]);
 
-		if (error) {
-			console.log("Datos a insertar:", newProducto);
-			console.log("Características:", newProducto.caracteristicas);
-			console.log(error);
-			setError(error);
-			setLoading(false);
-			return;
-		}
+	// 	if (error) {
+	// 		console.log("Datos a insertar:", newProducto);
+	// 		console.log("Características:", newProducto.caracteristicas);
+	// 		console.log(error);
+	// 		setError(error);
+	// 		setLoading(false);
+	// 		return;
+	// 	}
 
-		setProductos((prevProducts) => [...prevProducts, data[0]]);
-		setLoading(false);
-	};
+	// 	setProductos((prevProducts) => [...prevProducts, data[0]]);
+	// 	setLoading(false);
+	// };
 
 	// Función para actualizar un producto
 	const handleUpdate = async (id, updatedProducto) => {
