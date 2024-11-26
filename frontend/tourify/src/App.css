@@ -991,10 +991,13 @@
 
 	/* Estilo para el menú lateral */
 	.sidebar {
-		width: 200px;
-		background-color: #CFCFCF;
+		width: 210px;
+		background: linear-gradient(to bottom, #d7d7d7, #cfcfcf);
 		color: #60626E;
 		padding: 20px;
+		transition: all 0.3s ease-in-out;
+		box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+        color: #60626E;
 
 		.underline {
 			text-decoration: underline;
@@ -1007,8 +1010,25 @@
 			display: flex;
 			flex-direction: row;
 			width: 100%;
-			justify-content: space-evenly;
+			justify-content: flex-start;
+			background-color: transparent;
+			border: none;
+			cursor: pointer;
+			padding: 10px;
+			border-radius: 8px;
+			transition: all 0.3s ease;
+			text-align: left;
+			}
+
+		.link-button:hover {
+			background-color: #9FA2B4;
+			color: #000000;
+			transform: scale(1.05);
 		}
+
+		.link-button:focus {
+			outline: 1px solid #E2E2E2;
+		  }
 	}
 
 	.sidebar h2 {
@@ -1024,6 +1044,10 @@
 		margin: 10px 0;
 	}
 
+	.sidebar p {
+		text-align: left;
+	}
+
 	.content, .content-panel {
 		flex: 1;
 		padding: 20px;
@@ -1033,7 +1057,6 @@
 		align-items: center;
 		background-color: #ECECEC;
 	}
-
 
 
 	/* Ocultar mensaje de móviles en pantallas grandes */
