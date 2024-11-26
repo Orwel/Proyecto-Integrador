@@ -1,7 +1,19 @@
 import { Link } from "react-router-dom";
 import ProductFavs from "./ProductFavs";
+import React, { useState } from "react";
+import { FaTelegramPlane } from "react-icons/fa"; // Icono de Telegram
+import SharePopup from "./SharePopup"; // Componente emergente para compartir
+import "../styles/card.css"; // Asegúrate de mantener estilos consistentes
+export const Card = ({ id, image, title, location, country, reviews, rating, price ,description}) => {
+  const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
 
-export const Card = ({ id, image, title, location, country, reviews, rating, price }) => {
+  const handleShareClick = () => {
+    setIsSharePopupOpen(true); // Abrir ventana emergente
+  };
+
+  const closeSharePopup = () => {
+    setIsSharePopupOpen(false); // Cerrar ventana emergente
+  };
 
   return (
     <div className="card">
@@ -23,9 +35,36 @@ export const Card = ({ id, image, title, location, country, reviews, rating, pri
         </div>
       </div>
       <div className="card-favorite">
+      <div className="card-actions">
+        
+        <button
+          className="card-share"
+          style={{color: "#FE8C00" }}
+          onClick={handleShareClick}
+        >
+          <FaTelegramPlane size={20} />
+        </button>
+      </div>
+      
         <ProductFavs productId={id} />
         
       </div>
+
+      {isSharePopupOpen && (
+      <SharePopup 
+      link={`http://localhost:5173/detail/${id}`}
+      title={title} // Pasar el título del producto
+      image={image} // Pasar la imagen del producto
+      description={description} // Pasar descripción corta
+      onClose={closeSharePopup} // Función para cerrar el popup
+      />
+      
+    )}
+      
+
     </div>
+
   );
+
+  
 }
