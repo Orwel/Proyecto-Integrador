@@ -153,6 +153,36 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 								</ModalFooter>
 							</>
 						)}
+
+						{type === "eliminar" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px] text-red-600">
+									Confirmar eliminación
+								</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">¿Estás seguro de que deseas eliminar esta característica?.</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login bg-red-600 hover:bg-red-700"
+										onPress={() => {
+											onConfirm();
+										}}
+									>
+										Eliminar
+									</Button>
+									<Button
+										className="boton-modal-login bg-gray-400 hover:bg-gray-500"
+										onPress={() => {
+											onOpenChange(false); 
+										}}
+									>
+										Cancelar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+
 					</>
 				)}
 			</ModalContent>

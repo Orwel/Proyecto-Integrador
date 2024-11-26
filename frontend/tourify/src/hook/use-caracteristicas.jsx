@@ -80,20 +80,20 @@ export const useCaracteristicas = () => {
   
   // Función para eliminar una caracteristica
   const handleDelete = async (id) => {
-    const { data, error } = await supabase
-      .from('caracteristicas')
-      .delete()
-      .eq('id', id);
-
-    if (error) {
-      setError(error);
-      setLoading(false);
-      return;
+    try {
+      const { error } = await supabase
+        .from('caracteristicas')
+        .delete()
+        .eq('id', id);
+  
+      if (error) {
+        throw error; 
+      }
+    } catch (error) {
+      console.error('Error capturado en handleDelete:', error); 
+      throw error; 
     }
-
-    setCaracteristicas(prevCaracteristicas => 
-      prevCaracteristicas.filter(product => product.id !== id)
-    );
+    fetchCaracteristicas();
   };
 
   // Obtener características al montar el componente

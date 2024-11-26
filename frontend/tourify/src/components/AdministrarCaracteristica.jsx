@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useCaracteristicas } from '../hook/use-caracteristicas';
 import { AgregarCaracteristica } from "./AgregarCaracteristica";
 import { ActualizarCaracteristica } from './ActualizarCaracteristica';
+import { ModalConfirmation } from "./modalConfirmation";
 
 export const AdministrarCaracteristicas = () => {
   const { caracteristicas, handleDelete, handleCreate: handleCreateFromHook, handleUpdate } = useCaracteristicas();
@@ -10,21 +11,39 @@ export const AdministrarCaracteristicas = () => {
   const [selectedCaracteristica, setSelectedCaracteristica] = useState(null);
   const [message, setMessage] = useState({ text: '', type: '' });
 
-  const handleDeleteClick = async (caracteristicaId) => {
-    if (window.confirm('¿Estás seguro de que deseas eliminar esta caracteristica?')) {
-      try {
-        await handleDelete(caracteristicaId);
+
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [caracteristicaToDelete, setCaracteristicaToDelete] = useState(null);
+
+
+  const handleDeleteClick = (caracteristicaId) => {
+    setCaracteristicaToDelete(caracteristicaId);
+    setIsConfirmationModalOpen(true);
+  };
+
+
+  const confirmDelete = async () => {
+    try {
+      await handleDelete(caracteristicaToDelete);
+      setMessage({
+        text: 'Característica eliminada exitosamente',
+        type: 'success',
+      });
+    } catch (error) {
+      if (error.code === "23503") {
         setMessage({
-          text: 'Caracteristica eliminada exitosamente',
-          type: 'success'
+          text: 'No se puede eliminar la característica porque está asociada a uno o más productos.',
+          type: 'error',
         });
-        setTimeout(() => setMessage({ text: '', type: '' }), 3000);
-      } catch (error) {
+      } else {
         setMessage({
-          text: 'Error al eliminar caracteristica',
+          text: 'Error al eliminar característica',
           type: 'error'
         });
       }
+    } finally {
+      setIsConfirmationModalOpen(false);
+      setTimeout(() => setMessage({ text: "", type: "" }), 3000);
     }
   };
 
@@ -69,7 +88,7 @@ export const AdministrarCaracteristicas = () => {
     <>
       <div className="max-w-7xl mx-auto p-4">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Listado de Caracteristicas</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Listado de Características</h2>
           <button
             className="bg-[#FF8127] text-white px-4 py-2 rounded-lg hover:bg-[#FF8127]/90 transition-colors"
             onClick={() => setShowAddModal(true)}
@@ -156,6 +175,13 @@ export const AdministrarCaracteristicas = () => {
           </div>
         </div>
       )}
+    {}
+    <ModalConfirmation
+        isOpen={isConfirmationModalOpen}
+        onOpenChange={setIsConfirmationModalOpen}
+        onConfirm={confirmDelete}
+        type="eliminar"
+      />
     </>
   );
 };
