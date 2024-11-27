@@ -47,7 +47,7 @@ const PanelUsuario = () => {
             <InformacionPersonal />
           ) : activeComponent === "ListaFavoritos" ? (
             <ListaFavoritos />
-          ) : ""
+          ) : <InformacionPersonal />
           }
 
         </main>
