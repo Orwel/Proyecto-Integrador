@@ -52,7 +52,12 @@ export default function MultipleSelectCheckmarks({
 					input={
 						<OutlinedInput sx={{ backgroundColor: "white" }} label="Filtros" />
 					}
-					renderValue={(selected) => selected.join(", ")}
+					renderValue={(selected) =>
+						categorias
+							.filter((categoria) => selected.includes(categoria.id))
+							.map((categoria) => categoria.name)
+							.join(", ")
+					}
 					MenuProps={MenuProps}
 					IconComponent={() => null}
 					sx={{
@@ -61,9 +66,9 @@ export default function MultipleSelectCheckmarks({
 						boxShadow: "0px 2px 4px 1px gray",
 					}}>
 					{categorias.map((categoria) => (
-						<MenuItem key={categoria} value={categoria}>
-							<Checkbox checked={selectedCategory.includes(categoria)} />
-							<ListItemText primary={categoria} />
+						<MenuItem key={categoria.id} value={categoria.id}>
+							<Checkbox checked={selectedCategory.includes(categoria.id)} />
+							<ListItemText primary={categoria.name} />
 						</MenuItem>
 					))}
 				</Select>

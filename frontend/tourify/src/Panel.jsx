@@ -61,7 +61,7 @@ const Panel = () => {
                 onClick={() => handleComponentChange("AdministrarCaracteristicas")}
                 className="link-button"
               >
-                <FaClipboardList /> Caracteristicas
+                <FaClipboardList /> Características
               </button>
             </li>
             <li>
@@ -76,7 +76,7 @@ const Panel = () => {
           <span className="underline">Cerrar Sesión</span>
         </aside>
 
-        <main className="content">
+        <main className="content-panel">
           {loading ? (
             <div>Loading...</div> // Muestra un indicador de carga mientras cambia
           ) : activeComponent === "InformacionPersonal" ? (
@@ -101,6 +101,9 @@ const Panel = () => {
             </div>
           )}
         </main>
+        <div className="mobile-message">
+            El panel de administración no está disponible en dispositivos móviles. Accede desde un dispositivo compatible para gestionar las funciones de administración.
+          </div>
       </div>
     </div>
   );

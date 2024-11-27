@@ -62,7 +62,7 @@ export const AgregarCaracteristica = ({ closeModal, handleCreate }) => {
 
         {}
         <Input
-          label="URL de Imagen"
+          label="URL de Icono"
           name="url_icon"
           value={formData.url_icon}
           onChange={handleChange}

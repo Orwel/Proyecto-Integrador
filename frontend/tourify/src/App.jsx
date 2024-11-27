@@ -15,6 +15,9 @@ import InformacionPersonal from "./components/InformacionPersonal"; // Importa e
 import PanelUsuario from "./PanelUsuario"; // Importa el componente PanelUsuario
 import ProductoPage from './pages/ProductoPage';
 import { ListaFavoritos } from "./components/ListaFavoritos";
+import PoliticaPrivacidad from "./components/PoliticaPrivacidad";
+import TerminosUso from "./components/TerminosServicio";
+import TerminosServicio from "./components/TerminosServicio";
 
 function App() {
   return (
@@ -36,6 +39,8 @@ function App() {
         <Route path="/informacion-personal" element={<InformacionPersonal />} />
         <Route path="/producto/:id" element={<ProductoPage />} />
         <Route path="/favoritos" element={<ListaFavoritos />} />
+        <Route path="/terminosServicio" element={<TerminosServicio />} />
+        <Route path="/politicaPrivacidad" element={<PoliticaPrivacidad />} />
       </Routes>
       <Footer />
     </>

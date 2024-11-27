@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TabsCategorias from "./TabsCategorias";
 import MultipleSelectCheckmarks from "./MultipleSelectCheckMarks";
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import searchIcon from "@imagenes/search.svg";
-import { listaTiposCategoria } from "../utils/listaTiposCategoria";
+import { supabase } from "../supabaseClient";
 
 const Categorias = ({ onCategoryChange }) => {
 	const [selectedCategories, setSelectedCategories] = useState([]);
+	const [categorias, setCategorias] = useState([]);
+	const cargarCategorias = async () => {
+		try {
+			const { data, error } = await supabase.from("categorias").select("*");
+			if (error) throw error;
+			setCategorias(data);
+		} catch (error) {
+			console.error("Error al cargar categorías:", error);
+		}
+	};
+
+	useEffect(() => {
+		cargarCategorias();
+	}, []);
+
+	// console.log(categorias);
+	// console.log("categorias seleccionadas", selectedCategories);
 
 	const handleCategoryChange = (categories) => {
 		setSelectedCategories(categories);
@@ -19,7 +36,7 @@ const Categorias = ({ onCategoryChange }) => {
 			<h2
 				className="mt-24 pb-4 sm:mt-0"
 				style={{
-					padding: "5rem 2rem",
+					padding: "2rem 2rem",
 					maxWidth: "80%",
 					textAlign: "start",
 				}}>
@@ -37,7 +54,7 @@ const Categorias = ({ onCategoryChange }) => {
 					padding: "0 25px",
 				}}>
 				<MultipleSelectCheckmarks
-					categorias={listaTiposCategoria}
+					categorias={categorias}
 					onCategoryChange={handleCategoryChange}
 				/>
 				<Search>
@@ -50,7 +67,10 @@ const Categorias = ({ onCategoryChange }) => {
 					/>
 				</Search>
 			</section>
-			<TabsCategorias selectedCategories={selectedCategories} />
+			<TabsCategorias
+				selectedCategories={selectedCategories}
+				categorias={categorias}
+			/>
 		</div>
 	);
 };
