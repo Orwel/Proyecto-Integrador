@@ -1,0 +1,15 @@
+.card-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .card-share {
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
