@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
+import toast from 'react-hot-toast';
 
 export const useProductos = () => {
 	const [productos, setProductos] = useState([]);
@@ -105,16 +106,48 @@ export const useProductos = () => {
 		}
 	};
 
+	const checkProductNameExists = async (productName) => {
+	
+		const { data, error, status } = await supabase
+			.from("productos")
+			.select("id")
+			.eq("name", productName)
+			.single();
+	
+		if (error) {
+			console.error("Error al verificar nombre de producto:", error);
+			if (status !== 404) {
+				setError(error.message);
+			}
+			return true;
+		}
+		toast.error(`Producto ${productName} ${data ? 'existe por favor cambiar nombre' : 'no existe'}`)
+		
+		return !!data;
+	};
+
 	const handleCreate = async (newProducto) => {
 		setLoading(true);
 		try {
-			const { data: insertedProduct, error: productError } = await supabase
+			
+			const exists = await checkProductNameExists(newProducto.name);
+			if (exists) {
+				setError("Ya existe un producto con ese nombre.");
+				
+				return; 
+			}
+	
+			const { data: insertedProduct, error: productError, status } = await supabase
 				.from("productos")
 				.insert([newProducto])
 				.select();
-
-			if (productError) throw productError;
-
+	
+			if (productError || status !== 201) {
+				console.error("Error al crear producto:", productError);
+				setError(productError?.message || "Error al crear producto");
+				return;
+			}
+	
 			const productoId = insertedProduct[0].id;
 			const caracteristicasToInsert = newProducto.characteristics.map(
 				(car) => ({
@@ -123,17 +156,18 @@ export const useProductos = () => {
 					valor: car.valor,
 				})
 			);
-
+	
 			if (caracteristicasToInsert.length > 0) {
 				const { error: characteristicsError } = await supabase
 					.from("productos_caracteristicas")
 					.insert(caracteristicasToInsert);
-
+	
 				if (characteristicsError) throw characteristicsError;
 			}
-
+	
 			// Recargar productos
 			await fetchProductos();
+	
 		} catch (error) {
 			console.error("Error creando producto:", error);
 			setError(error.message);
@@ -141,7 +175,7 @@ export const useProductos = () => {
 			setLoading(false);
 		}
 	};
-
+	
 	const handleUpdate = async (updatedProduct) => {
 		try {
 			console.log("Producto a actualizar:", updatedProduct);
