@@ -5,6 +5,10 @@
 	text-align: center;
 }
 
+.modalBack {
+	background-color: #646cff;
+}
+
 * {
 	font-family: "Comfortaa", sans-serif;
 	list-style-type: none
@@ -196,7 +200,7 @@
 	height: 1000px;
 }
 
-/* card */
+/* Estilos cards productos sección recomendados */
 
 .card {
 	display: flex;
@@ -207,12 +211,6 @@
 	max-width: 70vw;
 	z-index: 2;
 	position: relative;
-	
-}
-
-.card-image {
-	width: 596px;
-	height: 398px;
 }
 
 .card-image img {
@@ -270,15 +268,21 @@
 
 .card-favorite {
 	position: absolute;
-	top: 16px;
-	right: 16px;
-	background: none;
-	border: none;
-	font-size: 24px;
+	top: 50px;
+	right: 50px;
+	display: flex;
 	cursor: pointer;
-	color: #fe8c00;
+	transition: transform 0.2s ease-in-out;
+}
+/*
+.card-favorite:hover {
+	transform: scale(1.2);
 }
 
+.card-favorite:focus {
+	outline: none;
+}
+*/
 .card-container {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -292,10 +296,15 @@
 	.card-container {
 		grid-template-columns: repeat(2, 1fr);
 	}
+
+	.card-image {
+		width: 596px;
+		height: 398px;
+	}
 }
 
 .container-body {
-	padding-top: 250px;
+	padding-top: 100px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -379,6 +388,33 @@
 	margin-right: 10px;
 }
 
+.detail-favs {
+	display: flex;
+	width: 100%;
+	justify-content: end;
+	align-items: center;
+	cursor: pointer;
+}
+
+.detail-favs svg {
+	width: 20px;
+	height: 20px;
+}
+
+.detail-favs:focus {
+	outline: none;
+}
+
+.detail-favs svg:hover {
+	transform: scale(1.2);
+}
+
+.favorite-text {
+	margin-left: 8px;
+	font-size: 10px;
+	font-weight: 500;
+}
+
 .detail-time {
 	width: 100%;
 	text-align: left;
@@ -442,6 +478,10 @@
 	.detail-characteristics {
 		display: flex;
 		flex-direction: column;
+	}
+
+	.detail-favs {
+		justify-content: start;
 	}
 }
 
@@ -539,13 +579,19 @@
 	align-self: center;
 }
 
+.search-form {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	height: 80px;
+}
+
 /* search-bar*/
 .search-bar {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	font-family: Arial, sans-serif;
-	margin: 20px;
 }
 
 .search-bar h2 {
@@ -629,7 +675,7 @@
 	font-size: 12px;
 	padding: 1.2rem;
 
-	.price{
+	.price {
 		color: #FE8C00;
 		font-size: 12px;
 	}
@@ -736,6 +782,7 @@
 
 .btn-gallery:hover {
 	color: #FFEED9;
+	background-color: #FE8C00;
 }
 
 .image-modal {
@@ -753,13 +800,13 @@
 
 .modal-content {
 	width: 90%;
-    max-width: 1200px;
-    padding: 30px;
-    border-radius: 10px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	max-width: 1200px;
+	padding: 30px;
+	border-radius: 10px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .close-btn {
@@ -823,15 +870,18 @@
 	.main-image {
 		padding: 5px;
 	}
+
 	.product-image {
 		padding: 5px;
 	}
+
 	.ver-mas {
 		top: 84%;
 	}
+
 	.modal-image {
 		width: 600px;
-		height: 400px;	
+		height: 400px;
 	}
 }
 
@@ -840,33 +890,41 @@
 		padding: 3px;
 		border-radius: 5px;
 	}
+
 	.product-image {
 		padding: 3px;
 		border-radius: 5px;
 	}
+
 	.ver-mas {
 		top: 76%;
 		right: 10px;
 	}
+
 	.btn-gallery {
 		width: 48px;
 		height: 24px;
 		font-size: 10px;
 
 	}
+
 	.modal-content {
 		width: 95%;
 	}
+
 	.modal-image {
 		width: 400px;
-		height: 200px;	
+		height: 200px;
 	}
+
 	nav-btn {
 		font-size: 1rem;
 	}
+
 	.prev {
 		left: 10px;
 	}
+
 	.next {
 		right: 10px;
 	}
@@ -933,10 +991,13 @@
 
 	/* Estilo para el menú lateral */
 	.sidebar {
-		width: 200px;
-		background-color: #CFCFCF;
+		width: 210px;
+		background: linear-gradient(to bottom, #d7d7d7, #cfcfcf);
 		color: #60626E;
 		padding: 20px;
+		transition: all 0.3s ease-in-out;
+		box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+        color: #60626E;
 
 		.underline {
 			text-decoration: underline;
@@ -949,8 +1010,25 @@
 			display: flex;
 			flex-direction: row;
 			width: 100%;
-			justify-content: space-evenly;
+			justify-content: flex-start;
+			background-color: transparent;
+			border: none;
+			cursor: pointer;
+			padding: 10px;
+			border-radius: 8px;
+			transition: all 0.3s ease;
+			text-align: left;
+			}
+
+		.link-button:hover {
+			background-color: #9FA2B4;
+			color: #000000;
+			transform: scale(1.05);
 		}
+
+		.link-button:focus {
+			outline: 1px solid #E2E2E2;
+		  }
 	}
 
 	.sidebar h2 {
@@ -966,7 +1044,11 @@
 		margin: 10px 0;
 	}
 
-	.content {
+	.sidebar p {
+		text-align: left;
+	}
+
+	.content, .content-panel {
 		flex: 1;
 		padding: 20px;
 		display: flex;
@@ -975,6 +1057,7 @@
 		align-items: center;
 		background-color: #ECECEC;
 	}
+
 
 	/* Ocultar mensaje de móviles en pantallas grandes */
 	.mobile-message {
@@ -1012,7 +1095,7 @@
 
 	/* Estilos en pantallas móviles */
 	@media (max-width: 768px) {
-		.sidebar {
+		.sidebar, .dashboard-summary {
 			display: none;
 		}
 
@@ -1029,7 +1112,197 @@
 
 		.content {
 			justify-content: center;
+		}
 
+		.content-panel{
+			display: none;
 		}
 	}
+
+
+
+
+}
+
+.search-bar {
+	width: 100%;
+	max-width: 1200px;
+	margin: 2rem auto;
+	padding: 0 1rem;
+}
+
+.search-fields {
+	background: white;
+	border-radius: 1rem;
+	padding: 1.5rem;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-form {
+	display: flex;
+	gap: 1.5rem;
+	align-items: center;
+}
+
+.search-field {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.search-field label {
+	font-size: 0.875rem;
+	color: #666;
+	font-weight: 500;
+}
+
+.search-date-picker {
+	width: 100%;
+	padding: 0.75rem;
+	border: 1px solid #e2e8f0;
+	border-radius: 0.5rem;
+}
+
+.search-autocomplete {
+	width: 100% !important;
+}
+
+.search-button {
+	background: #FF8127;
+	color: white;
+	padding: 0.75rem 2rem;
+	border-radius: 0.5rem;
+	border: none;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background 0.2s;
+	align-self: flex-end;
+}
+
+.search-button:hover {
+	background: #e67316;
+}
+
+.search-button:disabled {
+	background: #ccc;
+	cursor: not-allowed;
+}
+
+/* Estilos para el calendario */
+.react-datepicker-wrapper {
+	width: 100%;
+}
+
+.react-datepicker {
+	font-family: inherit;
+	border-radius: 0.5rem;
+	border: 1px solid #e2e8f0;
+}
+
+/* Estilos del bloque de búsqueda */
+.search-bar-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 1rem;
+}
+
+.search-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.search-fields-container {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.search-form-expanded {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.search-field-group {
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-label {
+  display: block;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.search-date-picker-expanded {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  height: 56px;
+}
+
+.search-autocomplete-expanded {
+  width: 100% !important;
+}
+
+.search-autocomplete-expanded .MuiOutlinedInput-root {
+  height: 56px;
+}
+
+.search-divider {
+  width: 2px;
+  height: 56px;
+  background-color: #e2e8f0;
+  margin: 0 1rem;
+}
+
+.search-button-expanded {
+  background: #FF8127;
+  color: white;
+  padding: 0 3rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  height: 56px;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.search-button-expanded:hover {
+  background: #e67316;
+  transform: translateY(-1px);
+}
+
+.search-button-expanded:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilos para los resultados */
+.search-results {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 2rem auto;
+}
+
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
 }

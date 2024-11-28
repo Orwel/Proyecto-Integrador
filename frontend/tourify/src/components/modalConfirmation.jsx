@@ -8,8 +8,6 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 		navigate('/');
 	};
 
-
-
 	return (
 		<Modal
 			isOpen={isOpen}
@@ -24,14 +22,15 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 						{type === "inicio" && (
 							<>
 								<ModalHeader className="flex flex-col text-center text-[24px]">¡Inicio de sesión exitoso!</ModalHeader>
-
 								<ModalBody className="p-9 text-center">
 									<p className="text-[14px]">Has ingresado a tu cuenta en <span className="text-[#FE8C00]">Tourify.</span>  Ahora puedes explorar y gestionar tus reservas.</p>
 								</ModalBody>
 								<ModalFooter>
 									<Button
 										className="boton-modal-login"
-										onPress={onClose()}
+										onPress={() => {
+											onOpenChange(false);
+										}}
 									>
 										Continuar
 									</Button>
@@ -92,6 +91,128 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 								</ModalFooter>
 							</>
 						)}
+						{type === "favsAñadidos" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡Guardado en favoritos!</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Producto añadido a tu lista de favoritos</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login"
+										onPress={() => {
+											onConfirm();
+										}}
+									>
+										Continuar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "favsEliminados" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡Eliminado de favoritos!</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Producto eliminado de tu lista de favoritos</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login" onPress={() => {
+											onConfirm();
+										}}>
+										Continuar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "error" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡ERROR!</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Ocurrió un error. Intenta nuevamente.</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login" onPress={() => {
+											onConfirm();
+										}}>
+										Reintentar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "iniciarSesion" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡Usuario Autenticado!</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Necesitas iniciar sesión para añadir productos a tu lista de favoritos.</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login" onPress={handleContinue}>
+										Continuar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+
+						{type === "eliminar" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px] text-red-600">
+									Confirmar eliminación
+								</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">¿Estás seguro de que deseas eliminar esta característica?.</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login bg-red-600 hover:bg-red-700"
+										onPress={() => {
+											onConfirm();
+										}}
+									>
+										Eliminar
+									</Button>
+									<Button
+										className="boton-modal-login bg-gray-400 hover:bg-gray-500"
+										onPress={() => {
+											onOpenChange(false);
+										}}
+									>
+										Cancelar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "duplicadoname" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">Nombres Duplicados</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">El nombre del producto ya está en uso. Por favor, elige un nombre diferente.</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login"
+										onPress={() => {
+											onOpenChange(false);
+										}}
+									>
+										Continuar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						
+						{type === "newproduct" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">Confirmación</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Producto agregado exitosamente. Ahora está disponible en el catálogo.</p>
+								</ModalBody>
+								
+							</>
+						)}
+
 					</>
 				)}
 			</ModalContent>
