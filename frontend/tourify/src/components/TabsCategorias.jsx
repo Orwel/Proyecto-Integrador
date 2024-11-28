@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 const TabsCategorias = ({ selectedCategories, categorias }) => {
 	const [value, setValue] = useState("1");
 	const { productos, loading } = useProductos();
-	console.log("producto", productos);
 
 	const asignarCategoria = (producto) => {
 		const categoria = categorias.find(
@@ -21,10 +20,14 @@ const TabsCategorias = ({ selectedCategories, categorias }) => {
 		return categoria ? categoria.name : "Sin Categoría";
 	};
 
-	const productosConCategoria = productos?.map((producto) => ({
-		...producto,
-		categoria: asignarCategoria(producto),
-	}));
+	const productosConCategoria = useMemo(
+		() =>
+			productos?.map((producto) => ({
+				...producto,
+				categoria: asignarCategoria(producto),
+			})),
+		[productos, categorias]
+	);
 
 	const handleChange = (event, newValue) => {
 		if (selectedCategories.length === 0) {
@@ -34,15 +37,19 @@ const TabsCategorias = ({ selectedCategories, categorias }) => {
 
 	const selectedTabCategory = tabData.find((tab) => tab.value === value)?.label;
 
-	const filteredCards = productosConCategoria?.filter((producto) => {
-		if (selectedCategories.length > 0) {
-			return selectedCategories.includes(producto.categoria_id);
-		} else {
-			return producto.categoria === selectedTabCategory;
-		}
-	});
+	const filteredCards = useMemo(
+		() =>
+			productosConCategoria?.filter((producto) => {
+				if (selectedCategories.length > 0) {
+					return selectedCategories.includes(producto.categoria_id);
+				} else {
+					return producto.categoria === selectedTabCategory;
+				}
+			}),
+		[productosConCategoria, selectedCategories, selectedTabCategory]
+	);
 
-	const filteredCount = filteredCards.length;
+	const filteredCount = filteredCards?.length || 0;
 
 	return (
 		<div style={{ marginTop: 30 }}>
@@ -75,6 +82,7 @@ const TabsCategorias = ({ selectedCategories, categorias }) => {
 												src={
 													value === tabValue ? iconSelected : inconNoSelected
 												}
+												alt={label}
 												style={{ margin: "0 auto" }}
 											/>
 											<span
@@ -103,7 +111,27 @@ const TabsCategorias = ({ selectedCategories, categorias }) => {
 						value={tabValue}>
 						<div style={{ textAlign: "center" }}>
 							{loading ? (
-								<CircularProgress sx={{ color: "orange" }} />
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+										height: "300px",
+									}}>
+									<CircularProgress sx={{ color: "orange" }} />
+								</div>
+							) : filteredCount === 0 ? (
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+										height: "300px",
+										fontSize: "20px",
+										color: "gray",
+									}}>
+									No se encontraron destinos
+								</div>
 							) : (
 								<div
 									className="justify-center lg:justify-between"
@@ -122,7 +150,7 @@ const TabsCategorias = ({ selectedCategories, categorias }) => {
 											}}
 											key={card.id}
 											className="w-[80%] lg:w-[45%] xl:w-[49%]">
-											<Link to={"detail/" + card.id}>
+											<Link to={`detail/${card.id}`}>
 												<CardCategorias
 													info={card}
 													filteredCount={filteredCount}
