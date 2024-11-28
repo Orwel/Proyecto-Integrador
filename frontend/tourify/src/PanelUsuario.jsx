@@ -33,7 +33,7 @@ const PanelUsuario = () => {
           <ul>
             {/* Botón para Información Personal */}
             <li>
-            <p className="font-bold mt-8 mb-4">Configuración</p>
+              <p className="font-bold mt-8 mb-4">Configuración</p>
               <button
                 onClick={() => handleComponentChange("InformacionPersonal")}
                 className="link-button"
@@ -41,7 +41,7 @@ const PanelUsuario = () => {
               </button>
             </li>
             <li>
-            <button
+              <button
                 onClick={() => handleComponentChange("Reservas")}
                 className="link-button"
               > Reservas
@@ -83,7 +83,7 @@ const PanelUsuario = () => {
             <TerminosServicio />
           ) : activeComponent === "PoliticaPrivacidad" ? (
             <PoliticaPrivacidad />
-          ) : ""
+          ) : <InformacionPersonal />
           }
 
         </main>

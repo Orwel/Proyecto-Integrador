@@ -5,6 +5,7 @@ import { InformacionPersonal } from "./components/InformacionPersonal";
 import { AdministrarProducto } from "./components/AdministrarProducto";
 import { AdministrarCategorias } from "./components/AdministrarCategorias";
 import { AdministrarCaracteristicas } from "./components/AdministrarCaracteristica";
+import { ListaFavoritos } from "./components/ListaFavoritos";
 
 const Panel = () => {
   const [activeComponent, setActiveComponent] = useState(null); // Controla qué componente mostrar
@@ -63,6 +64,14 @@ const Panel = () => {
                 <FaClipboardList /> Características
               </button>
             </li>
+            <li>
+              <button
+                onClick={() => handleComponentChange("ListaFavoritos")}
+                className="link-button"
+              >
+                <FaClipboardList /> Lista Favoritos
+              </button>
+            </li>
           </ul>
           <span className="underline">Cerrar Sesión</span>
         </aside>
@@ -80,6 +89,8 @@ const Panel = () => {
             <AdministrarCategorias />
           ) : activeComponent === "AdministrarCaracteristicas" ? (
             <AdministrarCaracteristicas />
+          ) : activeComponent === "ListaFavoritos" ? (
+            <ListaFavoritos />
           ) : (
             <div className="dashboard-summary">
               <h2>Bienvenido al Panel</h2>
