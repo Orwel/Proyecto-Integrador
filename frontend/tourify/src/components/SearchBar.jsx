@@ -25,13 +25,18 @@ export const SearchBar = ({ onBuscar }) => {
 		}
 		.custom-datepicker .react-datepicker__day--selected,
 		.custom-datepicker .react-datepicker__day--in-selecting-range,
-		.custom-datepicker .react-datepicker__day--in-range {
-			background-color: #FF8127 !important;
-			color: white;
-		}
+		.custom-datepicker .react-datepicker__day--in-range,
 		.custom-datepicker .react-datepicker__day--keyboard-selected {
-			background-color: #FF8127;
-			color: white;
+			background-color: #FF8127 !important;
+			color: white !important;
+		}
+		.custom-datepicker .react-datepicker__day--in-range:not(.react-datepicker__day--in-selecting-range) {
+			background-color: #FFE5D1 !important;
+			color: #FF8127 !important;
+		}
+		.custom-datepicker .react-datepicker__day:hover {
+			background-color: #FFE5D1 !important;
+			color: #FF8127 !important;
 		}
 		.custom-datepicker .react-datepicker__month-container {
 			float: left;

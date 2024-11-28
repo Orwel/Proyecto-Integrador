@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import "../styles/share-popup.css";
 import { FaLink, FaEnvelope, FaInstagram, FaFacebook, FaWhatsapp, FaTwitter } from "react-icons/fa";
 
@@ -24,7 +25,7 @@ const SharePopup = ({ link, title, image, description, onClose }) => {
   };
 
   const handleWhatsAppShare = () => {
-    const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(link)}`;
+    const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(`¡Mira este producto en Tourify! ${link}`)}`;
     window.open(whatsappShareUrl, "_blank");
   };
 
@@ -35,8 +36,8 @@ const SharePopup = ({ link, title, image, description, onClose }) => {
     window.open(twitterShareUrl, "_blank");
   };
 
-  return (
-    <div className="share-popup-overlay">
+  const content = (
+    <div className="share-popup-overlay" onClick={(e) => e.target.className === 'share-popup-overlay' && onClose()}>
       <div className="share-popup">
         <header className="share-popup-header">
           <h3>Compartir producto</h3>
@@ -84,6 +85,11 @@ const SharePopup = ({ link, title, image, description, onClose }) => {
         </div>
       </div>
     </div>
+  );
+
+  return ReactDOM.createPortal(
+    content,
+    document.body
   );
 };
 
