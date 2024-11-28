@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { supabase } from "../supabaseClient";
 import { Card } from './Card';
 import { Pagination } from "@nextui-org/react";
+import '../styles/searchResults.css';
 
 export const ResultadosBusqueda = ({ criterios }) => {
   const [reservas, setReservas] = useState([]);
@@ -81,8 +82,6 @@ export const ResultadosBusqueda = ({ criterios }) => {
   const totalPages = Math.ceil(reservas.length / productsPerPage);
 
   if (loading) return <div>Cargando...</div>;
-
-  // No mostrar nada si no se ha realizado una búsqueda
   if (!busquedaRealizada) return null;
 
   return (
@@ -90,7 +89,7 @@ export const ResultadosBusqueda = ({ criterios }) => {
       <h2 className="text-2xl font-bold mb-4">Resultados de la búsqueda:</h2>
       {reservas.length > 0 ? (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto px-4">
+          <div className="search-results-grid">
             {currentProducts.map((producto) => (
               <div key={producto.id} className="flex justify-center">
                 <div className="w-full max-w-[600px]">
@@ -122,7 +121,9 @@ export const ResultadosBusqueda = ({ criterios }) => {
           )}
         </>
       ) : (
-        <p className="text-center text-gray-600">No se encontraron productos disponibles para las fechas y destino seleccionados.</p>
+        <p className="text-center text-gray-600">
+          No se encontraron productos disponibles para las fechas y destino seleccionados.
+        </p>
       )}
     </div>
   );

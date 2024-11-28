@@ -2,7 +2,7 @@ import React from "react";
 import TabsCategorias from "./TabsCategorias";
 import { useCategorias } from '../hook/use-categorias';
 
-const Categorias = () => {
+const Categorias = ({ onCategoryChange }) => {
 	const { categorias, loading } = useCategorias();
 
 	if (loading) return <div>Cargando categorías...</div>;
@@ -12,7 +12,7 @@ const Categorias = () => {
 			<h2
 				className="mt-24 pb-4 sm:mt-0"
 				style={{
-					padding: "5rem 2rem",
+					padding: "2rem 2rem",
 					maxWidth: "80%",
 					textAlign: "start",
 				}}>
@@ -20,7 +20,10 @@ const Categorias = () => {
 				Encuentra tu <span style={{ color: "#FE8C00" }}>Estilo</span>, explora
 				el <span style={{ color: "#FE8C00" }}>Mundo...</span>
 			</h2>
-			<TabsCategorias categorias={categorias} />
+			<TabsCategorias 
+				categorias={categorias} 
+				onCategorySelect={onCategoryChange}
+			/>
 		</div>
 	);
 };
