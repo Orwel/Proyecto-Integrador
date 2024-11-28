@@ -274,7 +274,7 @@
 	cursor: pointer;
 	transition: transform 0.2s ease-in-out;
 }
-
+/*
 .card-favorite:hover {
 	transform: scale(1.2);
 }
@@ -282,7 +282,7 @@
 .card-favorite:focus {
 	outline: none;
 }
-
+*/
 .card-container {
 	display: grid;
 	grid-template-columns: 1fr;
