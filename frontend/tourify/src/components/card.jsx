@@ -3,7 +3,7 @@ import ProductFavs from "./ProductFavs";
 import React, { useState } from "react";
 import { FaTelegramPlane } from "react-icons/fa"; // Icono de Telegram
 import SharePopup from "./SharePopup"; // Componente emergente para compartir
-import "../styles/card.css"; // Asegúrate de mantener estilos consistentes
+import "../styles/Card.css"; // Asegúrate de mantener estilos consistentes
 export const Card = ({ id, image, title, location, country, reviews, rating, price ,description}) => {
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
 

@@ -107,23 +107,29 @@ export const useProductos = () => {
 	};
 
 	const checkProductNameExists = async (productName) => {
+		try {
+			const { data, error } = await supabase
+				.from("productos")
+				.select("id")
+				.eq("name", productName);
 	
-		const { data, error, status } = await supabase
-			.from("productos")
-			.select("id")
-			.eq("name", productName)
-			.single();
-	
-		if (error) {
-			console.error("Error al verificar nombre de producto:", error);
-			if (status !== 404) {
-				setError(error.message);
+			if (error) {
+				console.error("Error al verificar nombre de producto:", error);
+				throw error;
 			}
-			return true;
+	
+			
+			if (data && data.length > 0) {
+				toast.error(`Producto "${productName}" ya existe. Por favor, cambia el nombre.`);
+				return true;
+			}
+	
+			
+			return false;
+		} catch (error) {
+			console.error("Error en checkProductNameExists:", error);
+			throw error;
 		}
-		toast.error(`Producto ${productName} ${data ? 'existe por favor cambiar nombre' : 'no existe'}`)
-		
-		return !!data;
 	};
 
 	const handleCreate = async (newProducto) => {
@@ -141,7 +147,7 @@ export const useProductos = () => {
 				.from("productos")
 				.insert([newProducto])
 				.select();
-	
+	toast.success('Producto agregado exitosamente. Ahora está disponible en el catálogo')
 			if (productError || status !== 201) {
 				console.error("Error al crear producto:", productError);
 				setError(productError?.message || "Error al crear producto");
