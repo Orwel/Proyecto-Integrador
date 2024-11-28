@@ -89,30 +89,21 @@ export const SearchBar = ({ onBuscar }) => {
 		return () => clearTimeout(debounceTimer);
 	}, [searchText]);
 
-	const handleSubmit = async (e) => {
+	// Nueva función para verificar si el formulario está completo
+	const isFormValid = () => {
+		return startDate && 
+			   endDate && 
+			   searchText && 
+			   searchText.trim().length > 0;
+	};
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (!startDate || !endDate) {
-			alert('Por favor, selecciona un rango de fechas');
+		if (!isFormValid()) {
+			alert('Por favor, selecciona las fechas y un destino');
 			return;
 		}
-
-		try {
-			let query = supabase
-				.from('productos')
-				.select('*');
-
-			if (searchText) {
-				query = query.or(`city.ilike.%${searchText}%,destination.ilike.%${searchText}%`);
-			}
-
-			const { data, error } = await query;
-
-			if (error) throw error;
-			setSearchResults(data);
-			onBuscar({ startDate, endDate, searchText });
-		} catch (error) {
-			console.error('Error en la búsqueda:', error);
-		}
+		onBuscar({ startDate, endDate, searchText });
 	};
 
 	return (
@@ -195,7 +186,7 @@ export const SearchBar = ({ onBuscar }) => {
 						<button 
 							type="submit" 
 							className="search-button-expanded w-full md:w-auto"
-							disabled={!startDate || !endDate}
+							disabled={!isFormValid()}
 						>
 							Buscar
 						</button>
