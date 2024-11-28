@@ -28,7 +28,9 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 								<ModalFooter>
 									<Button
 										className="boton-modal-login"
-										onPress={onClose()}
+										onPress={() => {
+											onOpenChange(false);
+										}}
 									>
 										Continuar
 									</Button>
@@ -96,7 +98,7 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 									<p className="text-[14px]">Producto añadido a tu lista de favoritos</p>
 								</ModalBody>
 								<ModalFooter>
-								<Button
+									<Button
 										className="boton-modal-login"
 										onPress={() => {
 											onConfirm();
@@ -114,12 +116,12 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 									<p className="text-[14px]">Producto eliminado de tu lista de favoritos</p>
 								</ModalBody>
 								<ModalFooter>
-								<Button
-									className="boton-modal-login" onPress={() => {
+									<Button
+										className="boton-modal-login" onPress={() => {
 											onConfirm();
 										}}>
 										Continuar
-								</Button>
+									</Button>
 								</ModalFooter>
 							</>
 						)}
@@ -130,12 +132,12 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 									<p className="text-[14px]">Ocurrió un error. Intenta nuevamente.</p>
 								</ModalBody>
 								<ModalFooter>
-								<Button
-									className="boton-modal-login" onPress={() => {
+									<Button
+										className="boton-modal-login" onPress={() => {
 											onConfirm();
 										}}>
 										Reintentar
-								</Button>
+									</Button>
 								</ModalFooter>
 							</>
 						)}
@@ -146,10 +148,10 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 									<p className="text-[14px]">Necesitas iniciar sesión para añadir productos a tu lista de favoritos.</p>
 								</ModalBody>
 								<ModalFooter>
-								<Button
-									className="boton-modal-login" onPress={handleContinue}>
+									<Button
+										className="boton-modal-login" onPress={handleContinue}>
 										Continuar
-								</Button>
+									</Button>
 								</ModalFooter>
 							</>
 						)}
@@ -174,12 +176,40 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 									<Button
 										className="boton-modal-login bg-gray-400 hover:bg-gray-500"
 										onPress={() => {
-											onOpenChange(false); 
+											onOpenChange(false);
 										}}
 									>
 										Cancelar
 									</Button>
 								</ModalFooter>
+							</>
+						)}
+						{type === "duplicadoname" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">Nombres Duplicados</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">El nombre del producto ya está en uso. Por favor, elige un nombre diferente.</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login"
+										onPress={() => {
+											onOpenChange(false);
+										}}
+									>
+										Continuar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						
+						{type === "newproduct" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">Confirmación</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Producto agregado exitosamente. Ahora está disponible en el catálogo.</p>
+								</ModalBody>
+								
 							</>
 						)}
 

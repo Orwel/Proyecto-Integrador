@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/share-popup.css";
+import "../styles/Share-popup.css";
 import { FaLink, FaEnvelope, FaInstagram, FaFacebook, FaWhatsapp, FaTwitter } from "react-icons/fa";
 
 const SharePopup = ({ link, title, image, description, onClose }) => {
