@@ -1,4 +1,4 @@
-const Heart = ({ width = 38, height = 36.26, className = "" }) => (
+const Heart = ({ width = 24, height = 24, className = "" }) => (
     <svg
         width={width}
         height={height}
