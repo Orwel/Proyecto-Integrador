@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useProductos } from "../hook/use-productos";
-import { Card } from "./Card";
+import { Card } from "./card";
 import { useFavorites } from "../hook/use-favorites";
 import { User } from "@nextui-org/react";
 

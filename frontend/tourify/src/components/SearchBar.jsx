@@ -3,7 +3,7 @@ import { supabase } from '../supabaseClient';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { Autocomplete, TextField } from '@mui/material';
-import { Card } from './Card';
+import { Card } from './card';
 
 export const SearchBar = ({ onBuscar }) => {
 	const [dateRange, setDateRange] = useState([null, null]);

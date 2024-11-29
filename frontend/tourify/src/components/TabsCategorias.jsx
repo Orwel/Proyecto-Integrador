@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useProductos } from "../hook/use-productos";
-import { Card } from "./Card";
+import { Card } from "./card";
 import { Tabs, Tab, Pagination } from "@nextui-org/react";
 import '../styles/categorias.css';
 
@@ -56,7 +56,6 @@ const TabsCategorias = ({ categorias }) => {
 									id={producto.id}
 									image={producto.url_img}
 									title={producto.name}
-									
 									location={producto.city}
 									country={producto.destination}
 									reviews={producto.reviews}
