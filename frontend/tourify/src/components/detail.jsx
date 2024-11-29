@@ -6,6 +6,8 @@ import ProductGallery from "./ProductGallery";
 import ProductFavs from "./ProductFavs";
 import Calendario from './Calendario';
 import "react-datepicker/dist/react-datepicker.css";
+import SharePopup from "./SharePopup"; // Componente emergente para compartir
+import { FaTelegramPlane } from "react-icons/fa"; // Icono de compartir
 
 const Detail = () => {
     const id = parseInt(useParams().id);
@@ -21,6 +23,16 @@ const Detail = () => {
         const item = characteristics.filter(item => item.name.includes(key));
         return item.map((item) => item.url_icon);
     }
+
+    const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
+
+    const handleShareClick = () => {
+      setIsSharePopupOpen(true);
+    };
+    
+    const closeSharePopup = () => {
+      setIsSharePopupOpen(false);
+    };
 
     const handleDateSelect = ({ startDate: newStartDate, endDate: newEndDate, duracionDias }) => {
         console.log('Fechas seleccionadas:', { newStartDate, newEndDate, duracionDias });
@@ -56,8 +68,13 @@ const Detail = () => {
                     <span className="detail-location">📍 {product.city}</span>
                 </div>
                 <div className="detail-favs">
+                    <button 
+                        onClick={handleShareClick}
+                        style={{ marginLeft: "10px", display: "flex", alignItems: "center" }}
+                    >
+                    <FaTelegramPlane size={20} style={{ marginRight: "5px", color: "#FE8C00" }} />
+                    </button>
                     <ProductFavs productId={id} />
-                    <span className="favorite-text">Añadir a favoritos</span>
                 </div>
             </div>
 
@@ -134,7 +151,17 @@ const Detail = () => {
                             selectedRange={dateRange}
                             onRangeChange={setDateRange}
                             onClearDates={handleClearDates}
+                            className="calendario-container" 
                         />
+
+                        {isSharePopupOpen && (
+                            <SharePopup
+                                link={`http://localhost:5173/detail/${id}`}
+                                title={product.name}
+                                image={product.url_img} // Usa la imagen principal del producto
+                                onClose={closeSharePopup}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

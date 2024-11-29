@@ -275,11 +275,19 @@
 	transition: transform 0.2s ease-in-out;
 }
 
-.card-favorite:hover {
+.card-actions:hover {
 	transform: scale(1.2);
 }
 
-.card-favorite:focus {
+.card-actions:focus {
+	outline: none;
+}
+
+.card-favorite svg:hover{
+	transform: scale(1.2);
+}
+
+.card-favorite svg:focus {
 	outline: none;
 }
 
@@ -934,7 +942,7 @@
 /* Estilos para la paginación de los producto*/
 .pagination {
 	display: flex;
-	justify-content: right;
+	justify-content: center;
 	align-items: center;
 	gap: 10px;
 	margin: 20px;
@@ -979,6 +987,46 @@
 	text-decoration-line: underline;
 	color: #FE8C00;
 	font-weight: bolder;
+}
+
+@media (max-width: 768px) {
+    .pagination {
+        gap: 5px;
+        margin: 15px 0;
+    }
+
+    .pagination .nav-button,
+    .page-number {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .pagination .nav-button:hover,
+    .page-number:hover {
+        font-size: 1rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    .pagination {
+        gap: 3px;
+        margin: 5px 0;
+    }
+
+    .pagination .nav-button,
+    .page-number {
+        padding: 2px 6px;
+        font-size: 0.8rem;
+        width: 100%;
+    }
+
+    .page-number {
+        text-align: center;
+    }
+
+    .pagination .nav-button {
+        width: auto;
+    }
 }
 
 /* Estilos panel */
