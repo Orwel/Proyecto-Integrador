@@ -3,6 +3,8 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Chip, 
 import { useUsers } from "../hook/use-users";
 import { ModalConfirmation } from "./modalConfirmation";
 import { useDisclosure } from "@nextui-org/modal";
+import { useAuth } from "../context/AuthContext";
+
 
 
 const columns = [
@@ -20,6 +22,7 @@ export const AdministrarUsuario = () => {
   const { users, loading, error, handleUpdateUser } = useUsers();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedUser, setSelectedUser] = useState(null);
+  const { userInfo } = useAuth();
 
   const getInitials = (name) => {
     return name ? name.split(" ").map(n => n[0]).join("").toUpperCase() : "";
@@ -57,13 +60,15 @@ export const AdministrarUsuario = () => {
           </Chip>
         );
       case "actions":
+        const isCurrentUser = userInfo?.id === user.id;
         return (
           <div className="relative flex items-center gap-2">
-            <Tooltip content="Toggle role">
+            <Tooltip content="Cambiar Role">
               <Switch
                 defaultSelected={(user.role_id === 2 ? true : false)}
                 checked={user.role_id === 2}
                 onChange={() => openConfirmationModal(user)}
+                isDisabled={isCurrentUser}
               />
             </Tooltip>
           </div>
@@ -78,7 +83,7 @@ export const AdministrarUsuario = () => {
 
   return (
     <>
-      <Table aria-label="User management table">
+      <Table className="desktop-only" aria-label="User management table">
         <TableHeader columns={columns}>
           {(column) => (
             <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
