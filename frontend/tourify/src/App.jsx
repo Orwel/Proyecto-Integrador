@@ -16,7 +16,6 @@ import PanelUsuario from "./PanelUsuario"; // Importa el componente PanelUsuario
 import ProductoPage from './pages/ProductoPage';
 import { ListaFavoritos } from "./components/ListaFavoritos";
 import PoliticaPrivacidad from "./components/PoliticaPrivacidad";
-import TerminosUso from "./components/TerminosServicio";
 import TerminosServicio from "./components/TerminosServicio";
 
 function App() {

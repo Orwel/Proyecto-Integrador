@@ -44,7 +44,7 @@ const Header = () => {
             <img src="/img/logo.png" className="logo-image" alt="Logo" />
           </Link>
           <Link to="/" className="logo">
-            Crea recuerdos duraderos... Descubre nuevos horizontes!
+            ¡Crea recuerdos duraderos... Descubre nuevos horizontes!
           </Link>
         </div>
 
@@ -56,34 +56,34 @@ const Header = () => {
                   className='bg-[#757575] text-white'
                   placement="bottom-end">
                   <DropdownTrigger>
-                    <div className='flex items-center gap-4 cursor-pointer'>
-                      <span>
-                        {userInfo ? (userInfo.role_id === 2 ? "Administrador" : "Usuario") : ""}
-                      </span>
+                    <div className='user-avatar'>
                       <span className="avatar">{getInitials(userInfo.first_name)}</span>
-                      <span className="user-name">{userInfo.first_name} {userInfo.last_name}</span>
+                      <div className="user-info">
+                        <span className="user-name">{userInfo.first_name} {userInfo.last_name}</span>
+                        <span className="user-role"> {userInfo ? (userInfo.role_id === 2 ? "Administrador" : "Usuario") : ""}</span>
+                      </div>
                     </div>
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
 
-                    <DropdownItem key="profile" className="h-14 gap-2">
+                    <DropdownItem key={`profile${userInfo.id}`} className="h-14 gap-2">
                       <Link className='cursor-pointer flex gap-4' to={userInfo.role_id === 2 ? "/panel" : "/panel-usuario"} >
                         <span className="avatar">{getInitials(userInfo.first_name)}</span>
                         <div className='flex flex-col'>
                           <span className="font-semibold">{userInfo.first_name} {userInfo.last_name}</span>
-                          <p className="font-semibold">Perfil de usuario</p>
+                          <p className="font-semibold">Panel de usuario</p>
                         </div>
                       </Link>
 
                     </DropdownItem>
-                    <DropdownItem key="profile" className="h-14 gap-2">
+                    <DropdownItem key={`profile-email-${userInfo.id}`} className="h-14 gap-2">
                       <h2>Correo electrónico </h2>
                       <p className="font-semibold">{userInfo.email}</p>
 
                     </DropdownItem>
 
                     <DropdownItem key="settings">
-                    <Link className='cursor-pointer flex gap-4' to={"/informacion-personal"} >
+                      <Link className='cursor-pointer flex gap-4' to={"/informacion-personal"} >
                         Información personal
                       </Link>
                     </DropdownItem>
@@ -98,7 +98,7 @@ const Header = () => {
                     <DropdownItem key="configurations">Notificaciones</DropdownItem>
 
                     <DropdownItem key="help_and_feedback">
-                      <Link className="cursor-pointer flex gap-4" to="/terminosServicio">
+                      <Link className="cursor-pointer flex gap-4" to={"/terminosServicio"}>
                         Terminos de Servicio
                       </Link>
                     </DropdownItem>
@@ -114,7 +114,11 @@ const Header = () => {
                 </Dropdown>
 
               </div>
-              <img className="signout-button" onClick={handleSignOut} src="/img/Logout.png" alt="" />
+              {/* <img className="signout-button" onClick={handleSignOut} src="/img/Logout.png" alt="" /> */}
+              <button className="btn btn-logout" onClick={handleSignOut} >
+                <img src="/img/Logout.png" alt="Icono de cerrar sesión" className="logout-icon" />  
+                <span>Cerrar sesión</span>
+              </button>
             </div>
           ) : (
             <>
@@ -124,22 +128,39 @@ const Header = () => {
           )}
         </div>
 
-        <div className="hamburger-menu" onClick={toggleMenu}>
+        <div className={`hamburger-menu ${isMenuOpen ? "open" : ""}`} onClick={toggleMenu}>
           <span></span>
           <span></span>
           <span></span>
         </div>
       </div>
 
-
-
       {isMenuOpen && (
-        <div className="mobile-menu">
+        <div className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
           {userInfo ? (
-            <div className="user-avatar">
-              <span className="avatar">{getInitials(userInfo.first_name)}</span>
-              <span className="user-name">{userInfo.first_name} {userInfo.last_name}</span>
-            </div>
+            <>
+              <div className="user-avatar" onClick={toggleMenu}>
+                <span className="avatar">{getInitials(userInfo.first_name)}</span>
+                <div className="user-info">
+                  <span className="user-name">{userInfo.first_name} {userInfo.last_name}</span>
+                  <span className="user-role">{userInfo.role_id === 2 ? "Administrador" : "Usuario"}</span>
+                    <div className="flex items-center gap-2">
+                      < h2 className="text-xs text-gray-600 font-light">e-mail: </h2>
+                      <p className="text-xs text-gray-600 font-light">{userInfo.email}</p>
+                    </div>
+                </div>
+              </div>
+              <nav className="mobile-nav">
+                <Link to={userInfo.role_id === 2 ? "/panel" : "/panel-usuario"} className="mobile-nav-link" onClick={toggleMenu}> Panel de usuario</Link>
+                <Link to="/informacion-personal" className="mobile-nav-link" onClick={toggleMenu}>Información personal</Link>
+                <Link to="/favoritos" className="mobile-nav-link" onClick={toggleMenu}>Lista de favoritos</Link>
+                <Link to="/terminosServicio" className="mobile-nav-link" onClick={toggleMenu}>Términos de servicio</Link>
+                <Link to="/politicaPrivacidad" className="mobile-nav-link" onClick={toggleMenu}>Política de privacidad</Link>
+              </nav>
+              <button className="btn btn-logout" onClick={handleSignOut}>
+                Cerrar sesión
+              </button>
+            </>
           ) : (
             <>
               <button className="btn" id='btn-crear-cuenta' onClick={() => onOpenSignUp()}>Crear cuenta</button>

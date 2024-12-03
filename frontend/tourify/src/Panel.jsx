@@ -25,6 +25,7 @@ const Panel = () => {
         <aside className="sidebar">
           <ul>
             <li>
+              <p className="font-bold mt-8 mb-4">Dashboard</p>
               <button
                 onClick={() => handleComponentChange("InformacionPersonal")}
                 className="link-button"
@@ -73,7 +74,6 @@ const Panel = () => {
               </button>
             </li>
           </ul>
-          <span className="underline">Cerrar Sesión</span>
         </aside>
 
         <main className="content-panel">
@@ -102,7 +102,7 @@ const Panel = () => {
           )}
         </main>
         <div className="mobile-message">
-            El panel de administración no está disponible en dispositivos móviles. Accede desde un dispositivo compatible para gestionar las funciones de administración.
+            El panel de administración no está disponible en dispositivos móviles o tablet. Accede desde un dispositivo compatible para gestionar las funciones de administración.
           </div>
       </div>
     </div>

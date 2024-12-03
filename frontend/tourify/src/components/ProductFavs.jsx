@@ -3,7 +3,6 @@ import { useAuth } from "../context/AuthContext";
 import Heart from "../assets/Icons/Heart";
 import HeartFull from "../assets/Icons/HeartFull";
 import { ModalConfirmation } from "./modalConfirmation";
-// import { ModalConfirmation } from "./ModalConfirmation";
 
 const ProductFavs = ({ productId }) => {
   const { user } = useAuth();
