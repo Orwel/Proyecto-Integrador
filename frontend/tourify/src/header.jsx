@@ -66,7 +66,7 @@ const Header = () => {
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
 
-                    <DropdownItem key={`profile${userInfo.id}`} className="h-14 gap-2">
+                    <DropdownItem key={`profile${userInfo.id}`} className="h-14 gap-2" textValue="Perfil de usuario">
                       <Link className='cursor-pointer flex gap-4' to={userInfo.role_id === 2 ? "/panel" : "/panel-usuario"} >
                         <span className="avatar">{getInitials(userInfo.first_name)}</span>
                         <div className='flex flex-col'>
@@ -76,38 +76,38 @@ const Header = () => {
                       </Link>
 
                     </DropdownItem>
-                    <DropdownItem key={`profile-email-${userInfo.id}`} className="h-14 gap-2">
+                    <DropdownItem key={`profile-email-${userInfo.id}`} className="h-14 gap-2" textValue="Mail usuario">
                       <h2>Correo electrónico </h2>
                       <p className="font-semibold">{userInfo.email}</p>
 
                     </DropdownItem>
 
-                    <DropdownItem key="settings">
+                    <DropdownItem key="settings" textValue="Información personal del usuario">
                       <Link className='cursor-pointer flex gap-4' to={"/informacion-personal"} >
                         Información personal
                       </Link>
                     </DropdownItem>
-                    <DropdownItem key="analytics">
+                    <DropdownItem key="analytics" textValue="Reservas">
                       Reservas
                     </DropdownItem>
-                    <DropdownItem key="system">
+                    <DropdownItem key="system" textValue="Listado de favoritos">
                       <Link className='cursor-pointer flex gap-4' to={"/favoritos"} >
                         Lista de favoritos
                       </Link>
                     </DropdownItem>
                     <DropdownItem key="configurations">Notificaciones</DropdownItem>
 
-                    <DropdownItem key="help_and_feedback">
+                    <DropdownItem key="help_and_feedback" textValue="Terminos de servicio">
                       <Link className="cursor-pointer flex gap-4" to={"/terminosServicio"}>
                         Terminos de Servicio
                       </Link>
                     </DropdownItem>
-                    <DropdownItem key="Politica de privacidad">
+                    <DropdownItem key="Politica de privacidad" textValue="Política de privacidad">
                       <Link className="cursor-pointer flex gap-4" to="/politicaPrivacidad">
                         Política de privacidad
                       </Link>
                     </DropdownItem>
-                    <DropdownItem onClick={handleSignOut} key="logout" color="danger">
+                    <DropdownItem onClick={handleSignOut} key="logout" color="danger" textValue="Cerrar sesión">
                       Cerrar sesión
                     </DropdownItem>
                   </DropdownMenu>

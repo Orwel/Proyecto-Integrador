@@ -64,9 +64,10 @@ export default function CustomInput({ inputValue, onChange, type, placeholder, o
 				(type === "password" || type === "passwordstrong") && (
 					<button className="focus:outline-none" type="button" onClick={toggleVisibility}>
 						{isVisible ? (
-							<EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-						) : (
 							<EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+
+						) : (
+							<EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
 						)}
 					</button>
 				)

@@ -85,7 +85,7 @@ const ModalSignUp = ({ isOpen, onOpenChange }) => {
                   onValidChange={setEmailValid}
                   placeholder={"Ingresa tu email"}
                 />
-                <span className="text-xs">Te enviaremos por correo electrónico la confirmación de tu viaje y los recibos</span>
+                <span className="text-xs">Te enviaremos por correo electrónico la confirmación de tu reserva.</span>
                 
                 <CustomInput
                   inputValue={password}
