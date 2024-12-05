@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import es from 'date-fns/locale/es';
 import { supabase } from '../supabaseClient';
 import { isWithinInterval, differenceInDays } from 'date-fns';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { ModalConfirmation } from "./modalConfirmation";
 
 registerLocale('es', es);
 
 const Calendario = ({ productoId, onDateSelect, duracionMinima, onClearDates }) => {
+  const { user } = useAuth();
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [reservas, setReservas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const navigate = useNavigate();
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalType, setModalType] = useState("");
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,35 +64,56 @@ const Calendario = ({ productoId, onDateSelect, duracionMinima, onClearDates }) 
 
   const handleDateChange = (dates) => {
     const [start, end] = dates;
-    
-    if (start && !end) {
-      setDateRange([start, null]);
-    } else if (start && end) {
+    setDateRange([start, end]);
+
+    if (start && end) {
       const dias = differenceInDays(end, start) + 1;
-      
-      if (dias === duracionMinima) {
-        setDateRange([start, end]);
-        onDateSelect && onDateSelect({ startDate: start, endDate: end });
+      if (dias !== duracionMinima) {
+        //alert(`La duración debe ser exactamente ${duracionMinima} días`);
+        setModalType(`duracion ${duracionMinima}`);
+        setModalOpen(true);
       } else {
-        setDateRange([start, null]);
-        alert(`La duración debe ser exactamente ${duracionMinima} días`);
+        onDateSelect({ startDate: start, endDate: end });
       }
-    } else {
-      setDateRange([null, null]);
     }
   };
 
   const esFechaDisponible = (date) => {
-    if (date < new Date()) return false;
+    if (!date || date < new Date()) return false;
+    if (!reservas.length) return true;
 
-    if (startDate && !endDate) {
-      const dias = differenceInDays(date, startDate) + 1;
-      if (dias !== duracionMinima) return false;
-    }
-
-    return !reservas.some(reserva => 
+    return !reservas.some(reserva =>
       isWithinInterval(date, { start: new Date(reserva.start_date), end: new Date(reserva.end_date) })
     );
+  };
+
+  const onConfirmReserva = async () => {
+    if (!user) {
+      //alert("Por favor, inicia sesión para realizar una reserva.");
+      setModalType("SesionAuth");
+      setModalOpen(true);
+      return;
+    }
+
+    if (!startDate || !endDate) {
+      //alert("Debes seleccionar un rango de fechas válido.");
+      setModalType("fechasValidas");
+      setModalOpen(true);
+      return;
+    }
+
+    try {
+      navigate(`/reserva/${productoId}`, {
+        state: { fechaInicio: startDate, fechaFin: endDate },
+      });
+      alert("¡Reserva realizada con éxito!");
+      setModalType("reserva");
+      setModalOpen(true);
+
+    } catch (error) {
+      console.error("Error al crear la reserva:", error);
+      alert("Se produjo un error al realizar la reserva. Por favor, inténtalo nuevamente.");
+    }
   };
 
   return (
@@ -188,6 +218,23 @@ const Calendario = ({ productoId, onDateSelect, duracionMinima, onClearDates }) 
           />
         </div>
       )}
+
+    <button className="bg-[#FE8C00] text-white px-6 py-3 rounded-xl hover:scale-105 transform transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+      onClick={onConfirmReserva}
+        disabled={!startDate || !endDate || loading}
+      >
+      {loading ? 'Cargando disponibilidad...' : 'Confirmar fechas'}
+    </button>
+
+      <ModalConfirmation
+        isOpen={modalOpen}
+        onOpenChange={setModalOpen}
+        type={modalType}
+        onConfirm={() => setModalOpen(false)}
+        navigate={() => { }}
+        role_id={null}
+        duracionMinima={duracionMinima} 
+      />
     </div>
   );
 };

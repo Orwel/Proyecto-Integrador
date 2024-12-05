@@ -26,13 +26,14 @@
 	filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/*Estilos para la sección recomendaciones*/
 .recomendaciones-title {
 	text-align: start;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	padding: 60px 0 20px;
+	padding: 60px 24px 20px;
 }
 
 .eslogan-recomendaciones {
@@ -58,6 +59,44 @@
 
 .texto-recomendaciones>span {
 	color: #FE8C00
+}
+
+@media (max-width: 1024px) {
+    .recomendaciones-title {
+        padding: 50px 20px 15px; 
+    }
+
+    .eslogan-recomendaciones > h2 {
+        font-size: 26px; 
+        margin-top: 30px; 
+    }
+
+    .texto-recomendaciones {
+        margin: 20px 0; 
+        line-height: 35px;
+    }
+}
+
+@media (max-width: 600px) {
+    .recomendaciones-title {
+        padding: 40px 15px 10px;
+        align-items: flex-start; 
+    }
+
+    .eslogan-recomendaciones {
+        text-align: center;
+    }
+
+    .eslogan-recomendaciones > h2 {
+        font-size: 20px; 
+        margin-top: 20px; 
+    }
+
+    .texto-recomendaciones {
+        margin: 15px 0; 
+        line-height: 16px; 
+        font-size: 10px; 
+    }
 }
 
 @keyframes logo-spin {
@@ -295,7 +334,7 @@
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 20px;
-	padding: 10px;
+	padding: 40px;
 
 	/* max-height: calc(5 * 200px);  */
 }
@@ -303,11 +342,6 @@
 @media (min-width: 1024px) {
 	.card-container {
 		grid-template-columns: repeat(2, 1fr);
-	}
-
-	.card-image {
-		width: 596px;
-		height: 398px;
 	}
 }
 
@@ -331,25 +365,21 @@
 .detail-container {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: flex-start;
 	padding: 130px 80px 20px 80px;
-	/* Aumentar el padding superior a 120px para más espacio */
 	width: 100%;
 	background: #ececec;
-	/* Centra el contenedor */
 }
 
 .detail-header {
 	display: flex;
-	flex-direction: column;
-	/* Espacio entre el título y el botón */
+	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 20px;
-	/* Espacio inferior */
+	flex-direction: column;
 }
 
 .product-title {
-	text-align: left;
+	padding-top: 0%;
 	font-size: 30px;
 	font-weight: bold;
 }
@@ -362,12 +392,12 @@
 }
 
 .back-button {
-	background: none;
-	border: none;
+	display: flex;
+	align-items: flex-end;
 	color: #fe8c00;
-	/* Color de texto */
 	font-size: 18px;
 	cursor: pointer;
+	padding-right: 20px;
 }
 
 .detail-body {
@@ -384,7 +414,7 @@
 	display: flex;
 	width: 100%;
 	align-content: center;
-	justify-content: left;
+	justify-content: flex-start;
 	font-size: 10px;
 }
 
@@ -399,6 +429,7 @@
 .detail-favs {
 	display: flex;
 	width: 100%;
+	padding-right: 20px;
 	justify-content: end;
 	align-items: center;
 	cursor: pointer;
@@ -415,12 +446,6 @@
 
 .detail-favs svg:hover {
 	transform: scale(1.2);
-}
-
-.favorite-text {
-	margin-left: 8px;
-	font-size: 10px;
-	font-weight: 500;
 }
 
 .detail-time {
@@ -482,15 +507,61 @@
 	font-size: 16px;
 }
 
+@media (max-width: 768px) {
+	.detail-container {
+		padding: 120px 20px 20px 20px;
+	}
+
+	.product-title {
+        font-size: 24px;
+    }
+
+	.back-button {
+        font-size: 16px;
+    }
+
+	.product-rating {
+        font-size: 12px;
+    }
+
+	.detail-favs svg {
+		width: 16px;
+		height: 16px;
+	}
+	
+}
 @media (max-width: 480px) {
+	.detail-container {
+		padding: 90px 10px 20px 10px;
+	}
+
+	.product-title {
+        font-size: 16px;
+    }
+
 	.detail-characteristics {
 		display: flex;
 		flex-direction: column;
 	}
 
 	.detail-favs {
-		justify-content: start;
+		margin-top: 10px;
+		padding-right: 0px;
 	}
+
+	.detail-favs svg {
+		width: 16px;
+		height: 16px;
+	}
+
+	.back-button {
+        font-size: 12px;
+		padding-right: 0px;
+    }
+
+	.product-rating {
+        font-size: 8px;
+    }
 }
 
 .btns-table {
@@ -756,9 +827,10 @@
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	border-radius: 20px;
 }
 
-.product-image {
+.product-images {
 	width: 100%;
 	height: 100%;
 	margin-bottom: 10px;
@@ -772,7 +844,7 @@
 	top: 90%;
 	right: 20px;
 	transform: translateY(-50%);
-	z-index: 10;
+	z-index: 1;
 }
 
 .btn-gallery {
@@ -930,11 +1002,11 @@
 	}
 
 	.prev {
-		left: 10px;
+		left: 0px;
 	}
 
 	.next {
-		right: 10px;
+		right: 0px;
 	}
 }
 
@@ -1017,11 +1089,8 @@
     .page-number {
         padding: 2px 6px;
         font-size: 0.8rem;
-        width: 100%;
-    }
-
-    .page-number {
-        text-align: center;
+        width: 10%;
+		text-align: center;
     }
 
     .pagination .nav-button {
@@ -1039,13 +1108,12 @@
 
 	/* Estilo para el menú lateral */
 	.sidebar {
-		width: 210px;
+		width: 240px;
 		background: linear-gradient(to bottom, #d7d7d7, #cfcfcf);
 		color: #60626E;
 		padding: 20px;
 		transition: all 0.3s ease-in-out;
 		box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
-        color: #60626E;
 
 		.underline {
 			text-decoration: underline;
@@ -1056,31 +1124,37 @@
 
 		.link-button {
 			display: flex;
-			flex-direction: row;
+			flex-direction: center;
 			width: 100%;
 			justify-content: flex-start;
 			background-color: transparent;
 			border: none;
 			cursor: pointer;
-			padding: 10px;
-			border-radius: 8px;
-			transition: all 0.3s ease;
+			padding: 15px;
+			border-radius: 10px;
+			transition: background-color 0.3s ease-in-out;
 			text-align: left;
 			}
 
 		.link-button:hover {
-			background-color: #9FA2B4;
+			background-color: #f0f0f0;
 			color: #000000;
 			transform: scale(1.05);
 		}
 
+		.link-button:active {
+			background-color: #e0e0e0;
+		}
+
 		.link-button:focus {
 			outline: 1px solid #E2E2E2;
-		  }
+		}
 	}
 
 	.sidebar h2 {
-		margin-top: 0;
+		margin-bottom: 20px;
+		font-size: 1.2rem;
+		color: #60626E;
 	}
 
 	.sidebar ul {
@@ -1089,7 +1163,7 @@
 	}
 
 	.sidebar li {
-		margin: 10px 0;
+		margin-bottom: 15px;
 	}
 
 	.sidebar p {
@@ -1105,7 +1179,6 @@
 		align-items: center;
 		background-color: #ECECEC;
 	}
-
 
 	/* Ocultar mensaje de móviles en pantallas grandes */
 	.mobile-message {
@@ -1127,6 +1200,11 @@
 		span {
 			font-size: 14px;
 		}
+	}
+
+	.card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 	}
 
 	/* Estilos en pantallas grandes */
@@ -1156,6 +1234,7 @@
 			font-size: 1.5rem;
 			color: #888;
 			text-align: center;
+			padding: 40px;
 		}
 
 		.content {
@@ -1166,10 +1245,6 @@
 			display: none;
 		}
 	}
-
-
-
-
 }
 
 .search-bar {
