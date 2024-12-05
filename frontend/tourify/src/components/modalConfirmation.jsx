@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link } from "@nextui-org/react";
 
-export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConfirm, role_id }) => {
+export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConfirm, role_id, duracionMinima }) => {
 
 	const handleContinue = () => {
 		onOpenChange(false);
@@ -143,10 +143,69 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 						)}
 						{type === "iniciarSesion" && (
 							<>
-								<ModalHeader className="flex flex-col text-center text-[24px]">¡Usuario Autenticado!</ModalHeader>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡Usuario No Autenticado!</ModalHeader>
 								<ModalBody className="p-9 text-center">
-									<p className="text-[14px]">Necesitas iniciar sesión para añadir productos a tu lista de favoritos.</p>
+									<p className="text-[14px]">Necesitas iniciar sesión o crear una cuenta para añadir productos a tu lista de favoritos.</p>
 								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login" onPress={handleContinue}>
+										Continuar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "SesionAuth" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡Usuario No Autenticado!</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Debes iniciar sesión para realizar una reserva. Por favor, inicia sesión o regístrate.</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login" onPress={handleContinue}>
+										Continuar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "fechasValidas" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">Selección fechas</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Por favor, selecciona un rango de fechas válido.</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login" onPress={handleContinue}>
+										Continuar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === `duracion ${duracionMinima}` && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">Verificar duración del tour o experiencia</ModalHeader>
+								<ModalBody className="p-9 text-center">
+								<p className="text-[14px]">La duración del tour o experiencia debe ser exactamente de <span className="text-[#FE8C00] strong" >{duracionMinima}</span> días. Por favor, ajusta la duración para proceder.</p>
+								</ModalBody>
+								<ModalFooter>
+									<Button
+										className="boton-modal-login" onPress={() => {
+											onConfirm();
+										}}
+										>
+										Continuar
+									</Button>
+								</ModalFooter>
+							</>
+						)}
+						{type === "reserva" && (
+							<>
+								<ModalHeader className="flex flex-col text-center text-[24px]">¡Estás a un paso de confirmar tu reserva!</ModalHeader>
+								<ModalBody className="p-9 text-center">
+									<p className="text-[14px]">Para completar tu reserva, por favor confirma los detalles de tu tour o experiencia.</p>
+								</ModalBody>	
 								<ModalFooter>
 									<Button
 										className="boton-modal-login" onPress={handleContinue}>

@@ -11,7 +11,7 @@ function ProductGallery({ productId }) {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        console.log(`Fetching product data with images for productId: ${productId}`);
+        //console.log(`Fetching product data with images for productId: ${productId}`);
 
         const { data, error } = await supabase
           .rpc('get_product_images', { productid: productId });

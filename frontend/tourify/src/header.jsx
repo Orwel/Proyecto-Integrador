@@ -74,21 +74,20 @@ const Header = () => {
                           <p className="font-semibold">Panel de usuario</p>
                         </div>
                       </Link>
-
                     </DropdownItem>
                     <DropdownItem key={`profile-email-${userInfo.id}`} className="h-14 gap-2" textValue="Mail usuario">
                       <h2>Correo electrónico </h2>
                       <p className="font-semibold">{userInfo.email}</p>
-
                     </DropdownItem>
-
                     <DropdownItem key="settings" textValue="Información personal del usuario">
                       <Link className='cursor-pointer flex gap-4' to={"/informacion-personal"} >
                         Información personal
                       </Link>
                     </DropdownItem>
                     <DropdownItem key="analytics" textValue="Reservas">
+                    <Link className='cursor-pointer flex gap-4' to={"/historial-reservas"} >
                       Reservas
+                      </Link>
                     </DropdownItem>
                     <DropdownItem key="system" textValue="Listado de favoritos">
                       <Link className='cursor-pointer flex gap-4' to={"/favoritos"} >

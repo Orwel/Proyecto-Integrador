@@ -6,6 +6,7 @@ import { AdministrarProducto } from "./components/AdministrarProducto";
 import { AdministrarCategorias } from "./components/AdministrarCategorias";
 import { AdministrarCaracteristicas } from "./components/AdministrarCaracteristica";
 import { ListaFavoritos } from "./components/ListaFavoritos";
+import HistorialReservas from "./components/HistorialReservas";
 
 const Panel = () => {
   const [activeComponent, setActiveComponent] = useState(null); // Controla qué componente mostrar
@@ -73,6 +74,14 @@ const Panel = () => {
                 <FaClipboardList /> Lista Favoritos
               </button>
             </li>
+            <li>
+              <button
+                onClick={() => handleComponentChange("HistorialReservas")}
+                className="link-button"
+              >
+                <FaClipboardList /> Reservas
+              </button>
+            </li>
           </ul>
         </aside>
 
@@ -91,6 +100,8 @@ const Panel = () => {
             <AdministrarCaracteristicas />
           ) : activeComponent === "ListaFavoritos" ? (
             <ListaFavoritos />
+          ) : activeComponent === "HistorialReservas" ? (
+            <HistorialReservas />
           ) : (
             <div className="dashboard-summary">
               <h2>Bienvenido al Panel</h2>
