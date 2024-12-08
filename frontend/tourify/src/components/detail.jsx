@@ -82,7 +82,7 @@ const Detail = () => {
             
             <div className="detail-body">
                 <p className="detail-time">
-                    {product.duration_nights} noches • {product.duration_days} días
+                    <span className="detail-itinerary text-2xl font-bold mb-4">Duración: {product.duration_days} días</span>
                 </p>
                 <hr />
                 <br />

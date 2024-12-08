@@ -38,7 +38,7 @@ export default function CustomInput({ inputValue, onChange, type, placeholder, o
 	return (
 		<Input
 			value={inputValue}
-			type={type === "password" && isVisible ? "text" : type}
+			type={type === "password" || type === "passwordstrong" ? (isVisible ? "text" : "password") : type}
 			label=" "
 			placeholder={placeholder}
 			variant="bordered"
@@ -65,6 +65,7 @@ export default function CustomInput({ inputValue, onChange, type, placeholder, o
 					<button className="focus:outline-none" type="button" onClick={toggleVisibility}>
 						{isVisible ? (
 							<EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+
 						) : (
 							<EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
 						)}

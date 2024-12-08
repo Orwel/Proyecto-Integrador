@@ -5,6 +5,7 @@ import { InformacionPersonal } from "./components/InformacionPersonal";
 import { ListaFavoritos } from "./components/ListaFavoritos";
 import TerminosServicio from "./components/TerminosServicio";
 import PoliticaPrivacidad from "./components/PoliticaPrivacidad";
+import HistorialReservas from "./components/HistorialReservas";
 
 const PanelUsuario = () => {
   const { user } = useAuth();
@@ -42,7 +43,7 @@ const PanelUsuario = () => {
             </li>
             <li>
               <button
-                onClick={() => handleComponentChange("Reservas")}
+                onClick={() => handleComponentChange("HistorialReservas")}
                 className="link-button"
               > Reservas
               </button>
@@ -77,6 +78,8 @@ const PanelUsuario = () => {
             <div>Loading...</div> // Muestra un indicador de carga mientras cambia
           ) : activeComponent === "InformacionPersonal" ? (
             <InformacionPersonal />
+          ): activeComponent === "HistorialReservas" ? (
+            <HistorialReservas />
           ) : activeComponent === "ListaFavoritos" ? (
             <ListaFavoritos />
           ) : activeComponent === "TerminosServicio" ? (

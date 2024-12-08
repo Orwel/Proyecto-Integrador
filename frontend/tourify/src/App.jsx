@@ -16,8 +16,10 @@ import PanelUsuario from "./PanelUsuario"; // Importa el componente PanelUsuario
 import ProductoPage from './pages/ProductoPage';
 import { ListaFavoritos } from "./components/ListaFavoritos";
 import PoliticaPrivacidad from "./components/PoliticaPrivacidad";
-import TerminosUso from "./components/TerminosServicio";
 import TerminosServicio from "./components/TerminosServicio";
+import ReservaDetalle from "./components/ReservaDetalle";
+import ReservaConfirmada from "./components/ReservaConfirmada";
+import HistorialReservas from "./components/HistorialReservas";
 
 function App() {
   return (
@@ -41,6 +43,9 @@ function App() {
         <Route path="/favoritos" element={<ListaFavoritos />} />
         <Route path="/terminosServicio" element={<TerminosServicio />} />
         <Route path="/politicaPrivacidad" element={<PoliticaPrivacidad />} />
+        <Route path="/reserva/:id" element={<ReservaDetalle />} />
+        <Route path="/reserva-confirmada" element={<ReservaConfirmada />} />
+        <Route path="/historial-reservas" element={<HistorialReservas />} />
       </Routes>
       <Footer />
     </>

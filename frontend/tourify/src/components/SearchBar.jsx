@@ -113,7 +113,7 @@ export const SearchBar = ({ onBuscar }) => {
 			font-size: ${isMobile ? '0.8rem' : '0.9rem'};
 		}
 		.react-datepicker__header {
-			background-color: #FF8127;
+			background-color: #FFEED9;
 			border-bottom: none;
 			padding: 0.8rem 0;
 		}
