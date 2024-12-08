@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSupabase } from '../context/supabase-context';
 import { useAuth } from "../context/AuthContext";
 
-
 export const useFavorites = () => {
     const { supabase } = useSupabase();
     const { user } = useAuth();
@@ -12,7 +11,6 @@ export const useFavorites = () => {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [modalType, setModalType] = useState("");
-
 
     //Agregar favorites
     const handleCreate = async (productId) => {
@@ -74,7 +72,6 @@ export const useFavorites = () => {
         // alert("Producto eliminado de favoritos.");
         setModalType("favsEliminados");
         setModalOpen(true);
-
     };
 
     // Fetch inicial de favoritos

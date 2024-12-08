@@ -85,7 +85,8 @@ const ModalSignUp = ({ isOpen, onOpenChange }) => {
                   onValidChange={setEmailValid}
                   placeholder={"Ingresa tu email"}
                 />
-                <span>Te enviaremos por correo electrónico la confirmación de tu viaje y los recibos</span>
+                <span className="text-xs">Te enviaremos por correo electrónico la confirmación de tu reserva.</span>
+                
                 <CustomInput
                   inputValue={password}
                   type="passwordstrong"
@@ -93,7 +94,11 @@ const ModalSignUp = ({ isOpen, onOpenChange }) => {
                   onValidChange={setPasswordValid}
                   placeholder={"Ingresa tu contraseña"}
                 />
-                <p>Al crear una cuenta, usted acepta nuestra política de privacidad y los términos de uso.</p>
+                <p className="text-xs">Al crear una cuenta, usted acepta nuestra {" "} 
+                  <Link href="/politicaPrivacidad" className="text-[#FE8C00] text-xs"> política de privacidad</Link>{" "}
+                  y los{" "}
+                  <Link href="/terminosServicio" className="text-[#FE8C00] text-xs">términos de uso.</Link>
+                </p>
                 {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
               </ModalBody>
               <ModalFooter>

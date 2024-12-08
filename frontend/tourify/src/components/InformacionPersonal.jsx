@@ -23,7 +23,7 @@ export const InformacionPersonal = () => {
   }
 
   return (
-    <div className="desktop-only" style={{ flex: 1, padding: "20px" }}>
+    <div className="desktop-only" style={{ flex: 1, padding: "120px" }}>
       <Table aria-label="Tabla de información del usuario">
         <TableHeader columns={columns}>
           {(column) => (

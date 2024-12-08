@@ -38,6 +38,7 @@ const styles = {
     color: '#4B5563',
     padding: '1rem 2rem',
     fontSize: '0.9rem',
+    flexWrap: 'wrap',
   },
   span: {
     color: '#FE8C00',
@@ -49,6 +50,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     // flex: 1,
+    marginBottom: '1rem',
   },
   right: {
     display: 'flex',

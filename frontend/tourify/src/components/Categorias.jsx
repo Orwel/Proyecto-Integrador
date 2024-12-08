@@ -10,10 +10,10 @@ const Categorias = ({ onCategoryChange }) => {
 	return (
 		<div style={{ width: "100%", padding: "0rem 2rem" }}>
 			<h2
-				className="mt-24 pb-4 sm:mt-0"
+				className="mt-1 pb-3 sm:mt-0"
 				style={{
 					padding: "2rem 2rem",
-					maxWidth: "80%",
+					maxWidth: "100%",
 					textAlign: "start",
 				}}>
 				<p style={{ color: "#FE8C00", marginBottom: "10px" }}>Categorias</p>

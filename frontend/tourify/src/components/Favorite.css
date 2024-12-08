@@ -1,10 +1,10 @@
-h1 {
-    padding: 75px 0 10px 20px;
+.titulo-favoritos {
+    padding: 20px 0 10px 20px;
     font-size: 18px;
     font-weight: bold;
     text-align: left;
 }
 
 .favorite {
-    padding: 10px 0 0 10px;
+    padding: 40px 0 0 10px;
 }

@@ -6,6 +6,7 @@ import { AdministrarProducto } from "./components/AdministrarProducto";
 import { AdministrarCategorias } from "./components/AdministrarCategorias";
 import { AdministrarCaracteristicas } from "./components/AdministrarCaracteristica";
 import { ListaFavoritos } from "./components/ListaFavoritos";
+import HistorialReservas from "./components/HistorialReservas";
 
 const Panel = () => {
   const [activeComponent, setActiveComponent] = useState(null); // Controla qué componente mostrar
@@ -25,6 +26,7 @@ const Panel = () => {
         <aside className="sidebar">
           <ul>
             <li>
+              <p className="font-bold mt-8 mb-4">Dashboard</p>
               <button
                 onClick={() => handleComponentChange("InformacionPersonal")}
                 className="link-button"
@@ -72,8 +74,15 @@ const Panel = () => {
                 <FaClipboardList /> Lista Favoritos
               </button>
             </li>
+            <li>
+              <button
+                onClick={() => handleComponentChange("HistorialReservas")}
+                className="link-button"
+              >
+                <FaClipboardList /> Reservas
+              </button>
+            </li>
           </ul>
-          <span className="underline">Cerrar Sesión</span>
         </aside>
 
         <main className="content-panel">
@@ -91,6 +100,8 @@ const Panel = () => {
             <AdministrarCaracteristicas />
           ) : activeComponent === "ListaFavoritos" ? (
             <ListaFavoritos />
+          ) : activeComponent === "HistorialReservas" ? (
+            <HistorialReservas />
           ) : (
             <div className="dashboard-summary">
               <h2>Bienvenido al Panel</h2>
@@ -102,7 +113,7 @@ const Panel = () => {
           )}
         </main>
         <div className="mobile-message">
-            El panel de administración no está disponible en dispositivos móviles. Accede desde un dispositivo compatible para gestionar las funciones de administración.
+            El panel de administración no está disponible en dispositivos móviles o tablet. Accede desde un dispositivo compatible para gestionar las funciones de administración.
           </div>
       </div>
     </div>

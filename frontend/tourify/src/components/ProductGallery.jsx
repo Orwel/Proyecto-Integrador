@@ -11,7 +11,7 @@ function ProductGallery({ productId }) {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        console.log(`Fetching product data with images for productId: ${productId}`);
+        //console.log(`Fetching product data with images for productId: ${productId}`);
 
         const { data, error } = await supabase
           .rpc('get_product_images', { productid: productId });
@@ -26,7 +26,7 @@ function ProductGallery({ productId }) {
         }
 
         setProduct({ name, main_image });
-        setAdditionalImages([main_image, ...additional_images]);
+        setAdditionalImages([...additional_images]);
 
       } catch (error) {
         console.error('Error fetching data:', error.message);
@@ -34,10 +34,10 @@ function ProductGallery({ productId }) {
     };
 
     fetchProductData();
-  }, [productId]);
+  }, [supabase, productId]);
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % additionalImages.length);
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % (1 + additionalImages.length));
   };
 
   const handlePrevImage = () => {
@@ -51,6 +51,7 @@ function ProductGallery({ productId }) {
   }
 
   const imagesToShow = additionalImages.slice(0, 4);
+  const allImagesForCarousel = [product.main_image, ...additionalImages];
 
   return (
     <div className="gallery-container">
@@ -60,7 +61,7 @@ function ProductGallery({ productId }) {
       <div className="additional-images">
           {imagesToShow.map((image, index) => (
           <div key={index} className="image-item">
-            <img src={image} alt={`${product.name} additional ${index + 1}`} className="product-image"/>
+            <img src={image} alt={`${product.name} additional ${index + 1}`} className="product-images"/>
           </div>
         ))}
       </div>
@@ -78,7 +79,7 @@ function ProductGallery({ productId }) {
             <button className="close-btn" onClick={() => setShowAllImages(false)}>𐢫 Cerrar</button>
             <div className="modal-carousel">
               <button className="nav-btn prev" onClick={handlePrevImage}>❮</button>
-              <img src={additionalImages[currentImageIndex]} alt={`${product.name} gallery ${currentImageIndex + 1}`} className="modal-image"/>
+              <img src={allImagesForCarousel[currentImageIndex]} alt={`${product.name} gallery ${currentImageIndex + 1}`} className="modal-image"/>
               <button className="nav-btn next" onClick={handleNextImage}>❯</button>
             </div>
           </div>

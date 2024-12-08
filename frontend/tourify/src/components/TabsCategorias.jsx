@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useProductos } from "../hook/use-productos";
 import { Card } from "./Card";
 import { Tabs, Tab, Pagination } from "@nextui-org/react";
@@ -37,14 +37,27 @@ const TabsCategorias = ({ categorias }) => {
 				selectedKey={selectedTabCategory}
 				onSelectionChange={handleSelectionChange}
 				
-				className="flex justify-center overflow-auto mb-8 w-full max-w-6xl"
+				className="flex justify-center overflow-auto w-full max-w-6xl"
 			>
-				{categorias.map((categoria) => (
-					<Tab
-						key={categoria.id.toString()}
-						title={categoria.name}
-					/>
-				))}
+				{categorias.map((categoria) => {
+					const productosEnCategoria = productos.filter(
+						(producto) => producto.categoria_id === categoria.id
+					);
+					const cantidadProductos = productosEnCategoria.length;
+					return (
+						<Tab
+							key={categoria.id.toString()}
+							title={categoria.name}
+						>
+							<div className="text-center mt-1 p-4  rounded-lg">
+								<p className="text-4xl font-semibold text-[#FE8C00] flex items-center justify-center space-x-2">
+									<span className="text-5xl">{cantidadProductos}</span>
+									<span className="text-lg">tours y experiencias</span>
+								</p>
+							</div>
+						</Tab>
+					);
+				})}
 			</Tabs>
 			
 			<div className="w-full max-w-[1400px] mx-auto">
