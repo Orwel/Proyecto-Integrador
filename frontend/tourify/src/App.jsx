@@ -20,6 +20,7 @@ import TerminosServicio from "./components/TerminosServicio";
 import ReservaDetalle from "./components/ReservaDetalle";
 import ReservaConfirmada from "./components/ReservaConfirmada";
 import HistorialReservas from "./components/HistorialReservas";
+import WhatsAppButton from './components/Whatsapp';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path="/historial-reservas" element={<HistorialReservas />} />
       </Routes>
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }
