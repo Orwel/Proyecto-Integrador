@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import "../styles/share-popup.css";
+import "../styles/SharePopup.css"
 import {
   FaLink,
   FaEnvelope,
