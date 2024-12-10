@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Input } from "@nextui-org/input";
-import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
-import { EyeFilledIcon } from "./EyeFilledIcon";
+import { EyeSlashFilledIcon } from "@nextui-org/shared-icons";
+import { EyeFilledIcon } from "@nextui-org/shared-icons";
 
 
 export default function CustomInput({ inputValue, onChange, type, placeholder, onValidChange }) {
