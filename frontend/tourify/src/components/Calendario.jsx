@@ -7,6 +7,8 @@ import { isWithinInterval, differenceInDays } from 'date-fns';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ModalConfirmation } from "./modalConfirmation";
+import ModalLogin from './modalLogin';
+import { useDisclosure as useDisclosure1 } from "@nextui-org/react";
 
 registerLocale('es', es);
 
@@ -22,7 +24,7 @@ const Calendario = ({ productoId, onDateSelect, duracionMinima, onClearDates }) 
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState("");
-
+  const { isOpen: isOpenSignUp, onOpen: onOpenSignUp, onOpenChange: onOpenChangeSignUp } = useDisclosure1();
 
   useEffect(() => {
     const handleResize = () => {
@@ -92,6 +94,8 @@ const Calendario = ({ productoId, onDateSelect, duracionMinima, onClearDates }) 
       //alert("Por favor, inicia sesión para realizar una reserva.");
       setModalType("SesionAuth");
       setModalOpen(true);
+      // onOpenSignUp()
+
       return;
     }
 
@@ -103,10 +107,10 @@ const Calendario = ({ productoId, onDateSelect, duracionMinima, onClearDates }) 
     }
 
     try {
-      navigate(`/reserva/${productoId}`, {
-        state: { fechaInicio: startDate, fechaFin: endDate },
-      });
-      alert("¡Reserva realizada con éxito!");
+      // navigate(`/reserva/${productoId}`, {
+      //   state: { fechaInicio: startDate, fechaFin: endDate },
+      // });
+      // alert("¡Reserva realizada con éxito!");
       setModalType("reserva");
       setModalOpen(true);
 
@@ -115,6 +119,8 @@ const Calendario = ({ productoId, onDateSelect, duracionMinima, onClearDates }) 
       alert("Se produjo un error al realizar la reserva. Por favor, inténtalo nuevamente.");
     }
   };
+
+
 
   return (
     <div className="calendario-container">
@@ -219,21 +225,34 @@ const Calendario = ({ productoId, onDateSelect, duracionMinima, onClearDates }) 
         </div>
       )}
 
-    <button className="bg-[#FE8C00] text-white px-6 py-3 rounded-xl hover:scale-105 transform transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
-      onClick={onConfirmReserva}
+      <button className="bg-[#FE8C00] text-white px-6 py-3 rounded-xl hover:scale-105 transform transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+        onClick={onConfirmReserva}
         disabled={!startDate || !endDate || loading}
       >
-      {loading ? 'Cargando disponibilidad...' : 'Confirmar fechas'}
-    </button>
+        {loading ? 'Cargando disponibilidad...' : 'Confirmar fechas'}
+      </button>
 
       <ModalConfirmation
         isOpen={modalOpen}
-        onOpenChange={setModalOpen}
+        onOpenChange={(isOpen) => {
+          setModalOpen(isOpen);
+          if (!isOpen && modalType === "SesionAuth") {
+            onOpenSignUp();
+          } else if (!isOpen && modalType === "reserva") {
+            navigate(`/reserva/${productoId}`, {
+              state: { fechaInicio: startDate, fechaFin: endDate },
+            });
+          }
+        }}
         type={modalType}
-        onConfirm={() => setModalOpen(false)}
-        navigate={() => { }}
-        role_id={null}
-        duracionMinima={duracionMinima} 
+        // onConfirm={() => setModalOpen(false)}
+        // navigate={() => { }}
+        // role_id={null}
+        duracionMinima={duracionMinima}
+      />
+      <ModalLogin
+        isOpen={isOpenSignUp}
+        onOpenChange={onOpenChangeSignUp}
       />
     </div>
   );
