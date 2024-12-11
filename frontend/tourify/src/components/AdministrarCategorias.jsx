@@ -86,8 +86,8 @@ export const AdministrarCategorias = () => {
             {categorias.map((categoria) => (
               <tr key={categoria.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{categoria.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{categoria.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{categoria.description}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-left text-sm text-gray-900">{categoria.name}</td>
+                <td className="px-6 py-4 whitespace-wrap text-left text-sm text-gray-900">{categoria.description}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                   <img 
                     src={categoria.url_image} 

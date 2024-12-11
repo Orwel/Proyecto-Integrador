@@ -1,23 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useProductos } from "../hook/use-productos";
 import { Card } from "./card";
 import { useFavorites } from "../hook/use-favorites";
-import { User } from "@nextui-org/react";
+
+const shuffleProducts = (products) => {
+	for (let i = products.length - 1; i > 0; i--) {
+	  const j = Math.floor(Math.random() * (i + 1));
+	[products[i], products[j]] = [products[j], products[i]];
+	}
+	return products;
+  };
 
 export const ContainerProductos = ({ isFavorites }) => {
 	const { productos, loading, error } = useProductos();
-	const { favorites, loadingFav, errorFav } = useFavorites();
+	const { favorites } = useFavorites();
 	const [currentPage, setCurrentPage] = useState(1);
 	const productsPerPage = 6;
 
 	const listIdFavorites = favorites.map((item) => item.product_id);
 
-
 	// Filtra el objeto de productos con solo los favoritos
 	const productsFavorites = productos.filter(({ id }) => listIdFavorites.includes(id));
-
 	const productsList = isFavorites ? productsFavorites : productos
 
+	const shuffledProducts = shuffleProducts([...productsList]);
 
 	if (loading) return <div>Cargando...</div>;
 	if (error) return <div>Error al cargar los productos</div>;
@@ -25,10 +31,10 @@ export const ContainerProductos = ({ isFavorites }) => {
 	// Calcula los índices para los productos para la página actual
 	const indexOfLastProduct = currentPage * productsPerPage;
 	const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-	const currentProducts = productsList.slice(indexOfFirstProduct, indexOfLastProduct);
+	const currentProducts = shuffledProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
 	// Calcular el número total de páginas
-	const totalPages = Math.ceil(productsList.length / productsPerPage);
+	const totalPages = Math.ceil(shuffledProducts.length / productsPerPage);
 
 	// Función para cambiar la página mediante un número de página
 	const handlePageClick = (pageNumber) => {
@@ -55,13 +61,13 @@ export const ContainerProductos = ({ isFavorites }) => {
 				</div>
 				{/* Numeración de Páginas */}
 				<div className="pagination">
-					<button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className="nav-button">❮❮ Anterior</button>
+					<button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className="nav-button">❮</button>
 					{[...Array(totalPages)].map((_, index) => (
 						<button key={index + 1} onClick={() =>
 							handlePageClick(index + 1)}
 							className={`page-number ${currentPage === index + 1 ? "active-page" : ""}`}>{index + 1}</button>
 					))}
-					<button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} className="nav-button">Siguiente ❯❯</button>
+					<button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} className="nav-button">❯</button>
 				</div>
 			</div>
 		</>

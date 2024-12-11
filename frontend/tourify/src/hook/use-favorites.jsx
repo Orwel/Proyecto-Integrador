@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSupabase } from '../context/supabase-context';
 import { useAuth } from "../context/AuthContext";
 
-
 export const useFavorites = () => {
     const { supabase } = useSupabase();
     const { user } = useAuth();
@@ -12,7 +11,6 @@ export const useFavorites = () => {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [modalType, setModalType] = useState("");
-
 
     //Agregar favorites
     const handleCreate = async (productId) => {
@@ -66,15 +64,17 @@ export const useFavorites = () => {
             return;
         }
 
-        setFavorites((prevFavorites) =>
-            prevFavorites.filter((favorite) => favorite.product_id !== productId)
-        );
-
         setLoading(false);
         // alert("Producto eliminado de favoritos.");
         setModalType("favsEliminados");
         setModalOpen(true);
 
+        setFavorites((prevFavorites) => {
+            console.log("Favorites before update:", prevFavorites);
+            const updatedFavorites = prevFavorites.filter((favorite) => favorite.product_id !== productId);
+            console.log("Favorite after update:", updatedFavorites);
+            return updatedFavorites
+        });
     };
 
     // Fetch inicial de favoritos
