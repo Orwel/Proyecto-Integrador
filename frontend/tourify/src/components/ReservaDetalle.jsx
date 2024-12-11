@@ -8,7 +8,7 @@ import ProductGallery from "./ProductGallery";
 import '../styles/reservas.css';
 
 const ReservaDetalle = () => {
-  const { user } = useAuth();
+  const { user, userInfo } = useAuth();
   const { id: productId } = useParams();
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -95,8 +95,8 @@ const ReservaDetalle = () => {
       { user && (
           <div className="user-info bg-gray-100 p-6 rounded-lg mb-8">
             <h3 className="text-xl font-semibold text-gray-800 mb-4">Tus Datos</h3>
-            <p><strong>Nombre: </strong>{user.first_name} {user.last_name}</p>
-            <p className='text-left'><strong>Correo electrónico: </strong>{user.email}</p>
+            <p><strong>Nombre: </strong>{userInfo?.first_name} {userInfo?.last_name}</p>
+            <p className='text-left'><strong>Correo electrónico: </strong>{userInfo?.email}</p>
           </div>
         )}
 
