@@ -173,7 +173,7 @@ export const useProductos = () => {
 	
 			// Recargar productos
 			await fetchProductos();
-	
+			return productoId;
 		} catch (error) {
 			console.error("Error creando producto:", error);
 			setError(error.message);

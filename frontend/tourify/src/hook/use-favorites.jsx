@@ -64,14 +64,17 @@ export const useFavorites = () => {
             return;
         }
 
-        setFavorites((prevFavorites) =>
-            prevFavorites.filter((favorite) => favorite.product_id !== productId)
-        );
-
         setLoading(false);
         // alert("Producto eliminado de favoritos.");
         setModalType("favsEliminados");
         setModalOpen(true);
+
+        setFavorites((prevFavorites) => {
+            console.log("Favorites before update:", prevFavorites);
+            const updatedFavorites = prevFavorites.filter((favorite) => favorite.product_id !== productId);
+            console.log("Favorite after update:", updatedFavorites);
+            return updatedFavorites
+        });
     };
 
     // Fetch inicial de favoritos

@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
-export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConfirm, role_id, duracionMinima }) => {
+export const ModalConfirmation = ({ isOpen, onOpenChange,  type, onConfirm, role_id, duracionMinima }) => {
+
+	const navigate = useNavigate();
 
 	const handleContinue = () => {
+		// navigate('/');
 		onOpenChange(false);
-		navigate('/');
 	};
 
+	const handleHome = () => {
+		navigate('/');
+		onOpenChange(false);
+	};
+	
+
+
 	return (
+		<>
 		<Modal
 			isOpen={isOpen}
 			onOpenChange={onOpenChange}
@@ -46,7 +57,7 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 								<ModalFooter>
 									<Button
 										className="boton-modal-login"
-										onPress={handleContinue}
+										onPress={handleHome}
 									>
 										Ir a la página de inicio
 									</Button>
@@ -163,7 +174,9 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 								</ModalBody>
 								<ModalFooter>
 									<Button
-										className="boton-modal-login" onPress={handleContinue}>
+										className="boton-modal-login" 
+										onPress={handleContinue}
+										>
 										Continuar
 									</Button>
 								</ModalFooter>
@@ -177,7 +190,9 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 								</ModalBody>
 								<ModalFooter>
 									<Button
-										className="boton-modal-login" onPress={handleContinue}>
+										className="boton-modal-login" onPress={() => {
+											onOpenChange(false);
+										}}>
 										Continuar
 									</Button>
 								</ModalFooter>
@@ -191,8 +206,9 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 								</ModalBody>
 								<ModalFooter>
 									<Button
-										className="boton-modal-login" onPress={() => {
-											onConfirm();
+										className="boton-modal-login" 
+										onPress={() => {
+											onOpenChange(false);
 										}}
 										>
 										Continuar
@@ -271,10 +287,13 @@ export const ModalConfirmation = ({ isOpen, onOpenChange, navigate, type, onConf
 								
 							</>
 						)}
-
+						
 					</>
 				)}
 			</ModalContent>
 		</Modal>
+		
+		</>
+		
 	)
 }
