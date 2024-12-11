@@ -12,8 +12,12 @@ import {
 } from "@nextui-org/react";
 import { useDisclosure as useDisclosure1 } from "@nextui-org/react";
 import { ModalConfirmation } from "./modalConfirmation";
+import { useImages } from "../hook/use-images";
+
 
 export const AgregarProducto = ({ closeModal, handleCreate, characteristics }) => {
+  const { insertImages } = useImages();
+  const [urls, setUrls] = useState(["", "", "", ""]);
   const { isOpen: isOpenNewProduct, onOpen: onOpenNewProduct, onOpenChange: onOpenChangeNewProduct } = useDisclosure1();
   const [categorias, setCategorias] = useState([]);
   const [producto, setProducto] = useState({
@@ -58,6 +62,12 @@ export const AgregarProducto = ({ closeModal, handleCreate, characteristics }) =
     });
   };
 
+  const handleUrlsChange = (index, value) => {
+    const updatedUrls = [...urls];
+    updatedUrls[index] = value;
+    setUrls(updatedUrls);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -75,9 +85,14 @@ export const AgregarProducto = ({ closeModal, handleCreate, characteristics }) =
     }
 
     try {
-      await handleCreate(producto);
-      // console.log("Producto creado:", producto);
-    
+      const productoId = await handleCreate(producto);
+      // console.log("Producto creado:", createdProduct);
+      const imageInsertions = urls
+        .filter((url) => url) // Filtrar URLs no vacías
+        .map((url) => insertImages({ product_id: productoId, url_imge: url }));
+
+      await Promise.all(imageInsertions);
+
       setProducto({
         name: "",
         destination: "",
@@ -93,9 +108,9 @@ export const AgregarProducto = ({ closeModal, handleCreate, characteristics }) =
         characteristics: [],
       });
       // onOpenChangeNewProduct(true)
-   
-        closeModal();
-    
+      setUrls(["", "", "", ""]);
+      closeModal();
+
 
     } catch (error) {
       console.error("Error al agregar producto:", error);
@@ -183,7 +198,19 @@ export const AgregarProducto = ({ closeModal, handleCreate, characteristics }) =
                 onChange={(e) => handleChange("url_img", e.target.value)}
                 variant="bordered"
               />
-
+              <div className="space-y-2">
+                <h3 className="text-sm font-medium">4 imagenes opcionales</h3>
+                {urls.map((url, index) => (
+                  <Input
+                    key={index}
+                    label={`Imagen ${index + 1}`}
+                    value={url}
+                    onChange={(e) => handleUrlsChange(index, e.target.value)}
+                    placeholder="Ingresa la URL de la imagen"
+                    variant="bordered"
+                  />
+                ))}
+              </div>
               <Textarea
                 label="Descripción"
                 value={producto.description}
