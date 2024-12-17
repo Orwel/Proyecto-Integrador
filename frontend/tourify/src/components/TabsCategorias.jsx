@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useProductos } from "../hook/use-productos";
-import { Card } from "./card";
+import { Card } from './Card.jsx';
 import { Tabs, Tab, Pagination } from "@nextui-org/react";
 import '../styles/categorias.css';
 
