@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSupabase } from '../context/supabase-context';
+import styles from '../styles/ProductGallery.module.css';
 
 function ProductGallery({ productId }) {
   const { supabase } = useSupabase();
@@ -54,32 +55,44 @@ function ProductGallery({ productId }) {
   const allImagesForCarousel = [product.main_image, ...additionalImages];
 
   return (
-    <div className="gallery-container">
-      <div className="gallery">
-        <img src={product.main_image} alt={product.name} className="main-image"/>
+    <div className={styles['gallery-container']}>
+      <div className={styles.gallery}>
+        <img 
+          src={product.main_image} 
+          alt={product.name} 
+          className={styles['main-image']}
+        />
       </div>
-      <div className="additional-images">
-          {imagesToShow.map((image, index) => (
-          <div key={index} className="image-item">
-            <img src={image} alt={`${product.name} additional ${index + 1}`} className="product-images"/>
+      <div className={styles['additional-images']}>
+        {imagesToShow.map((image, index) => (
+          <div key={index} className={styles['image-item']}>
+            <img 
+              src={image} 
+              alt={`${product.name} additional ${index + 1}`} 
+              className={styles['product-images']}
+            />
           </div>
         ))}
       </div>
-      <div className="ver-mas">
-        <button onClick={() => {
-          setShowAllImages(true);
-          setCurrentImageIndex(0);
-        }}
-          className="btn-gallery">Ver más </button>
+      <div className={styles['ver-mas']}>
+        <button 
+          onClick={() => {
+            setShowAllImages(true);
+            setCurrentImageIndex(0);
+          }}
+          className={styles['btn-gallery']}
+        >
+          Ver más fotos
+        </button>
       </div>
-      {/* Modal carrusel con todas las imágenes */}
+
       {showAllImages && (
-      <div className="image-modal" onClick={() => setShowAllImages(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className={styles['image-modal']} onClick={() => setShowAllImages(false)}>
+          <div className={styles['modal-content']} onClick={(e) => e.stopPropagation()}>
             <button className="close-btn" onClick={() => setShowAllImages(false)}>𐢫 Cerrar</button>
-            <div className="modal-carousel">
+            <div className={styles['modal-carousel']}>
               <button className="nav-btn prev" onClick={handlePrevImage}>❮</button>
-              <img src={allImagesForCarousel[currentImageIndex]} alt={`${product.name} gallery ${currentImageIndex + 1}`} className="modal-image"/>
+              <img src={allImagesForCarousel[currentImageIndex]} alt={`${product.name} gallery ${currentImageIndex + 1}`} className={styles['modal-image']}/>
               <button className="nav-btn next" onClick={handleNextImage}>❯</button>
             </div>
           </div>
