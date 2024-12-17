@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from "../supabaseClient";
-import { Card } from './card';
+import { Card } from './Card.jsx';
 import { Pagination } from "@nextui-org/react";
 import '../styles/searchResults.css';
 
