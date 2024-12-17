@@ -94,8 +94,6 @@ const Header = () => {
                         Lista de favoritos
                       </Link>
                     </DropdownItem>
-                    <DropdownItem key="configurations">Notificaciones</DropdownItem>
-
                     <DropdownItem key="help_and_feedback" textValue="Terminos de servicio">
                       <Link className="cursor-pointer flex gap-4" to={"/terminosServicio"}>
                         Terminos de Servicio
@@ -150,9 +148,9 @@ const Header = () => {
                 </div>
               </div>
               <nav className="mobile-nav">
-                <Link to={userInfo.role_id === 2 ? "/panel" : "/panel-usuario"} className="mobile-nav-link" onClick={toggleMenu}> Panel de usuario</Link>
                 <Link to="/informacion-personal" className="mobile-nav-link" onClick={toggleMenu}>Información personal</Link>
                 <Link to="/favoritos" className="mobile-nav-link" onClick={toggleMenu}>Lista de favoritos</Link>
+                <Link to="/historial-reservas" className="mobile-nav-link" onClick={toggleMenu}>Reservas</Link>
                 <Link to="/terminosServicio" className="mobile-nav-link" onClick={toggleMenu}>Términos de servicio</Link>
                 <Link to="/politicaPrivacidad" className="mobile-nav-link" onClick={toggleMenu}>Política de privacidad</Link>
               </nav>
